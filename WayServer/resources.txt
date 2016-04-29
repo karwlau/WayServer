@@ -1,0 +1,18 @@
+#github resources:
+-appcan plugin
+https://github.com/android-plugin
+
+
+
+#eclipse plugins:
+-ermaster(data model)
+http://ermaster.sourceforge.net/update-site/
+
+-JBoss Tools Nightly Build Update Site - (freeMarker Editor)
+http://download.jboss.org/jbosstools/updates/JBossTools-3.0.3.GA
+
+-jetty
+market place 
+
+-git
+eclipse 
