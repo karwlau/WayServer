@@ -16,15 +16,15 @@
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
 			connectionURL="${dbUrl}" userId="${dbUser}" password="${dbPwd}" />
 
-		<javaModelGenerator targetPackage="com.way.biz.operate.entity"
+		<javaModelGenerator targetPackage="com.way.framewk.privilege.entity"
 			targetProject="src">
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="com.rdk.biz.operate.provider.dao"
+		<sqlMapGenerator targetPackage="com.way.framewk.privilege.provider.dao"
 			targetProject="src" />
 
-		<javaClientGenerator targetPackage="com.way.biz.operate.provider.dao"
+		<javaClientGenerator targetPackage="com.way.framewk.privilege.provider.dao"
 			targetProject="src" type="XMLMAPPER" />
 
 		<table domainObjectName="${entity}" tableName="${table_name}">

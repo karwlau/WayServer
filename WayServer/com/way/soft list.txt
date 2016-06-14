@@ -1,0 +1,42 @@
+#database:
+#- mysql
+#- postgreSQL
+#- oracle
+
+#maven management:
+#- nexus
+
+#env:
+#- jdk
+
+#auto build
+#- jenkins
+
+#SSH
+#- secureCRT
+#- xShell
+
+#Server File Management
+#- winSCP
+#- FileZilla
+
+#Application Container
+#- tomcat
+
+#load balancing server
+#-nginx
+
+#pcre library(nginx required)
+#download url:
+ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/
+
+#zlib library(nginx required)
+#download url:
+http://zlib.net/zlib-1.2.8.tar.gz
+
+#SOA
+#- zookeeper
+#- dubbo
+
+#cache
+#- redis

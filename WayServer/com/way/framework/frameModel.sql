@@ -2,6 +2,8 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 
 /* Drop Tables */
 
+DROP TABLE IF EXISTS sys_dept_user;
+DROP TABLE IF EXISTS sys_dept;
 DROP TABLE IF EXISTS sys_role_menu;
 DROP TABLE IF EXISTS sys_menu;
 DROP TABLE IF EXISTS sys_user_role;
@@ -13,47 +15,83 @@ DROP TABLE IF EXISTS sys_user;
 
 /* Create Tables */
 
--- sys_menu : 权限菜单资源
+-- sys_dept : 部门表
+CREATE TABLE sys_dept
+(
+	id bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+	name varchar(64) COMMENT 'name',
+	parent_id bigint COMMENT 'parent_id',
+	-- 部门编码
+	code varchar(32) COMMENT 'code : 部门编码',
+	-- 菜单id路径
+	path varchar(128) COMMENT 'path : 菜单id路径',
+	is_delete boolean COMMENT 'is_delete',
+	create_time timestamp COMMENT 'create_time',
+	create_by bigint COMMENT 'create_by',
+	update_time timestamp COMMENT 'update_time',
+	update_by bigint COMMENT 'update_by',
+	PRIMARY KEY (id)
+) COMMENT = 'sys_dept : 部门表';
+
+
+-- sys_dept_user
+CREATE TABLE sys_dept_user
+(
+	dept_id bigint NOT NULL COMMENT 'dept_id',
+	user_id bigint NOT NULL COMMENT 'user_id',
+	is_head boolean COMMENT 'is_head'
+) COMMENT = 'sys_dept_user';
+
+
+-- sys_menu : 权限资源表
 CREATE TABLE sys_menu
 (
 	id bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
 	name varchar(64) COMMENT 'name',
-	parentId bigint COMMENT 'parentId',
-	path varchar(128) COMMENT 'path',
-	code varchar(64) COMMENT 'code',
-	priCode varchar(64) COMMENT 'priCode',
+	parent_id bigint COMMENT 'parent_id',
+	-- 菜单id路径
+	path varchar(128) COMMENT 'path : 菜单id路径',
+	-- 资源编码
+	code varchar(64) COMMENT 'code : 资源编码',
+	-- 权限控制编码
+	pri_code varchar(64) COMMENT 'pri_code : 权限控制编码',
+	-- 排序
+	order_no int COMMENT 'order_no : 排序',
 	url varchar(128) COMMENT 'url',
-	isDelete tinyint(1) COMMENT 'isDelete',
-	createTime timestamp NULL DEFAULT NULL COMMENT 'createTime',
-	createBy bigint COMMENT 'createBy',
-	updateTime timestamp NULL DEFAULT NULL COMMENT 'updateTime',
-	updateBy bigint COMMENT 'updateBy',
+	is_delete boolean COMMENT 'is_delete',
+	create_time timestamp COMMENT 'create_time',
+	create_by bigint COMMENT 'create_by',
+	update_time timestamp COMMENT 'update_time',
+	update_by bigint COMMENT 'update_by',
 	PRIMARY KEY (id)
-) COMMENT = 'sys_menu : 权限菜单资源';
+) COMMENT = 'sys_menu : 权限资源表';
 
 
--- sys_role
+-- sys_role : 角色表
 CREATE TABLE sys_role
 (
 	id bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
 	name varchar(64) COMMENT 'name',
-	isKeyOwner boolean COMMENT 'isKeyOwner',
-	isDelete tinyint(1) COMMENT 'isDelete',
-	createTime timestamp NULL DEFAULT NULL COMMENT 'createTime',
-	createBy bigint COMMENT 'createBy',
-	updateTime timestamp NULL DEFAULT NULL COMMENT 'updateTime',
-	updateBy bigint COMMENT 'updateBy',
+	-- 是否拥有权限钥匙
+	isKeyOwner boolean COMMENT 'isKeyOwner : 是否拥有权限钥匙',
+	-- 角色描述
+	description varchar(128) COMMENT 'description : 角色描述',
+	is_delete boolean COMMENT 'is_delete',
+	create_time timestamp COMMENT 'create_time',
+	create_by bigint COMMENT 'create_by',
+	update_time timestamp COMMENT 'update_time',
+	update_by bigint COMMENT 'update_by',
 	PRIMARY KEY (id)
-) COMMENT = 'sys_role';
+) COMMENT = 'sys_role : 角色表';
 
 
--- sys_role_menu
+-- sys_role_menu : 角色权限（分配给角色的权限列表）
 CREATE TABLE sys_role_menu
 (
 	roleId bigint NOT NULL COMMENT 'roleId',
 	menuId bigint NOT NULL COMMENT 'menuId',
 	UNIQUE (roleId, menuId)
-) COMMENT = 'sys_role_menu';
+) COMMENT = 'sys_role_menu : 角色权限（分配给角色的权限列表）';
 
 
 -- sys_user : 用户表
@@ -61,15 +99,15 @@ CREATE TABLE sys_user
 (
 	id bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
 	name varchar(64) COMMENT 'name',
-	isAdmin boolean COMMENT 'isAdmin',
+	is_admin boolean COMMENT 'is_admin',
 	salt varchar(8) COMMENT 'salt',
 	password varchar(64) COMMENT 'password',
-	nickName varchar(64) COMMENT 'nickName',
-	isDelete tinyint(1) COMMENT 'isDelete',
-	createTime timestamp NULL DEFAULT NULL COMMENT 'createTime',
-	createBy bigint COMMENT 'createBy',
-	updateTime timestamp NULL DEFAULT NULL COMMENT 'updateTime',
-	updateBy bigint COMMENT 'updateBy',
+	nick_name varchar(64) COMMENT 'nick_name',
+	is_delete boolean COMMENT 'is_delete',
+	create_time timestamp COMMENT 'create_time',
+	create_by bigint COMMENT 'create_by',
+	update_time timestamp COMMENT 'update_time',
+	update_by bigint COMMENT 'update_by',
 	PRIMARY KEY (id)
 ) COMMENT = 'sys_user : 用户表';
 
@@ -85,6 +123,14 @@ CREATE TABLE sys_user_role
 
 
 /* Create Foreign Keys */
+
+ALTER TABLE sys_dept_user
+	ADD FOREIGN KEY (dept_id)
+	REFERENCES sys_dept (id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
 
 ALTER TABLE sys_role_menu
 	ADD FOREIGN KEY (roleId)
@@ -105,6 +151,14 @@ ALTER TABLE sys_role_menu
 ALTER TABLE sys_user_role
 	ADD FOREIGN KEY (userId)
 	REFERENCES sys_role (id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE sys_dept_user
+	ADD FOREIGN KEY (user_id)
+	REFERENCES sys_user (id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;

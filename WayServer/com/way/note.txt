@@ -1,0 +1,178 @@
+#for CAS
+#############################################################################################
+#java tool generate key command
+keytool -genkey -alias mycas -keyalg RSA -keysize 2048 -keystore G:/WayFramework/casKey/mycas.keystore
+#java tool export key command
+keytool -export -file G:/WayFramework/casKey/mycas.crt -alias mycas -keystore G:/WayFramework/casKey/mycas.keystore
+#java tool import key to jvm command (two method)
+keytool -import -keystore C:\Program Files\Java\jre7\lib\security\cacerts -file G:/WayFramework/casKey/mycas.crt -alias mycas
+keytool -import -alias mycas -file G:/WayFramework/casKey/mycas.crt -keystore G:/WayFramework/casKey/mycas.keystore
+
+#cas-server-core :org.w3c.dom.Node.getTextContent()
+#Exception: The method getTextContent() is undefined for the type Node
+#Settle: set jre lib before maven lib in build path perference (order and export tab)
+#############################################################################################
+
+
+
+#for Linux Server
+#############################################################################################
+#install jdk
+#set environment variable in using sh
+cd /etc/profile.d/
+vi java.sh
+
+##java.sh content #start
+export JAVA_HOME=/work/install/jdk1.7.0_25
+export PATH=$JAVA_HOME/bin:$PATH
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+##java.sh content #end
+
+source /etc/profile
+
+
+#install nexus
+#default info(user:admin; password:admin123; port:8081)
+
+
+#install tomcat default port 8080
+
+
+#install jenkins
+vi ${TOMCAT_HOME}/conf/server.xml
+##add server.xml content in tag<hosts> #start
+<Context path="/jenkins" docBase="/work/www/jenkins" reloadable="true">
+	<Logger className="org.apache.catalina.logger.FileLogger" directory="logs" prefix="jenkins." suffix=".txt" timestamp="true"/>
+</Context>
+##add server.xml content #end
+
+
+#common command
+#upgrade server
+yum update
+#check net port
+iptables -L
+#clean 
+iptables -F
+#############################################################################################
+
+
+
+#for maven
+#############################################################################################
+#official net
+search.maven.org
+#china net
+maven.oschina.net
+#command
+clean install deploy
+#############################################################################################
+
+
+
+#for redis
+#############################################################################################
+#install
+$ mkdir /usr/local/redis  
+$ cd /usr/local/src  
+$ wget http://redis.googlecode.com/files/redis-2.6.14.tar.gz  
+$ tar xzf redis-2.6.14.tar.gz   
+$ ln -s redis-2.6.14 redis #建立一个链接  
+$ cd redis  
+$ make PREFIX=/usr/local/redis install #安装到指定目录中
+
+#if failed last step,should install gcc frist
+yum install gcc
+#choose allocator if erro like:   zmalloc.h:50:31: error: jemalloc/jemalloc.h: No such file or directory
+make MALLOC=libc
+
+
+#make as a service
+cp /usr/local/src/redis/utils/redis_init_script /etc/rc.d/init.d/redis
+chkconfig --add redis
+#if last step error like: service redis does not support chkconfig
+#edit start script  /etc/rc.d/init.d/redis
+add the line at second line 
+#chkconfig: 2345 80 90 
+#change(mind the & symbol)
+$EXEC $CONF & 
+mkdir /etc/redis
+cp /usr/local/src/redis/redis.conf /etc/redis/6379.conf
+chkconfig --add redis
+service redis start 
+
+
+#set redis command
+vi /etc/profile.d/redis.sh
+export PATH="$PATH:/usr/local/redis/bin"
+sourse /etc/profile
+#############################################################################################
+
+
+
+#for mysql
+#############################################################################################
+#download mysql tar 
+#unzip the tar package
+tar -xvzf mysql.tar -C /yourdir
+#initialize database
+mysqld --initialize
+
+#set configuration
+cp mysql_dir/support-files/my-default.cnf /etc/my.cnf
+cp mysql_dir/support-files/mysql.server /etc/init.d/mysql
+#modify file content
+##basedir=/softdir/mysql
+##datadir=/datadir/mysql/data
+
+#set env variable
+vi /etc/profile.d/mysql.sh
+export MYSQL_HOME="softdir/mysql"
+export PATH="$PATH:$MYSQL_HOME/bin"
+
+#selinux(especially centos)
+vi /etc/selinux/config
+#set SELINUX=disabled
+
+#make as service
+chkconfig --add mysql
+chkconfig mysql on
+service mysql start
+
+mysqladmin -u root password 'your_password'
+msyql -u root -p
+#remote connection config
+mysql>GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'your_password' WITH GRANT OPTION;
+mysql>FLUSH PRIVILEGES;
+
+#maybe exception
+#remote port config
+iptables -F
+#close selinux : modify /etc/selinux/config set selinux=disabled
+
+#
+#############################################################################################
+
+
+
+#for pcre lib
+#############################################################################################
+wget ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-file
+tar -zxvf pcre-8.34.tar.gz
+cd pcre-8.34
+./configure
+make
+make install
+#############################################################################################
+
+
+
+#for zlib lib
+#############################################################################################
+wget http://zlib.net/zlib-1.2.8.tar.gz
+tar -zxvf zlib-1.2.8.tar.gz
+cd zlib-1.2.8
+./configure
+make
+make install
+#############################################################################################
