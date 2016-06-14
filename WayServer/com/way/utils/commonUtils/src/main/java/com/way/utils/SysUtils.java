@@ -22,4 +22,8 @@ public class SysUtils {
 			e.printStackTrace();
 		}
 	}
+	
+	public void currentTime(){
+		System.out.println(System.currentTimeMillis());
+	}
 }
