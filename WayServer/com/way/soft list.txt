@@ -40,3 +40,22 @@ http://zlib.net/zlib-1.2.8.tar.gz
 
 #cache
 #- redis
+
+#work flow
+#-snaker
+
+#page template
+#-beetl
+#-freemarker
+
+#captch
+#-JCaptch
+
+#report
+#-JasperWave(http://jasperwave.com/update-site)[pay]
+
+#online editor
+#-CHEditor
+
+#android emulator
+#-Genymotion

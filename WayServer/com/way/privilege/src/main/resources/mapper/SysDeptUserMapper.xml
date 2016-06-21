@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.way.framewk.privilege.provider.dao.SysDeptUserMapper" >
-  <resultMap id="BaseResultMap" type="com.way.framewk.privilege.entity.SysDeptUser" >
+<mapper namespace="com.way.wayFramewk.privilege.provider.dao.SysDeptUserMapper" >
+  <resultMap id="BaseResultMap" type="com.way.wayFramewk.privilege.entity.SysDeptUser" >
     <result column="dept_id" property="deptId" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="is_head" property="isHead" jdbcType="BIT" />
@@ -67,7 +67,7 @@
   <sql id="Base_Column_List" >
     dept_id, user_id, is_head
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.way.framewk.privilege.entity.SysDeptUserExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.way.wayFramewk.privilege.entity.SysDeptUserExample" >
     select
     <if test="distinct" >
       distinct
@@ -81,19 +81,19 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.way.framewk.privilege.entity.SysDeptUserExample" >
+  <delete id="deleteByExample" parameterType="com.way.wayFramewk.privilege.entity.SysDeptUserExample" >
     delete from sys_dept_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.way.framewk.privilege.entity.SysDeptUser" >
+  <insert id="insert" parameterType="com.way.wayFramewk.privilege.entity.SysDeptUser" >
     insert into sys_dept_user (dept_id, user_id, is_head
       )
     values (#{deptId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{isHead,jdbcType=BIT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.way.framewk.privilege.entity.SysDeptUser" >
+  <insert id="insertSelective" parameterType="com.way.wayFramewk.privilege.entity.SysDeptUser" >
     insert into sys_dept_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="deptId != null" >
@@ -118,7 +118,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.way.framewk.privilege.entity.SysDeptUserExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.way.wayFramewk.privilege.entity.SysDeptUserExample" resultType="java.lang.Integer" >
     select count(*) from sys_dept_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />

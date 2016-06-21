@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.way.framewk.privilege.provider.dao.SysRoleMenuMapper" >
-  <resultMap id="BaseResultMap" type="com.way.framewk.privilege.entity.SysRoleMenu" >
+<mapper namespace="com.way.wayFramewk.privilege.provider.dao.SysRoleMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.way.wayFramewk.privilege.entity.SysRoleMenu" >
     <result column="roleId" property="roleid" jdbcType="BIGINT" />
     <result column="menuId" property="menuid" jdbcType="BIGINT" />
   </resultMap>
@@ -66,7 +66,7 @@
   <sql id="Base_Column_List" >
     roleId, menuId
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.way.framewk.privilege.entity.SysRoleMenuExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.way.wayFramewk.privilege.entity.SysRoleMenuExample" >
     select
     <if test="distinct" >
       distinct
@@ -80,17 +80,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.way.framewk.privilege.entity.SysRoleMenuExample" >
+  <delete id="deleteByExample" parameterType="com.way.wayFramewk.privilege.entity.SysRoleMenuExample" >
     delete from sys_role_menu
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.way.framewk.privilege.entity.SysRoleMenu" >
+  <insert id="insert" parameterType="com.way.wayFramewk.privilege.entity.SysRoleMenu" >
     insert into sys_role_menu (roleId, menuId)
     values (#{roleid,jdbcType=BIGINT}, #{menuid,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.way.framewk.privilege.entity.SysRoleMenu" >
+  <insert id="insertSelective" parameterType="com.way.wayFramewk.privilege.entity.SysRoleMenu" >
     insert into sys_role_menu
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="roleid != null" >
@@ -109,7 +109,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.way.framewk.privilege.entity.SysRoleMenuExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.way.wayFramewk.privilege.entity.SysRoleMenuExample" resultType="java.lang.Integer" >
     select count(*) from sys_role_menu
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
