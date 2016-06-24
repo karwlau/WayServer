@@ -26,9 +26,9 @@ CREATE TABLE sys_dept
 	-- 菜单id路径
 	path varchar(128) COMMENT 'path : 菜单id路径',
 	is_delete boolean COMMENT 'is_delete',
-	create_time timestamp COMMENT 'create_time',
+	create_time timestamp NULL DEFAULT NULL COMMENT 'create_time',
 	create_by bigint COMMENT 'create_by',
-	update_time timestamp COMMENT 'update_time',
+	update_time timestamp NULL DEFAULT NULL COMMENT 'update_time',
 	update_by bigint COMMENT 'update_by',
 	PRIMARY KEY (id)
 ) COMMENT = 'sys_dept : 部门表';
@@ -57,11 +57,13 @@ CREATE TABLE sys_menu
 	pri_code varchar(64) COMMENT 'pri_code : 权限控制编码',
 	-- 排序
 	order_no int COMMENT 'order_no : 排序',
+	-- 深度
+	depth smallint COMMENT 'depth : 深度',
 	url varchar(128) COMMENT 'url',
 	is_delete boolean COMMENT 'is_delete',
-	create_time timestamp COMMENT 'create_time',
+	create_time timestamp NULL DEFAULT NULL COMMENT 'create_time',
 	create_by bigint COMMENT 'create_by',
-	update_time timestamp COMMENT 'update_time',
+	update_time timestamp NULL DEFAULT NULL COMMENT 'update_time',
 	update_by bigint COMMENT 'update_by',
 	PRIMARY KEY (id)
 ) COMMENT = 'sys_menu : 权限资源表';
@@ -77,9 +79,9 @@ CREATE TABLE sys_role
 	-- 角色描述
 	description varchar(128) COMMENT 'description : 角色描述',
 	is_delete boolean COMMENT 'is_delete',
-	create_time timestamp COMMENT 'create_time',
+	create_time timestamp NULL DEFAULT NULL COMMENT 'create_time',
 	create_by bigint COMMENT 'create_by',
-	update_time timestamp COMMENT 'update_time',
+	update_time timestamp NULL DEFAULT NULL COMMENT 'update_time',
 	update_by bigint COMMENT 'update_by',
 	PRIMARY KEY (id)
 ) COMMENT = 'sys_role : 角色表';
@@ -104,9 +106,9 @@ CREATE TABLE sys_user
 	password varchar(64) COMMENT 'password',
 	nick_name varchar(64) COMMENT 'nick_name',
 	is_delete boolean COMMENT 'is_delete',
-	create_time timestamp COMMENT 'create_time',
+	create_time timestamp NULL DEFAULT NULL COMMENT 'create_time',
 	create_by bigint COMMENT 'create_by',
-	update_time timestamp COMMENT 'update_time',
+	update_time timestamp NULL DEFAULT NULL COMMENT 'update_time',
 	update_by bigint COMMENT 'update_by',
 	PRIMARY KEY (id)
 ) COMMENT = 'sys_user : 用户表';
