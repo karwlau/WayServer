@@ -1,3 +1,8 @@
+#open source code
+#- https://github.com/facebook
+#- https://github.com/xushaomin
+
+
 #database:
 #- mysql
 #- postgreSQL
