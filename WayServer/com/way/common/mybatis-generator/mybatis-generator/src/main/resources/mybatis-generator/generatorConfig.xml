@@ -6,7 +6,12 @@
 	<classPathEntry location="${mysqlConnector}" />
 
 	<context id="context1" targetRuntime="MyBatis3">
-		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+		
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin><!-- 
+		<plugin type="com.way.common.plugins.mbg_page_plugin.PaginationPlugin"></plugin> -->
+		<plugin type="com.way.common.plugins.mbg_page_plugin.service.ServicePlugin">
+			<property name="service_path" value="${service_path}"/>
+		</plugin>
 
 		<commentGenerator>
 			<property name="suppressAllComments" value="true" />
@@ -26,7 +31,7 @@
 
 		<javaClientGenerator targetPackage="com.way.framewk.privilege.provider.dao"
 			targetProject="src" type="XMLMAPPER" />
-
+			
 		<table domainObjectName="${entity}" tableName="${table_name}">
 			<generatedKey type="post" identity="true" column="id"
 				sqlStatement="MySql" />
