@@ -39,7 +39,7 @@
 				<dependencies>
 					<dependency>
 						<groupId>com.way.common.plugins</groupId>
-						<artifactId>mbg-page-plugin</artifactId>
+						<artifactId>mbg-plugins</artifactId>
 						<version>0.0.1</version>
 					</dependency>
 					<dependency>
