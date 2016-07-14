@@ -23,12 +23,12 @@ public class ServiceIntGenerator extends Interface {
 	public ServiceIntGenerator(Context context, IntrospectedTable introspectedTable, Map<TypeName, MbgType> MTYPES) {
 		this(new FullyQualifiedJavaType(MTYPES.get(TypeName.SERVICE).getType()));
 		this.MTYPES = MTYPES;
-		
-		//import
+
+		// import
 		this.addImportedType(MTYPES.get(TypeName.PAGE).getFQJType());
 		this.addImportedType(MTYPES.get(TypeName.RECORD).getFQJType());
 
-		//method
+		// method
 		this.setVisibility(JavaVisibility.PUBLIC);
 		this.findMethodGenerate(introspectedTable);
 		this.getMethodGenerate(introspectedTable);
