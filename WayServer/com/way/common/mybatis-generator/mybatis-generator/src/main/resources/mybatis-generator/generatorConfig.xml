@@ -9,7 +9,11 @@
 		<property name="service_path" value="${service_path}" />
 
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+<<<<<<< HEAD
 		<plugin type="com.way.common.plugins.mbg_plugins.page.PaginationPlugin"></plugin>
+=======
+		<!-- <plugin type="com.way.common.plugins.mbg_plugins.page.PaginationPlugin"></plugin> -->
+>>>>>>> branch 'master' of ssh://git@github.com/karwlau/WayServer.git
 		<plugin type="com.way.common.plugins.mbg_plugins.service.ServicePlugin"></plugin>
 
 		<commentGenerator>
