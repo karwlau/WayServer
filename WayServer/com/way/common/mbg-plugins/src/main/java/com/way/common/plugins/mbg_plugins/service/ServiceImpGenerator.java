@@ -25,14 +25,15 @@ public class ServiceImpGenerator extends TopLevelClass {
 
 	List<String> findMethodCode = Arrays.asList("List<#{recordType}> list = #{mapper}.selectByPage(page,example);",
 			"page.setList(list);", "return page;");
-	List<String> getMethodCode = Arrays.asList("return #{mapper}.selectByPrimaryKey(id)");
+	List<String> getMethodCode = Arrays.asList("return #{mapper}.selectByPrimaryKey(id);");
 	List<String> saveMethodCode = Arrays.asList("Date now = new Date();", "record.setIsDelete(false);",
-			"record.setCreateTime(now);", "record.setUpdateTime(now);", "#{mapper}.insertSelective(record);");
+			"record.setCreateTime(now);", "record.setUpdateTime(now);", "#{mapper}.insertSelective(record);",
+			"return record;");
 	List<String> updateMethodCode = Arrays.asList("Date now = new Date();", "record.setUpdateTime(now);",
-			"#{mapper}.updateByPrimaryKeySelective(record);");
+			"#{mapper}.updateByPrimaryKeySelective(record);", "return record;");
 	List<String> deleteMethodCode = Arrays.asList("Date now = new Date();",
 			"#{recordType} update = new #{recordType}();", "update.setId(id);", "update.setUpdateTime(now);",
-			"udpate.setIsDelete(true);", "#{mapper}.updateByPrimaryKeySelective(update);");
+			"update.setIsDelete(true);", "#{mapper}.updateByPrimaryKeySelective(update);", "return id;");
 
 	public ServiceImpGenerator(Context context, IntrospectedTable introspectedTable, Map<TypeName, MbgType> MTYPES) {
 		this(new FullyQualifiedJavaType(MTYPES.get(TypeName.SERVICE_IMPL).getType()));
@@ -54,7 +55,7 @@ public class ServiceImpGenerator extends TopLevelClass {
 
 		// field
 		Field mapper = new Field(MTYPES.get(TypeName.MAPPER).getName(), MTYPES.get(TypeName.MAPPER).getFQJType());
-		mapper.addAnnotation("@Resouce");
+		mapper.addAnnotation("@Resource");
 		mapper.setVisibility(JavaVisibility.PRIVATE);
 		this.addField(mapper);
 

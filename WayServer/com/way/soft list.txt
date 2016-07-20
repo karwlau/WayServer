@@ -45,6 +45,7 @@ http://zlib.net/zlib-1.2.8.tar.gz
 
 #cache
 #- redis
+#- memcache
 
 #work flow
 #-snaker
