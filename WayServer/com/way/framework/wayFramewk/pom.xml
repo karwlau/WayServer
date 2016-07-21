@@ -40,6 +40,13 @@
 			<version>2.3.23</version>
 		</dependency>
 
+		<!-- cache -->
+		<dependency>
+			<groupId>org.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+
 		<!-- -->
 		<dependency>
 			<groupId>junit</groupId>
