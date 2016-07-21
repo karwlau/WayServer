@@ -15,6 +15,12 @@ import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 
+/**
+ * 
+ * @author Administrator
+ * @date 2016-7-21
+ * @description page method generate
+ */
 public class PaginationPlugin extends PluginAdapter {
 
 	@Override
