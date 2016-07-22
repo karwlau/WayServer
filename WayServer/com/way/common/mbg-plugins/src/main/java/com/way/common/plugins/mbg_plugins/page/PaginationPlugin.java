@@ -15,6 +15,8 @@ import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 
+import com.way.common.plugins.mbg_plugins.utils.constants.SType;
+
 /**
  * 
  * @author Administrator
@@ -29,22 +31,26 @@ public class PaginationPlugin extends PluginAdapter {
 	}
 
 	@Override
+	public void initialized(IntrospectedTable introspectedTable) {
+		super.initialized(introspectedTable);
+		SType.initRecord(introspectedTable);
+	}
+
+	@Override
 	public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass,
 			IntrospectedTable introspectedTable) {
 		// Mapper注解
 		interfaze.addAnnotation("@Repository");
-		interfaze.addImportedType(new FullyQualifiedJavaType("org.springframework.stereotype.Repository"));
+		interfaze.addImportedType(SType.ANO_REPOSITORY.getFQJType());
 
 		// 分页方法接口
 		Method method = new Method("selectByPage");
 		method.setVisibility(JavaVisibility.PUBLIC);
-		FullyQualifiedJavaType fqjt = new FullyQualifiedJavaType("java.util.List");
-		fqjt.addTypeArgument(new FullyQualifiedJavaType(introspectedTable.getBaseRecordType()));
+		FullyQualifiedJavaType fqjt = SType.LIST.getFQJType();
+		fqjt.addTypeArgument(SType.RECORD.getFQJType());
 		method.setReturnType(fqjt);
-		method.addParameter(new Parameter(new FullyQualifiedJavaType("com.appleframework.model.page.Pagination"),
-				"page", "@Param(\"page\")"));
-		method.addParameter(new Parameter(new FullyQualifiedJavaType(introspectedTable.getExampleType()), "example",
-				"@Param(\"example\")"));
+		method.addParameter(new Parameter(SType.PAGE.getFQJType(), "page", "@Param(\"page\")"));
+		method.addParameter(new Parameter(SType.EXAMPLE.getFQJType(), "example", "@Param(\"example\")"));
 		interfaze.addMethod(method);
 		return true;
 	}

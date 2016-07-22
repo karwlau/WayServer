@@ -2,7 +2,6 @@ package com.way.common.plugins.mbg_plugins.service;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.Field;
@@ -12,19 +11,19 @@ import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.config.Context;
 
-import com.way.common.plugins.mbg_plugins.service.constants.MbgType;
-import com.way.common.plugins.mbg_plugins.service.constants.TypeName;
+import com.way.common.plugins.mbg_plugins.utils.constants.SType;
 
 public class ServiceImpGenerator extends TopLevelClass {
-
-	Map<TypeName, MbgType> MTYPES;
 
 	private ServiceImpGenerator(FullyQualifiedJavaType type) {
 		super(type);
 	}
 
-	List<String> findMethodCode = Arrays.asList("List<#{recordType}> list = #{mapper}.selectByPage(page,example);",
+	List<String> findMethodCode = Arrays.asList("List<#{recordType}> list = #{mapper}.selectByPage(page,record);",
 			"page.setList(list);", "return page;");
+	List<String> findExtendMethodCode = Arrays.asList(
+			"List<#{recordType}> list = #{extendMapper}.selectByPage(page,record);", "page.setList(list);",
+			"return page;");
 	List<String> getMethodCode = Arrays.asList("return #{mapper}.selectByPrimaryKey(id);");
 	List<String> saveMethodCode = Arrays.asList("Date now = new Date();", "record.setIsDelete(false);",
 			"record.setCreateTime(now);", "record.setUpdateTime(now);", "#{mapper}.insertSelective(record);",
@@ -35,29 +34,35 @@ public class ServiceImpGenerator extends TopLevelClass {
 			"#{recordType} update = new #{recordType}();", "update.setId(id);", "update.setUpdateTime(now);",
 			"update.setIsDelete(true);", "#{mapper}.updateByPrimaryKeySelective(update);", "return id;");
 
-	public ServiceImpGenerator(Context context, IntrospectedTable introspectedTable, Map<TypeName, MbgType> MTYPES) {
-		this(new FullyQualifiedJavaType(MTYPES.get(TypeName.SERVICE_IMPL).getType()));
-		this.MTYPES = MTYPES;
+	public ServiceImpGenerator(Context context, IntrospectedTable introspectedTable) {
+		this(new FullyQualifiedJavaType(SType.SERVICE_IMPL.getType()));
 		// implements
-		this.addSuperInterface(MTYPES.get(TypeName.SERVICE).getFQJType());
+		this.addSuperInterface(SType.SERVICE.getFQJType());
 
 		// import
-		this.addImportedType("com.appleframework.model.page.Pagination");
-		this.addImportedType("org.springframework.stereotype.Service");
-		this.addImportedType("javax.annotation.Resource");
-		this.addImportedType(MTYPES.get(TypeName.RECORD).getFQJType());
-		this.addImportedType(MTYPES.get(TypeName.EXAMPLE).getFQJType());
-		this.addImportedType(MTYPES.get(TypeName.MAPPER).getFQJType());
-		this.addImportedType(MTYPES.get(TypeName.SERVICE).getFQJType());
+		this.addImportedType(SType.PAGE.getFQJType());
+		this.addImportedType(SType.ANO_SERVICE.getFQJType());
+		this.addImportedType(SType.ANO_RESOURCE.getFQJType());
+		this.addImportedType(SType.DATE.getFQJType());
+		this.addImportedType(SType.LIST.getFQJType());
+		this.addImportedType(SType.RECORD.getFQJType());
+		this.addImportedType(SType.EXAMPLE.getFQJType());
+		this.addImportedType(SType.MAPPER.getFQJType());
+		this.addImportedType(SType.EXT_MAPPER.getFQJType());
+		this.addImportedType(SType.SERVICE.getFQJType());
 
 		// annotation
-		this.addAnnotation("@Service(\"" + MTYPES.get(TypeName.SERVICE).getName() + "\")");
+		this.addAnnotation("@Service(\"" + SType.SERVICE.getName() + "\")");
 
 		// field
-		Field mapper = new Field(MTYPES.get(TypeName.MAPPER).getName(), MTYPES.get(TypeName.MAPPER).getFQJType());
+		Field mapper = new Field(SType.MAPPER.getName(), SType.MAPPER.getFQJType());
 		mapper.addAnnotation("@Resource");
 		mapper.setVisibility(JavaVisibility.PRIVATE);
 		this.addField(mapper);
+		Field extMapper = new Field(SType.EXT_MAPPER.getName(), SType.EXT_MAPPER.getFQJType());
+		extMapper.addAnnotation("@Resource");
+		extMapper.setVisibility(JavaVisibility.PRIVATE);
+		this.addField(extMapper);
 
 		this.setVisibility(JavaVisibility.PUBLIC);
 		this.findMethodGenerate(introspectedTable);
@@ -70,10 +75,14 @@ public class ServiceImpGenerator extends TopLevelClass {
 	private void findMethodGenerate(IntrospectedTable introspectedTable) {
 		Method method = new Method("findByPage");
 		method.setVisibility(JavaVisibility.PUBLIC);
-		method.setReturnType(MTYPES.get(TypeName.PAGE).getFQJType());
-		method.addParameter(MTYPES.get(TypeName.PAGE).getParam());
-		method.addParameter(MTYPES.get(TypeName.RECORD).getParam());
-		this.buildBody(method, findMethodCode);
+		method.setReturnType(SType.PAGE.getFQJType());
+		method.addParameter(SType.PAGE.getParam());
+		method.addParameter(SType.RECORD.getParam());
+		if ("mExtend".equals(introspectedTable.getContext().getProperty("mExtend"))) {
+			this.buildBody(method, findExtendMethodCode);
+		} else {
+			this.buildBody(method, findMethodCode);
+		}
 		method.addAnnotation("@Override");
 		this.addMethod(method);
 	}
@@ -81,8 +90,8 @@ public class ServiceImpGenerator extends TopLevelClass {
 	private void getMethodGenerate(IntrospectedTable introspectedTable) {
 		Method method = new Method("getById");
 		method.setVisibility(JavaVisibility.PUBLIC);
-		method.setReturnType(MTYPES.get(TypeName.RECORD).getFQJType());
-		method.addParameter(MTYPES.get(TypeName.LONG).getParam());
+		method.setReturnType(SType.RECORD.getFQJType());
+		method.addParameter(SType.LONG.getParam());
 		this.buildBody(method, getMethodCode);
 		method.addAnnotation("@Override");
 		this.addMethod(method);
@@ -91,8 +100,8 @@ public class ServiceImpGenerator extends TopLevelClass {
 	private void saveMethodgeenerate(IntrospectedTable introspectedTable) {
 		Method method = new Method("save");
 		method.setVisibility(JavaVisibility.PUBLIC);
-		method.setReturnType(MTYPES.get(TypeName.RECORD).getFQJType());
-		method.addParameter(MTYPES.get(TypeName.RECORD).getParam());
+		method.setReturnType(SType.RECORD.getFQJType());
+		method.addParameter(SType.RECORD.getParam());
 		method.addAnnotation("@Override");
 		this.buildBody(method, saveMethodCode);
 		this.addMethod(method);
@@ -101,8 +110,8 @@ public class ServiceImpGenerator extends TopLevelClass {
 	private void updateMethodgeenerate(IntrospectedTable introspectedTable) {
 		Method method = new Method("update");
 		method.setVisibility(JavaVisibility.PUBLIC);
-		method.setReturnType(MTYPES.get(TypeName.RECORD).getFQJType());
-		method.addParameter(MTYPES.get(TypeName.RECORD).getParam());
+		method.setReturnType(SType.RECORD.getFQJType());
+		method.addParameter(SType.RECORD.getParam());
 		method.addAnnotation("@Override");
 		this.buildBody(method, updateMethodCode);
 		this.addMethod(method);
@@ -111,8 +120,8 @@ public class ServiceImpGenerator extends TopLevelClass {
 	private void deleteMethodgeenerate(IntrospectedTable introspectedTable) {
 		Method method = new Method("delete");
 		method.setVisibility(JavaVisibility.PUBLIC);
-		method.setReturnType(MTYPES.get(TypeName.LONG).getFQJType());
-		method.addParameter(MTYPES.get(TypeName.LONG).getParam());
+		method.setReturnType(SType.LONG.getFQJType());
+		method.addParameter(SType.LONG.getParam());
 		method.addAnnotation("@Override");
 		this.buildBody(method, deleteMethodCode);
 		this.addMethod(method);
@@ -125,8 +134,9 @@ public class ServiceImpGenerator extends TopLevelClass {
 	}
 
 	private String bodyReplace(String str) {
-		return str.replaceAll("#\\{recordType\\}", MTYPES.get(TypeName.RECORD).getShortType())
-				.replaceAll("#\\{mapper\\}", MTYPES.get(TypeName.MAPPER).getName());
+		return str.replaceAll("#\\{recordType\\}", SType.RECORD.getShortType())
+				.replaceAll("#\\{mapper\\}", SType.MAPPER.getName())
+				.replaceAll("#\\{extendMapper\\}", SType.EXT_MAPPER.getName());
 	}
 
 }
