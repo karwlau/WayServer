@@ -22,7 +22,6 @@ public class ClientExtendGenerator extends Interface {
 		this.addImportedType(SType.PAGE.getFQJType());
 		this.addImportedType(SType.RECORD.getFQJType());
 		this.addImportedType(SType.LIST.getFQJType());
-		this.addImportedType(SType.LIST.getFQJType());
 		this.addImportedType(SType.ANO_PARAM.getFQJType());
 
 		// general
