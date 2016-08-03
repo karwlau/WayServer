@@ -176,3 +176,16 @@ cd zlib-1.2.8
 make
 make install
 #############################################################################################
+
+
+#for repo
+#############################################################################################
+#directory /etc/yum.repo.d/
+#163 repo
+wget http://mirrors.163.com/.help/CentOS7-Base-163.repo
+#ustc repo
+wget http://centos.ustc.edu.cn/CentOS-Base.repo
+#sohu repo
+wget http://mirrors.sohu.com/help/CentOS-Base-sohu.repo
+yum makecache
+#############################################################################################
