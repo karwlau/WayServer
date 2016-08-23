@@ -15,102 +15,14 @@
 <script type="text/javascript"
 	src="/js/jquery-ui-1.11.4/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="/js/jquery-ui-1.11.4/jquery-ui.min.css">
+<link rel="stylesheet" href="/js/jquery-ui-1.11.4/myCss/jquery-ui.my.css">
+<!-- common widget -->
+<script type="text/javascript" src="/js/select.js"></script>
+
 <SCRIPT type="text/javascript">
 	var curMenu = null, zTree_Menu = null;
-	var setting = {
-		view : {
-			showLine : true,
-			selectedMulti : false,
-			dblClickExpand : true
-		},
-		data : {
-			simpleData : {
-				enable : true
-			}
-		},
-		callback : {
-			onNodeCreated : this.onNodeCreated,
-			beforeClick : this.beforeClick,
-			onClick : this.onClick
-		}
-	};
 
-	var zNodes = [ {
-		id : 1,
-		pId : 0,
-		name : "主菜单 1",
-		open : true
-	}, {
-		id : 11,
-		pId : 1,
-		name : "子菜单 1-1"
-	}, {
-		id : 111,
-		pId : 11,
-		name : "w3school",
-		furl : "http://www.w3school.com.cn/"
-	}, {
-		id : 112,
-		pId : 11,
-		name : "runoob",
-		furl : "http://www.runoob.com/"
-	}, {
-		id : 12,
-		pId : 1,
-		name : "子菜单 1-2"
-	}, {
-		id : 121,
-		pId : 12,
-		name : "叶子节点 1-2-1"
-	}, {
-		id : 2,
-		pId : 0,
-		name : "主菜单 2"
-	}, {
-		id : 21,
-		pId : 2,
-		name : "子菜单 2-1"
-	}, {
-		id : 211,
-		pId : 21,
-		name : "叶子节点 2-1-1"
-	}, {
-		id : 212,
-		pId : 21,
-		name : "叶子节点 2-1-2"
-	}, {
-		id : 213,
-		pId : 21,
-		name : "叶子节点 2-1-3"
-	}, {
-		id : 3,
-		pId : 0,
-		name : "主菜单 3"
-	}, {
-		id : 31,
-		pId : 3,
-		name : "子菜单 3-1"
-	}, {
-		id : 311,
-		pId : 31,
-		name : "叶子节点 3-1-1"
-	}, {
-		id : 312,
-		pId : 31,
-		name : "叶子节点 3-1-2"
-	}, {
-		id : 32,
-		pId : 3,
-		name : "子菜单 3-2"
-	}, {
-		id : 321,
-		pId : 32,
-		name : "叶子节点 3-2-1"
-	}, {
-		id : 322,
-		pId : 32,
-		name : "叶子节点 3-2-2"
-	} ];
+	/*var zNodes=[{id:1,pId:0,name:"主菜单 1",open:true},{id:11,pId:1,name:"子菜单 1-1"},{id:111,pId:11,name:"w3school",furl:"http://www.w3school.com.cn/"},{id:112,pId:11,name:"runoob",furl:"http://www.runoob.com/"},{id:12,pId:1,name:"子菜单 1-2"},{id:121,pId:12,name:"叶子节点 1-2-1"},{id:2,pId:0,name:"主菜单 2"},{id:21,pId:2,name:"子菜单 2-1"},{id:211,pId:21,name:"叶子节点 2-1-1"},{id:212,pId:21,name:"叶子节点 2-1-2"},{id:213,pId:21,name:"叶子节点 2-1-3"},{id:3,pId:0,name:"主菜单 3"},{id:31,pId:3,name:"子菜单 3-1"},{id:311,pId:31,name:"叶子节点 3-1-1"},{id:312,pId:31,name:"叶子节点 3-1-2"},{id:32,pId:3,name:"子菜单 3-2"},{id:321,pId:32,name:"叶子节点 3-2-1"},{id:322,pId:32,name:"叶子节点 3-2-2"}];*/
 
 	function beforeClick(treeId, node) {
 		if (node.isParent) {
@@ -188,12 +100,6 @@
 	$(document).ready(function() {
 		//var outerH = document.body.scrollHeight - 10;
 		//$("#outerWin").height(outerH);
-		$.fn.zTree.init($("#menuTree"), setting, zNodes);
-		zTree_Menu = $.fn.zTree.getZTreeObj("menuTree");
-		curMenu = zTree_Menu.getNodes()[0].children[0].children[0];
-		zTree_Menu.selectNode(curMenu);
-		var a = $("#" + zTree_Menu.getNodes()[0].tId + "_a");
-		a.addClass("cur");
 
 		var frameW = window.innerWidth - $('#menuTree').width();
 		//$('#tabs').width(frameW);
@@ -201,6 +107,52 @@
 		//var titleH = $('#tabs').children('ul').height();
 		//$('#tabs').children('div').height(outerH - titleH);
 		refreshHeight();
+		
+		
+		selectWidget($("#sysMenu"),"/menu/sysList","name","id",function(){
+			$("#sysMenu").selectmenu({
+				"width" : "200px",
+				"select" : function(event,option){
+					//option.item.value
+		
+					var setting = {
+						view : {
+							showLine : true,
+							selectedMulti : false,
+							dblClickExpand : true
+						},
+						data : {
+							simpleData : {
+								enable : true,
+								idKey : 'id',
+								pIdKey : 'parentId',
+								rootPId : $("#sysMenu").val()
+							}
+						},
+						async: {
+							enable: true,
+							type: "post",
+							url: "/menu/menuExpand",
+							autoParam: ["pId=id"],
+							otherParam: {"sysId":$("#sysMenu").val()}
+						},
+						callback : {
+							onNodeCreated : this.onNodeCreated,
+							beforeClick : this.beforeClick,
+							onClick : this.onClick,
+							onAsyncSuccess : function(){
+								zTree_Menu = $.fn.zTree.getZTreeObj("menuTree");
+								curMenu = zTree_Menu.getNodes()[0].children[0].children[0];
+								zTree_Menu.selectNode(curMenu);
+								var a = $("#" + zTree_Menu.getNodes()[0].tId + "_a");
+								a.addClass("cur");
+							}
+						}
+					};
+					$.fn.zTree.init($("#menuTree"), setting);//, zNodes
+				}
+			},false);
+		});
 	});
 </SCRIPT>
 <style type="text/css">
@@ -241,15 +193,20 @@
 
 <BODY>
 	<div id="outerWin" style="display: flex; width: 100%; height: 100%;">
-		<div id="menuTree" class="ztree" style="float: left;"></div>
+		<div style="float: left;">
+			<div>
+				<select id="sysMenu" ></select>
+			</div>
+			<div id="menuTree" class="ztree clear"></div>
+		</div>
 		<div id="tabs" style="float: right; height: 100%; flex: 1;">
 			<ul id="winList">
 				<li><a href="#tabs-home">Home</a></li>
 			</ul>
 			<div id="tabs-home" style="display: flex;" class="itab">
 				<!-- <iframe src="http://localhost:8089/rowNumber/list" width="100%" scrolling="auto"
-					frameborder="0" name="baidu"></iframe> -->
-				<img src="/images/start.jpg" alt="home page" height="100%" width="100%" />
+					frameborder="0" name="baidu"></iframe>
+				<img src="/images/start.jpg" alt="home page" height="100%" width="100%" /> -->
 			</div>
 		</div>
 	</div>

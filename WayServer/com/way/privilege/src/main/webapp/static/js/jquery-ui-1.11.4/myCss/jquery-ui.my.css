@@ -1,0 +1,6 @@
+/*
+下拉框；去上下填充，默认padding: 0.4em 2.1em 0.4em 1em;
+*/
+.ui-selectmenu-button span.ui-selectmenu-text {
+	padding: 0em 2.1em 0em 1em;
+}
