@@ -205,8 +205,8 @@
 			</ul>
 			<div id="tabs-home" style="display: flex;" class="itab">
 				<!-- <iframe src="http://localhost:8089/rowNumber/list" width="100%" scrolling="auto"
-					frameborder="0" name="baidu"></iframe>
-				<img src="/images/start.jpg" alt="home page" height="100%" width="100%" /> -->
+					frameborder="0" name="baidu"></iframe>-->
+				<img src="/images/start.jpg" alt="home page" height="100%" width="100%" /> 
 			</div>
 		</div>
 	</div>
