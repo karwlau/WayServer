@@ -1,6 +1,9 @@
-#open source code
-#- https://github.com/facebook
-#- https://github.com/xushaomin
+#open source
+#- code
+#-- https://github.com/facebook
+#-- https://github.com/xushaomin
+#- resource
+#-- https://mirrors.tuna.tsinghua.edu.cn/
 
 
 #database:
