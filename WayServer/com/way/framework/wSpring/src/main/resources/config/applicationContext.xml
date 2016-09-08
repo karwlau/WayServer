@@ -1,0 +1,129 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	http://www.springframework.org/schema/context
+<<<<<<< HEAD
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd"><!-- default-dependency-check="all" -->
+
+
+
+	<!-- 启动自动扫描 <context:component-scan base-package="com.way.framework.wSpring" 
+		/> -->
+	<!-- 启用注解 -->
+	<context:annotation-config />
+
+	<!-- 强制检查required注解 <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor" 
+		/> -->
+
+
+	<bean id="helloBean" class="com.way.framework.wSpring.HelloWorld">
+
+		<!-- java.util.List -->
+		<property name="list">
+			<list>
+				<value>1</value>
+				<ref bean="randName" />
+				<value>${propertyName}</value>
+			</list>
+		</property>
+
+		<!-- java.util.Set -->
+		<property name="set">
+			<set>
+				<value>1</value>
+				<ref bean="randName" />
+			</set>
+		</property>
+
+		<!-- java.util.Map -->
+		<property name="map">
+			<map>
+				<entry key="Key 1" value="1" />
+				<entry key="Key 2" value-ref="randName" />
+			</map>
+		</property>
+
+		<!-- java.util.Properties -->
+		<property name="prop">
+			<props>
+				<prop key="admin">admin@way.com</prop>
+				<prop key="support">support@way.com</prop>
+			</props>
+		</property>
+		<property name="randName" ref="randName"></property>
+		<property name="date">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2015-12-31" />
+			</bean>
+		</property>
+	</bean>
+	<!-- dependency-check -->
+	<!-- none – 没有依赖检查，这是默认的模式。 -->
+	<!-- simple – 如果基本类型(int, long,double…)和集合类型(map, list..)的任何属性都没有设置，UnsatisfiedDependencyException将被抛出。 -->
+	<!-- objects – 如果对象类型的任何属性都没有设置，UnsatisfiedDependencyException将被抛出。 -->
+	<!-- all – 如果任何类型的任何属性都没有被设置，UnsatisfiedDependencyException将被抛出。 ] -->
+=======
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- 启动自动扫描 <context:component-scan base-package="com.way.framework.wSpring" 
+		/> -->
+	<bean id="helloBean" class="com.way.framework.wSpring.HelloWorld">
+
+		<!-- java.util.List -->
+		<property name="list">
+			<list>
+				<value>1</value>
+				<ref bean="randName" />
+				<value>${propertyName}</value>
+			</list>
+		</property>
+
+		<!-- java.util.Set -->
+		<property name="set">
+			<set>
+				<value>1</value>
+				<ref bean="randName" />
+			</set>
+		</property>
+
+		<!-- java.util.Map -->
+		<property name="map">
+			<map>
+				<entry key="Key 1" value="1" />
+				<entry key="Key 2" value-ref="randName" />
+			</map>
+		</property>
+
+		<!-- java.util.Properties -->
+		<property name="prop">
+			<props>
+				<prop key="admin">admin@way.com</prop>
+				<prop key="support">support@way.com</prop>
+			</props>
+		</property>
+		<property name="randName" ref="randName"></property>
+		<property name="date">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2015-12-31" />
+			</bean>
+		</property>
+	</bean>
+
+>>>>>>> branch 'master' of ssh://git@github.com/karwlau/WayServer.git
+	<bean id="randName" class="com.way.framework.wSpring.imp.RandNameImp">
+	</bean>
+
+	<!-- 日期类型注入工厂 -->
+	<bean id="dateFormat" class="java.text.SimpleDateFormat">
+		<constructor-arg value="yyyy-MM-dd" />
+	</bean>
+
+	<!-- 属性配置装配工厂 -->
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:config/demo.properties</value>
+		</property>
+	</bean>
+</beans>
