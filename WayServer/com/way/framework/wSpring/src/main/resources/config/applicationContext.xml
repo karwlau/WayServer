@@ -7,6 +7,7 @@
 
 	<!-- 启动自动扫描 <context:component-scan base-package="com.way.framework.wSpring" 
 		/> -->
+	<context:annotation-config />
 	<bean id="helloBean" class="com.way.framework.wSpring.HelloWorld">
 
 		<!-- java.util.List -->

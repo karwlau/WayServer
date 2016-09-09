@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
@@ -57,6 +59,16 @@ public class HelloWorld {
 	@Resource
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	@PostConstruct
+	public void initBean(){
+		System.out.println("init bean method");
+	}
+	
+	@PreDestroy
+	public void cleanBean(){
+		System.out.println("clean bean method");
 	}
 
 }
