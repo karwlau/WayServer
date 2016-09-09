@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -21,10 +21,14 @@ public class ServiceTest {
 	@Test
 	public void test() {
 		try {
-			ApplicationContext context = new ClassPathXmlApplicationContext("config/applicationContext.xml");
-			HelloWorld obj = (HelloWorld) context.getBean("helloBean");
+			// ApplicationContext
+			ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("config/applicationContext.xml");
+			//HelloWorld obj = (HelloWorld) context.getBean("helloBean");
+			//HelloWorld obj = (HelloWorld) context.getBean("helloServiceProxy");
+			HelloWorld obj = (HelloWorld) context.getBean("helloServiceCutProxy");
 			obj.printHello();
-			System.in.read();
+			context.close();
+			// System.in.read();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

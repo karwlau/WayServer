@@ -5,8 +5,54 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<!-- 启动自动扫描 <context:component-scan base-package="com.way.framework.wSpring" 
-		/> -->
+	<!-- 启动自动扫描 
+	<context:component-scan base-package="com.way.framework.wSpring">
+		<context:include-filter type="regex"
+			expression="com.yiibai.customer.dao.*DAO.*" />
+		<context:include-filter type="regex"
+			expression="com.yiibai.customer.services.*Service.*" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Service" />
+	</context:component-scan>-->
+	
+	<!-- 启动注解 -->
+	<context:annotation-config />
+	
+	<!-- AOP 拦截 -->
+	<bean id="aopBeforeMethodBean" class="com.way.framework.wSpring.AopAdviceBeforeMethod" />
+	<bean id="aopAfterMethodBean" class="com.way.framework.wSpring.AopAdviceAfterMethod" />
+	<bean id="aopRoundMethodBean" class="com.way.framework.wSpring.AopAdviceRoundMethod" />
+	<bean id="helloServiceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="helloBean" />
+		<property name="interceptorNames">
+			<list>
+				<value>aopBeforeMethodBean</value>
+				<value>aopAfterMethodBean</value>
+				<!-- ThrowsAdvice -->
+			</list>
+		</property>
+	</bean>
+	
+	<!-- AOP 切入点拦截 -->
+	<bean id="helloCut" class="org.springframework.aop.support.NameMatchMethodPointcut" >
+		<property name="mappedName" value="printHello"></property>
+	</bean>
+	<bean id="helloAdvisor"
+		class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="pointcut" ref="helloCut" />
+		<property name="advice" ref="aopRoundMethodBean" />
+	</bean>
+	<bean id="helloServiceCutProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="helloBean" />
+		<property name="interceptorNames">
+			<list>
+				<value>helloAdvisor</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- 简单bean类 -->
 	<bean id="helloBean" class="com.way.framework.wSpring.HelloWorld">
 
 		<!-- java.util.List -->
