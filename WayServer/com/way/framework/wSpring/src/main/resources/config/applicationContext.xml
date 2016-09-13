@@ -5,6 +5,7 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
+<<<<<<< HEAD
 	<!-- 启动自动扫描 
 	<context:component-scan base-package="com.way.framework.wSpring">
 		<context:include-filter type="regex"
@@ -53,6 +54,11 @@
 	
 	
 	<!-- 简单bean类 -->
+=======
+	<!-- 启动自动扫描 <context:component-scan base-package="com.way.framework.wSpring" 
+		/> -->
+	<context:annotation-config />
+>>>>>>> branch 'master' of ssh://git@github.com/karwlau/WayServer.git
 	<bean id="helloBean" class="com.way.framework.wSpring.HelloWorld">
 
 		<!-- java.util.List -->
