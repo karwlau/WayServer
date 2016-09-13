@@ -23,13 +23,9 @@ public class ServiceTest {
 		try {
 			// ApplicationContext
 			ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("config/applicationContext.xml");
-<<<<<<< HEAD
 			//HelloWorld obj = (HelloWorld) context.getBean("helloBean");
 			//HelloWorld obj = (HelloWorld) context.getBean("helloServiceProxy");
 			HelloWorld obj = (HelloWorld) context.getBean("helloServiceCutProxy");
-=======
-			HelloWorld obj = (HelloWorld) context.getBean("helloBean");
->>>>>>> branch 'master' of ssh://git@github.com/karwlau/WayServer.git
 			obj.printHello();
 			context.close();
 			// System.in.read();
