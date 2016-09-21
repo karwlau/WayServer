@@ -34,9 +34,9 @@ public class Constants {
     
     public static final String BASE_DIR = "config-data";
 
-    public static String DEFAULT_DOMAINNAME = "a.b.c";
+    public static String DEFAULT_DOMAINNAME = "default-config.way.com";
 
-    public static String DAILY_DOMAINNAME = "d.e.f";
+    public static String DAILY_DOMAINNAME = "daily-config.way.com";
 
     public static int DEFAULT_PORT = 8080;
 
