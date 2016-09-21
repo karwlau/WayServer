@@ -110,6 +110,13 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.39</version>
 		</dependency>
+		
+		<!-- diamond 配置 -->
+		<dependency>
+			<groupId>com.way.framework</groupId>
+			<artifactId>config</artifactId>
+			<version>0.0.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>privilege</finalName>
