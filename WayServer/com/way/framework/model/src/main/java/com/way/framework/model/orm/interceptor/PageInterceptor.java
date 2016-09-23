@@ -18,7 +18,6 @@ public class PageInterceptor implements Interceptor {
 
 	@Override
 	public Object intercept(Invocation ivk) throws Throwable {
-
 		return ivk.proceed();
 	}
 
