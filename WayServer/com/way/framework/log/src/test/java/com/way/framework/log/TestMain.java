@@ -15,21 +15,19 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:config/biz-*.xml" })
-public class App 
-{
+public class TestMain {
 	@Resource
 	public TestService tbService;
-	
-    public static void main( String[] args )
-    {
-    	Logger log = Logger.getLogger(App.class);
-        System.out.println( "Hello World!" );
-        log.info("test log");
-    }
-    
-    @Test
-    public void test(){
-    	tbService.pf();
-    	tbService.save();
-    }
+
+	public static void main(String[] args) {
+		Logger log = Logger.getLogger(TestMain.class);
+		System.out.println("Hello World!");
+		log.info("test log");
+	}
+
+	@Test
+	public void test() {
+		tbService.pf();
+		tbService.save();
+	}
 }
