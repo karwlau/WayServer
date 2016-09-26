@@ -1,6 +1,6 @@
 package com.way.utils;
 
-public class NumberUtil {
+public class NumberUtils {
 
 	/**
 	 * 数字转换

@@ -73,10 +73,4 @@ public class QRCoder {
 		return r.getText();
 	}
 
-	// 测试代码
-	public static void main(String[] args) throws Exception {
-		QRCoder.qrEncoder("testContent", "d:/test.jpg", "JPG");
-		String content = QRCoder.qrDecoder("d:/test.jpg");
-		System.out.println(content);
-	}
 }

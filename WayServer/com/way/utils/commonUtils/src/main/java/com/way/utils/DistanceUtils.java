@@ -1,6 +1,6 @@
 package com.way.utils;
 
-public class DistanceUtil {
+public class DistanceUtils {
 
 	/**
 	 * 两点经纬度获取距离描述
