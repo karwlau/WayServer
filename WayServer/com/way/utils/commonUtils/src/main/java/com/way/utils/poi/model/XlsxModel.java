@@ -1,7 +1,6 @@
 package com.way.utils.poi.model;
 
 import java.util.List;
-import java.util.Map;
 
 public class XlsxModel<T> {
 
@@ -36,7 +35,7 @@ public class XlsxModel<T> {
 	/**
 	 * 数据
 	 */
-	private List<Map<String, T>> datas;
+	private List<T> datas;
 	/**
 	 * 分页记录数,默认为0，不分页
 	 */
@@ -132,13 +131,13 @@ public class XlsxModel<T> {
 	/**
 	 * @return the datas
 	 */
-	public List<Map<String, T>> getDatas() {
+	public List<T> getDatas() {
 		return datas;
 	}
 	/**
 	 * @param datas the datas to set
 	 */
-	public void setDatas(List<Map<String, T>> datas) {
+	public void setDatas(List<T> datas) {
 		this.datas = datas;
 	}
 	/**
