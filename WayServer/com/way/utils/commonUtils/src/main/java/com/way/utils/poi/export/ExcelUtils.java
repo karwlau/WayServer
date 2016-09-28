@@ -1,4 +1,4 @@
-package com.way.utils.poi;
+package com.way.utils.poi.export;
 
 import java.util.List;
 import java.util.Map;
@@ -6,10 +6,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.springframework.web.servlet.view.document.AbstractXlsxView;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.springframework.web.servlet.view.document.AbstractExcelView;
 
 /**
  * 生成excel视图，可用excel工具打开或者保存 由ViewController的return new ModelAndView(viewExcel,
@@ -17,7 +17,8 @@ import org.springframework.web.servlet.view.document.AbstractXlsxView;
  * 
  * @version Version 1.0
  */
-public class XlsxUtils extends AbstractXlsxView {
+@SuppressWarnings({ "rawtypes", "deprecation" })
+public class ExcelUtils extends AbstractExcelView {
 
 	public String excelType;
 	public final static String HEADER_KEY = "header";
@@ -31,16 +32,16 @@ public class XlsxUtils extends AbstractXlsxView {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void buildExcelDocument(Map<String, Object> map, Workbook workbook, HttpServletRequest request,
+	public void buildExcelDocument(Map map, HSSFWorkbook workbook, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		Sheet sheet = workbook.createSheet("list");
+		HSSFSheet sheet = workbook.createSheet("list");
 		sheet.setDefaultColumnWidth((short) 18);
 
 		// 创建表头
 		List<String> headerList = (List<String>) map.get(HEADER_KEY);
 		int headerSize = headerList == null ? 0 : headerList.size();
-		Row headerRow = sheet.createRow(0);
+		HSSFRow headerRow = sheet.createRow(0);
 		for (int i = 0; i < headerSize; i++) {
 			headerRow.createCell(i).setCellValue(headerList.get(i));
 		}
@@ -54,7 +55,7 @@ public class XlsxUtils extends AbstractXlsxView {
 			int dataSize = dataList == null ? 0 : dataList.size();
 
 			for (short i = 0; i < dataSize; i++) {
-				Row sheetRow = sheet.createRow((i + 1));
+				HSSFRow sheetRow = sheet.createRow((i + 1));
 				Object object = dataList.get(i);
 				String prop = null;
 				Object value = null;
