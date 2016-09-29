@@ -3,24 +3,16 @@ package com.way.wayFramewk.privilege.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class SysMenu implements Serializable {
+public class SysDept implements Serializable {
     private Long id;
 
     private String name;
 
     private Long parentId;
 
-    private String path;
-
     private String code;
 
-    private String priCode;
-
-    private Integer orderNo;
-
-    private Short depth;
-
-    private String url;
+    private String path;
 
     private Boolean isDelete;
 
@@ -58,14 +50,6 @@ public class SysMenu implements Serializable {
         this.parentId = parentId;
     }
 
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path == null ? null : path.trim();
-    }
-
     public String getCode() {
         return code;
     }
@@ -74,36 +58,12 @@ public class SysMenu implements Serializable {
         this.code = code == null ? null : code.trim();
     }
 
-    public String getPriCode() {
-        return priCode;
+    public String getPath() {
+        return path;
     }
 
-    public void setPriCode(String priCode) {
-        this.priCode = priCode == null ? null : priCode.trim();
-    }
-
-    public Integer getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(Integer orderNo) {
-        this.orderNo = orderNo;
-    }
-
-    public Short getDepth() {
-        return depth;
-    }
-
-    public void setDepth(Short depth) {
-        this.depth = depth;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
+    public void setPath(String path) {
+        this.path = path == null ? null : path.trim();
     }
 
     public Boolean getIsDelete() {

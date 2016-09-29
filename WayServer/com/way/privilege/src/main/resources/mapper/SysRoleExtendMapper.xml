@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.way.wayFramewk.privilege.provider.dao.extend.SysRoleExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.way.wayFramewk.privilege.entity.SysRole" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="isKeyOwner" property="iskeyowner" jdbcType="BIT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, isKeyOwner, description, is_delete, create_time, create_by, update_time, 
+    update_by
+  </sql>
+  <select id="selectByPage" parameterType="map" resultMap="BaseResultMap" >
+    select * from sys_role
+  </select>
+</mapper>

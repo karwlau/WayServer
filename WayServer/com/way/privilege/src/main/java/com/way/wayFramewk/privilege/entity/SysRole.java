@@ -3,24 +3,14 @@ package com.way.wayFramewk.privilege.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class SysMenu implements Serializable {
+public class SysRole implements Serializable {
     private Long id;
 
     private String name;
 
-    private Long parentId;
+    private Boolean iskeyowner;
 
-    private String path;
-
-    private String code;
-
-    private String priCode;
-
-    private Integer orderNo;
-
-    private Short depth;
-
-    private String url;
+    private String description;
 
     private Boolean isDelete;
 
@@ -50,60 +40,20 @@ public class SysMenu implements Serializable {
         this.name = name == null ? null : name.trim();
     }
 
-    public Long getParentId() {
-        return parentId;
+    public Boolean getIskeyowner() {
+        return iskeyowner;
     }
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
+    public void setIskeyowner(Boolean iskeyowner) {
+        this.iskeyowner = iskeyowner;
     }
 
-    public String getPath() {
-        return path;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPath(String path) {
-        this.path = path == null ? null : path.trim();
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
-    }
-
-    public String getPriCode() {
-        return priCode;
-    }
-
-    public void setPriCode(String priCode) {
-        this.priCode = priCode == null ? null : priCode.trim();
-    }
-
-    public Integer getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(Integer orderNo) {
-        this.orderNo = orderNo;
-    }
-
-    public Short getDepth() {
-        return depth;
-    }
-
-    public void setDepth(Short depth) {
-        this.depth = depth;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 
     public Boolean getIsDelete() {

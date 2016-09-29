@@ -123,6 +123,12 @@
 			<artifactId>log</artifactId>
 			<version>0.0.1</version>
 		</dependency>
+		<!-- 日志 -->
+		<dependency>
+			<groupId>com.way.framework</groupId>
+			<artifactId>model</artifactId>
+			<version>0.0.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>privilege</finalName>

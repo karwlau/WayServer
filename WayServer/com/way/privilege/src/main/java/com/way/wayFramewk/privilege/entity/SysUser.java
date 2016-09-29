@@ -3,24 +3,18 @@ package com.way.wayFramewk.privilege.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class SysMenu implements Serializable {
+public class SysUser implements Serializable {
     private Long id;
 
     private String name;
 
-    private Long parentId;
+    private Boolean isAdmin;
 
-    private String path;
+    private String salt;
 
-    private String code;
+    private String password;
 
-    private String priCode;
-
-    private Integer orderNo;
-
-    private Short depth;
-
-    private String url;
+    private String nickName;
 
     private Boolean isDelete;
 
@@ -50,60 +44,36 @@ public class SysMenu implements Serializable {
         this.name = name == null ? null : name.trim();
     }
 
-    public Long getParentId() {
-        return parentId;
+    public Boolean getIsAdmin() {
+        return isAdmin;
     }
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
+    public void setIsAdmin(Boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
-    public String getPath() {
-        return path;
+    public String getSalt() {
+        return salt;
     }
 
-    public void setPath(String path) {
-        this.path = path == null ? null : path.trim();
+    public void setSalt(String salt) {
+        this.salt = salt == null ? null : salt.trim();
     }
 
-    public String getCode() {
-        return code;
+    public String getPassword() {
+        return password;
     }
 
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 
-    public String getPriCode() {
-        return priCode;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setPriCode(String priCode) {
-        this.priCode = priCode == null ? null : priCode.trim();
-    }
-
-    public Integer getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(Integer orderNo) {
-        this.orderNo = orderNo;
-    }
-
-    public Short getDepth() {
-        return depth;
-    }
-
-    public void setDepth(Short depth) {
-        this.depth = depth;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
+    public void setNickName(String nickName) {
+        this.nickName = nickName == null ? null : nickName.trim();
     }
 
     public Boolean getIsDelete() {
