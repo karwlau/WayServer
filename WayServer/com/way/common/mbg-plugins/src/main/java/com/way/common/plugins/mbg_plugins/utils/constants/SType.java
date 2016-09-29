@@ -5,7 +5,7 @@ import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.Parameter;
 
 public enum SType {
-	PAGE("com.appleframework.model.page.Pagination", "page"),
+	PAGE("com.way.framework.model.Pagination", "page"),
 
 	LONG("java.lang.Long", "id"),
 
