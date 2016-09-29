@@ -31,7 +31,7 @@ public class XlsxModel<T> {
 	/**
 	 * 数据开始行数
 	 */
-	private long startRow = 1;
+	private int startRow = 1;
 	/**
 	 * 字段
 	 */
@@ -172,7 +172,7 @@ public class XlsxModel<T> {
 	/**
 	 * @return the startRow
 	 */
-	public long getStartRow() {
+	public int getStartRow() {
 		return startRow;
 	}
 
@@ -180,7 +180,7 @@ public class XlsxModel<T> {
 	 * @param startRow
 	 *            the startRow to set
 	 */
-	public void setStartRow(long startRow) {
+	public void setStartRow(int startRow) {
 		this.startRow = startRow;
 	}
 
