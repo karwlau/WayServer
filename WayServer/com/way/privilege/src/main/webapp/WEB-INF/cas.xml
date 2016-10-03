@@ -1,7 +1,7 @@
 
 	<!-- ======================== 单点登录/登出 ======================== -->
 
-	<! - - 该过滤器用于实现单点登出功能，可选配置。 - - >
+	<!-- 该过滤器用于实现单点登出功能，可选配置。 -->
 	<filter>
 		<filter-name>CAS Single Sign Out Filter</filter-name>
 		<filter-class>org.jasig.cas.client.session.SingleSignOutFilter</filter-class>
