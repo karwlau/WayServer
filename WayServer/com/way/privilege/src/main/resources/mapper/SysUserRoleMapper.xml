@@ -85,26 +85,4 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update sys_user_role
-    <set >
-      <if test="record.userid != null" >
-        userId = #{record.userid,jdbcType=BIGINT},
-      </if>
-      <if test="record.roleid != null" >
-        roleId = #{record.roleid,jdbcType=BIGINT},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update sys_user_role
-    set userId = #{record.userid,jdbcType=BIGINT},
-      roleId = #{record.roleid,jdbcType=BIGINT}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
 </mapper>
