@@ -44,4 +44,26 @@ public class MenuController {
 		}
 		return list;
 	}
+
+	@RequestMapping("/save")
+	@ResponseBody
+	public String save(SysMenu record, HttpServletRequest request) {
+		this.sysMenuService.save(record);
+		return "true";
+	}
+
+	@RequestMapping("/update")
+	@ResponseBody
+	public String update(SysMenu record, HttpServletRequest request) {
+		this.sysMenuService.update(record);
+		return "true";
+	}
+	
+	@RequestMapping("/delete")
+	@ResponseBody
+	public String delete(Long id, HttpServletRequest request) {
+		this.sysMenuService.delete(id);
+		return "true";
+	}
+
 }
