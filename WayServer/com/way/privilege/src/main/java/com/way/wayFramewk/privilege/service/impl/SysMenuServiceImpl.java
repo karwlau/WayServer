@@ -88,7 +88,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 
 	@Override
-	public List<SysMenu> getListByParentIdUserId(Long parent, Long userId) {
+	public List<SysMenu> getListByParentIdUserId(Long parentId, Long userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

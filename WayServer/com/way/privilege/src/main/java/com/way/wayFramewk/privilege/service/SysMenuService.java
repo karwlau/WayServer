@@ -22,5 +22,5 @@ public interface SysMenuService {
     
     List<SysMenu> getListByParentId(Long parentId);
     
-    List<SysMenu> getListByParentIdUserId(Long parent,Long userId);
+    List<SysMenu> getListByParentIdUserId(Long parentId,Long userId);
 }
