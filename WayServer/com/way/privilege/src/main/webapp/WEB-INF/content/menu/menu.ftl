@@ -132,7 +132,7 @@
 						async: {
 							enable: true,
 							type: "post",
-							url: "/menu/menuExpand",
+							url: "/menu/sysMenuExpand",
 							autoParam: ["pId=id"],
 							otherParam: {"sysId":$("#sysMenu").val()}
 						},

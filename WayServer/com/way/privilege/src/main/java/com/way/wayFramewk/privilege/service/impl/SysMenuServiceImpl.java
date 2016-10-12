@@ -92,4 +92,23 @@ public class SysMenuServiceImpl implements SysMenuService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<SysMenu> getListBySysId(Long sysId) {
+		SysMenuExample example = new SysMenuExample();
+		example.createCriteria().andIsDeleteEqualTo(false)
+				.andPathLike(sysId + Constants.SEPERATE_CODE + Constants.LIKE_CODE)
+				.andDepthLessThan(Constants.BTN_LEVEL);
+		List<SysMenu> list = this.sysMenuMapper.selectByExample(example);
+		if (list != null && list.size() > 0) {
+			return list;
+		}
+		return null;
+	}
+
+	@Override
+	public List<SysMenu> getListBySysId(Long sysId, Long userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

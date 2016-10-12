@@ -45,6 +45,17 @@ public class MenuController {
 		return list;
 	}
 
+	@RequestMapping("/sysMenuExpand")
+	public @ResponseBody List<SysMenu> sysMenuExpand(Long sysId, HttpServletRequest request) {
+		List<SysMenu> list = new ArrayList<SysMenu>();
+		if (sysId != null && Constants.SYS_ROOT.equals(sysId)) {
+			//
+		} else {
+			list = this.sysMenuService.getListBySysId(sysId);
+		}
+		return list;
+	}
+
 	@RequestMapping("/save")
 	@ResponseBody
 	public String save(SysMenu record, HttpServletRequest request) {
