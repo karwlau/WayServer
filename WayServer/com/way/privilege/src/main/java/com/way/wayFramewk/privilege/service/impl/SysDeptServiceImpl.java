@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.way.framework.model.Pagination;
 import com.way.wayFramewk.privilege.entity.SysDept;
+import com.way.wayFramewk.privilege.entity.SysDeptUser;
+import com.way.wayFramewk.privilege.entity.SysDeptUserExample;
 import com.way.wayFramewk.privilege.provider.dao.SysDeptMapper;
+import com.way.wayFramewk.privilege.provider.dao.SysDeptUserMapper;
 import com.way.wayFramewk.privilege.provider.dao.extend.SysDeptExtendMapper;
 import com.way.wayFramewk.privilege.service.SysDeptService;
 
@@ -17,9 +20,10 @@ import com.way.wayFramewk.privilege.service.SysDeptService;
 public class SysDeptServiceImpl implements SysDeptService {
 	@Resource
 	private SysDeptMapper sysDeptMapper;
-
 	@Resource
 	private SysDeptExtendMapper sysDeptExtendMapper;
+	@Resource
+	private SysDeptUserMapper sysDeptUserMapper;
 
 	@Override
 	public Pagination<SysDept> findByPage(Pagination<SysDept> page, SysDept record) {
@@ -60,5 +64,23 @@ public class SysDeptServiceImpl implements SysDeptService {
 		update.setIsDelete(true);
 		sysDeptMapper.updateByPrimaryKeySelective(update);
 		return id;
+	}
+
+	@Override
+	public boolean existsUser(Long deptId) {
+		SysDeptUserExample example = new SysDeptUserExample();
+		example.createCriteria().andDeptIdEqualTo(deptId);
+		int count = this.sysDeptUserMapper.countByExample(example);
+		return count > 0;
+	}
+
+	@Override
+	public void divideDept(Long deptId, Long userId, boolean isHead) {
+		SysDeptUser record = new SysDeptUser();
+		record.setDeptId(deptId);
+		record.setUserId(userId);
+		record.setIsHead(isHead);
+		this.sysDeptUserMapper.insert(record);
+
 	}
 }

@@ -15,4 +15,6 @@ public interface SysDeptUserMapper {
 	int insert(SysDeptUser record);
 
 	List<SysDeptUser> selectByExample(SysDeptUserExample example);
+	
+	int countByExample(SysDeptUserExample example);
 }

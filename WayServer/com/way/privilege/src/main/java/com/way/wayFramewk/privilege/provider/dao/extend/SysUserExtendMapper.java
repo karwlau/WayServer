@@ -8,5 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SysUserExtendMapper {
-    List<SysUser> selectByPage(@Param("page") Pagination<SysUser> page, @Param("info") SysUser info);
+	List<SysUser> selectByPage(@Param("page") Pagination<SysUser> page, @Param("info") SysUser info);
+
+	List<SysUser> selectListByDept(@Param("deptId") Long deptId);
 }

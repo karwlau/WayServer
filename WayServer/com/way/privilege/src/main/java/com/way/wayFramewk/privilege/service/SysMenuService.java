@@ -6,25 +6,89 @@ import com.way.framework.model.Pagination;
 import com.way.wayFramewk.privilege.entity.SysMenu;
 
 public interface SysMenuService {
-    Pagination<SysMenu> findByPage(Pagination<SysMenu> page, SysMenu record);
 
-    SysMenu getById(Long id);
+	/* base CRUD start */
+	Pagination<SysMenu> findByPage(Pagination<SysMenu> page, SysMenu record);
 
-    SysMenu save(SysMenu record);
+	SysMenu getById(Long id);
 
-    SysMenu update(SysMenu record);
+	SysMenu save(SysMenu record);
 
-    Long delete(Long id);
-    
-    List<SysMenu> getSysList();
-    
-    List<SysMenu> getSysList(Long userId);
-    
-    List<SysMenu> getListByParentId(Long parentId);
-    
-    List<SysMenu> getListByParentIdUserId(Long parentId,Long userId);
+	SysMenu update(SysMenu record);
 
+	Long delete(Long id);
+	/* base CRUD end */
+
+	/**
+	 * 所有系统
+	 * 
+	 * @return
+	 */
+	List<SysMenu> getSysList();
+
+	/**
+	 * 所有系统(用户权限)
+	 * 
+	 * @return
+	 */
+	List<SysMenu> getSysListForUser(Long userId);
+
+	/**
+	 * 加载下级菜单-扩展
+	 * 
+	 * @param parentId
+	 * @return
+	 */
+	List<SysMenu> getListByParentId(Long parentId);
+
+	/**
+	 * 加载下级菜单-扩展(用户权限)
+	 * 
+	 * @param parentId
+	 * @param userId
+	 * @return
+	 */
+	List<SysMenu> getListByParentIdForUser(Long parentId, Long userId);
+
+	/**
+	 * 系统所有菜单
+	 * 
+	 * @param sysId
+	 * @return
+	 */
 	List<SysMenu> getListBySysId(Long sysId);
-	
-	List<SysMenu> getListBySysId(Long sysId,Long userId);
+
+	/**
+	 * 系统所有菜单(用户权限)
+	 * 
+	 * @param sysId
+	 * @param userId
+	 * @return
+	 */
+	List<SysMenu> getListBySysIdForUser(Long sysId, Long userId);
+
+	/**
+	 * 角色分配检查
+	 * 
+	 * @param menuId
+	 * @return
+	 */
+	boolean existsRoleForMenu(Long menuId);
+
+	/**
+	 * 权限检查过滤
+	 * 
+	 * @param menuList
+	 * @param userId
+	 * @return
+	 */
+	List<SysMenu> privilegeCheck(List<SysMenu> menuList, Long userId);
+
+	/**
+	 * 分配权限
+	 * 
+	 * @param menuList
+	 * @param roleId
+	 */
+	void dividePriv(List<SysMenu> menuList, Long roleId);
 }

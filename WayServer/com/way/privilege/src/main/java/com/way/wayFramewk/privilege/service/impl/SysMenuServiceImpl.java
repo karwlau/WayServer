@@ -12,7 +12,10 @@ import com.way.framework.model.Pagination;
 import com.way.wayFramewk.privilege.constant.Constants;
 import com.way.wayFramewk.privilege.entity.SysMenu;
 import com.way.wayFramewk.privilege.entity.SysMenuExample;
+import com.way.wayFramewk.privilege.entity.SysRoleMenu;
+import com.way.wayFramewk.privilege.entity.SysRoleMenuExample;
 import com.way.wayFramewk.privilege.provider.dao.SysMenuMapper;
+import com.way.wayFramewk.privilege.provider.dao.SysRoleMenuMapper;
 import com.way.wayFramewk.privilege.provider.dao.extend.SysMenuExtendMapper;
 import com.way.wayFramewk.privilege.service.SysMenuService;
 
@@ -20,9 +23,10 @@ import com.way.wayFramewk.privilege.service.SysMenuService;
 public class SysMenuServiceImpl implements SysMenuService {
 	@Resource
 	private SysMenuMapper sysMenuMapper;
-
 	@Resource
 	private SysMenuExtendMapper sysMenuExtendMapper;
+	@Resource
+	private SysRoleMenuMapper sysRoleMenuMapper;
 
 	@Override
 	public Pagination<SysMenu> findByPage(Pagination<SysMenu> page, SysMenu record) {
@@ -71,12 +75,6 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 
 	@Override
-	public List<SysMenu> getSysList(Long userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<SysMenu> getListByParentId(Long parentId) {
 		SysMenuExample example = new SysMenuExample();
 		example.createCriteria().andIsDeleteEqualTo(false).andParentIdEqualTo(parentId);
@@ -85,12 +83,6 @@ public class SysMenuServiceImpl implements SysMenuService {
 			return list;
 		}
 		return Collections.emptyList();
-	}
-
-	@Override
-	public List<SysMenu> getListByParentIdUserId(Long parentId, Long userId) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -107,8 +99,49 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 
 	@Override
-	public List<SysMenu> getListBySysId(Long sysId, Long userId) {
+	public List<SysMenu> getListBySysIdForUser(Long sysId, Long userId) {
+		List<SysMenu> menuList = this.getListBySysId(sysId);
+		menuList = this.privilegeCheck(menuList, userId);
+		return menuList;
+	}
+
+	@Override
+	public List<SysMenu> getSysListForUser(Long userId) {
+		List<SysMenu> sysList = this.getSysList();
+		sysList = this.privilegeCheck(sysList, userId);
+		return sysList;
+	}
+
+	@Override
+	public List<SysMenu> getListByParentIdForUser(Long parentId, Long userId) {
+		List<SysMenu> menuList = this.getListByParentId(parentId);
+		menuList = this.privilegeCheck(menuList, userId);
+		return menuList;
+	}
+
+	@Override
+	public boolean existsRoleForMenu(Long menuId) {
+		SysRoleMenuExample example = new SysRoleMenuExample();
+		example.createCriteria().andMenuIdEqualTo(menuId);
+		int count = this.sysRoleMenuMapper.countByExample(example);
+		return count > 0;
+	}
+
+	@Override
+	public List<SysMenu> privilegeCheck(List<SysMenu> menuList, Long userId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void dividePriv(List<SysMenu> menuList, Long roleId) {
+		if (menuList != null && menuList.size() > 0) {
+			SysRoleMenu record = new SysRoleMenu();
+			record.setRoleId(roleId);
+			for (SysMenu menu : menuList) {
+				record.setMenuId(menu.getId());
+				this.sysRoleMenuMapper.insert(record);
+			}
+		}
 	}
 }

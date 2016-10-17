@@ -61,4 +61,10 @@ public class SysUserServiceImpl implements SysUserService {
 		sysUserMapper.updateByPrimaryKeySelective(update);
 		return id;
 	}
+
+	@Override
+	public List<SysUser> getUsersByDeptId(Long deptId) {
+		List<SysUser> list = this.sysUserExtendMapper.selectListByDept(deptId);
+		return list;
+	}
 }

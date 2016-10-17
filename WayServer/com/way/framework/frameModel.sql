@@ -59,6 +59,8 @@ CREATE TABLE sys_menu
 	order_no int COMMENT 'order_no : 排序',
 	-- 深度
 	depth smallint COMMENT 'depth : 深度',
+	-- 系统URL
+	base_url varchar(128) COMMENT 'base_url : 系统URL',
 	url varchar(128) COMMENT 'url',
 	is_delete boolean DEFAULT '0' COMMENT 'is_delete',
 	create_time datetime DEFAULT NULL COMMENT 'create_time',
@@ -90,9 +92,9 @@ CREATE TABLE sys_role
 -- sys_role_menu : 角色权限（分配给角色的权限列表）
 CREATE TABLE sys_role_menu
 (
-	roleId bigint NOT NULL COMMENT 'roleId',
-	menuId bigint NOT NULL COMMENT 'menuId',
-	UNIQUE (roleId, menuId)
+	role_id bigint NOT NULL COMMENT 'role_id',
+	menu_id bigint NOT NULL COMMENT 'menu_id',
+	UNIQUE (role_id, menu_id)
 ) COMMENT = 'sys_role_menu : 角色权限（分配给角色的权限列表）';
 
 
@@ -117,9 +119,9 @@ CREATE TABLE sys_user
 -- sys_user_role
 CREATE TABLE sys_user_role
 (
-	userId bigint NOT NULL COMMENT 'userId',
-	roleId bigint NOT NULL COMMENT 'roleId',
-	UNIQUE (userId, roleId)
+	user_id bigint NOT NULL COMMENT 'user_id',
+	role_id bigint NOT NULL COMMENT 'role_id',
+	UNIQUE (user_id, role_id)
 ) COMMENT = 'sys_user_role';
 
 
@@ -135,7 +137,7 @@ ALTER TABLE sys_dept_user
 
 
 ALTER TABLE sys_role_menu
-	ADD FOREIGN KEY (roleId)
+	ADD FOREIGN KEY (role_id)
 	REFERENCES sys_menu (id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -143,7 +145,7 @@ ALTER TABLE sys_role_menu
 
 
 ALTER TABLE sys_role_menu
-	ADD FOREIGN KEY (menuId)
+	ADD FOREIGN KEY (menu_id)
 	REFERENCES sys_role (id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -151,7 +153,7 @@ ALTER TABLE sys_role_menu
 
 
 ALTER TABLE sys_user_role
-	ADD FOREIGN KEY (userId)
+	ADD FOREIGN KEY (user_id)
 	REFERENCES sys_role (id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -167,7 +169,7 @@ ALTER TABLE sys_dept_user
 
 
 ALTER TABLE sys_user_role
-	ADD FOREIGN KEY (roleId)
+	ADD FOREIGN KEY (role_id)
 	REFERENCES sys_user (id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
