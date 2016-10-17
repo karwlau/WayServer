@@ -3,21 +3,9 @@
 <HEAD>
 <title>菜单</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="/js/jquery-ztree/css/demo.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="/js/jquery-ztree/css/zTreeStyle/zTreeStyle.css"
-	type="text/css">
-<script type="text/javascript" src="/js/jquery-2.1.4/jquery.min.js"></script>
-<script type="text/javascript"
-	src="/js/jquery-ztree/jquery.ztree.all.min.js"></script>
-<!-- jquery ui -->
-<script type="text/javascript"
-	src="/js/jquery-ui-1.11.4/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="/js/jquery-ui-1.11.4/jquery-ui.min.css">
-<link rel="stylesheet" href="/js/jquery-ui-1.11.4/myCss/jquery-ui.my.css">
-<!-- common widget -->
-<script type="text/javascript" src="/js/select.js"></script>
+
+<#include "../common/commonJS.ftl">
+<#include "../common/commonCss.ftl">
 
 <SCRIPT type="text/javascript">
 	var curMenu = null, zTree_Menu = null;
@@ -114,7 +102,7 @@
 				"width" : "200px",
 				"select" : function(event,option){
 					//option.item.value
-		
+					
 					var setting = {
 						view : {
 							showLine : true,
@@ -152,6 +140,7 @@
 					$.fn.zTree.init($("#menuTree"), setting);//, zNodes
 				}
 			},false);
+			//$("#sysMenu").selectmenu("selectmenuselect");
 		});
 	});
 </SCRIPT>
