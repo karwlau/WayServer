@@ -56,7 +56,7 @@ public class MenuController {
 		return list;
 	}
 
-	@RequestMapping("/save")
+		@RequestMapping("/save")
 	@ResponseBody
 	public String save(SysMenu record, HttpServletRequest request) {
 		this.sysMenuService.save(record);
@@ -69,7 +69,7 @@ public class MenuController {
 		this.sysMenuService.update(record);
 		return "true";
 	}
-	
+
 	@RequestMapping("/delete")
 	@ResponseBody
 	public String delete(Long id, HttpServletRequest request) {

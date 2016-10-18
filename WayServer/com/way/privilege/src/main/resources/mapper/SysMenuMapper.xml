@@ -10,6 +10,7 @@
     <result column="pri_code" property="priCode" jdbcType="VARCHAR" />
     <result column="order_no" property="orderNo" jdbcType="INTEGER" />
     <result column="depth" property="depth" jdbcType="SMALLINT" />
+    <result column="base_url" property="baseUrl" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="is_delete" property="isDelete" jdbcType="BIT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -76,8 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, parent_id, path, code, pri_code, order_no, depth, url, is_delete, create_time, 
-    create_by, update_time, update_by
+    id, name, parent_id, path, code, pri_code, order_no, depth, base_url, url, is_delete, 
+    create_time, create_by, update_time, update_by
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.way.wayFramewk.privilege.entity.SysMenuExample" >
     select

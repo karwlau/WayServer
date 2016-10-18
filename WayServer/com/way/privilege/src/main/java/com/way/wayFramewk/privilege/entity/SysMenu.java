@@ -20,6 +20,8 @@ public class SysMenu implements Serializable {
 
     private Short depth;
 
+    private String baseUrl;
+
     private String url;
 
     private Boolean isDelete;
@@ -96,6 +98,14 @@ public class SysMenu implements Serializable {
 
     public void setDepth(Short depth) {
         this.depth = depth;
+    }
+
+    public String getBaseUrl() {
+        return baseUrl;
+    }
+
+    public void setBaseUrl(String baseUrl) {
+        this.baseUrl = baseUrl == null ? null : baseUrl.trim();
     }
 
     public String getUrl() {

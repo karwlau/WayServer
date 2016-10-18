@@ -625,6 +625,76 @@ public class SysMenuExample {
             return (Criteria) this;
         }
 
+        public Criteria andBaseUrlIsNull() {
+            addCriterion("base_url is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBaseUrlIsNotNull() {
+            addCriterion("base_url is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBaseUrlEqualTo(String value) {
+            addCriterion("base_url =", value, "baseUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBaseUrlNotEqualTo(String value) {
+            addCriterion("base_url <>", value, "baseUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBaseUrlGreaterThan(String value) {
+            addCriterion("base_url >", value, "baseUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBaseUrlGreaterThanOrEqualTo(String value) {
+            addCriterion("base_url >=", value, "baseUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBaseUrlLessThan(String value) {
+            addCriterion("base_url <", value, "baseUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBaseUrlLessThanOrEqualTo(String value) {
+            addCriterion("base_url <=", value, "baseUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBaseUrlLike(String value) {
+            addCriterion("base_url like", value, "baseUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBaseUrlNotLike(String value) {
+            addCriterion("base_url not like", value, "baseUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBaseUrlIn(List<String> values) {
+            addCriterion("base_url in", values, "baseUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBaseUrlNotIn(List<String> values) {
+            addCriterion("base_url not in", values, "baseUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBaseUrlBetween(String value1, String value2) {
+            addCriterion("base_url between", value1, value2, "baseUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBaseUrlNotBetween(String value1, String value2) {
+            addCriterion("base_url not between", value1, value2, "baseUrl");
+            return (Criteria) this;
+        }
+
         public Criteria andUrlIsNull() {
             addCriterion("url is null");
             return (Criteria) this;
