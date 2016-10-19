@@ -88,4 +88,11 @@ public class MenuController {
 	public String menuList(Model model, HttpServletRequest request) {
 		return "menu/system";
 	}
+	
+	@RequestMapping("/findSystem")
+	@ResponseBody
+	public List<SysMenu> findSystem(SysMenu info, HttpServletRequest request) {
+		List<SysMenu> list = this.sysMenuService.getSysList();
+		return list;
+	}
 }
