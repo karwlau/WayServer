@@ -116,12 +116,12 @@
     </selectKey>
     insert into sys_menu (name, parent_id, path, 
       code, pri_code, order_no, 
-      depth, url, is_delete, 
+      depth, base_url, url, is_delete, 
       create_time, create_by, update_time, 
       update_by)
     values (#{name,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, #{path,jdbcType=VARCHAR}, 
       #{code,jdbcType=VARCHAR}, #{priCode,jdbcType=VARCHAR}, #{orderNo,jdbcType=INTEGER}, 
-      #{depth,jdbcType=SMALLINT}, #{url,jdbcType=VARCHAR}, #{isDelete,jdbcType=BIT}, 
+      #{depth,jdbcType=SMALLINT}, #{baseUrl,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{isDelete,jdbcType=BIT}, 
       #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{updateBy,jdbcType=BIGINT})
   </insert>
@@ -151,6 +151,9 @@
       </if>
       <if test="depth != null" >
         depth,
+      </if>
+      <if test="baseUrl != null" >
+        base_url,
       </if>
       <if test="url != null" >
         url,
@@ -192,6 +195,9 @@
       </if>
       <if test="depth != null" >
         #{depth,jdbcType=SMALLINT},
+      </if>
+      <if test="baseUrl != null" >
+        #{baseUrl,jdbcType=VARCHAR},
       </if>
       <if test="url != null" >
         #{url,jdbcType=VARCHAR},
@@ -246,6 +252,9 @@
       <if test="record.depth != null" >
         depth = #{record.depth,jdbcType=SMALLINT},
       </if>
+      <if test="record.baseUrl != null" >
+        base_url = #{record.baseUrl,jdbcType=VARCHAR},
+      </if>
       <if test="record.url != null" >
         url = #{record.url,jdbcType=VARCHAR},
       </if>
@@ -279,6 +288,7 @@
       pri_code = #{record.priCode,jdbcType=VARCHAR},
       order_no = #{record.orderNo,jdbcType=INTEGER},
       depth = #{record.depth,jdbcType=SMALLINT},
+      base_url = #{record.baseUrl,jdbcType=VARCHAR},
       url = #{record.url,jdbcType=VARCHAR},
       is_delete = #{record.isDelete,jdbcType=BIT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -313,6 +323,9 @@
       <if test="depth != null" >
         depth = #{depth,jdbcType=SMALLINT},
       </if>
+      <if test="baseUrl != null" >
+        base_url = #{baseUrl,jdbcType=VARCHAR},
+      </if>
       <if test="url != null" >
         url = #{url,jdbcType=VARCHAR},
       </if>
@@ -343,6 +356,7 @@
       pri_code = #{priCode,jdbcType=VARCHAR},
       order_no = #{orderNo,jdbcType=INTEGER},
       depth = #{depth,jdbcType=SMALLINT},
+      base_url = #{baseUrl,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=BIT},
       create_time = #{createTime,jdbcType=TIMESTAMP},

@@ -89,6 +89,7 @@
 			id : data.id,
 			title : data.name,
 			content : '<iframe src="' + data.furl + '" style="width:100%;height:100%;overflow:hide;"></iframe>',//href : data.furl,
+			height : auto,
 			closable : true,
 			selected : true
 		});

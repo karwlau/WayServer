@@ -7,6 +7,19 @@ public class Pagination<T> {
 	private int pageSize;
 	private int totalNum;
 	private List<T> list;
+	//easyUI
+	private int page;
+	private int rows;
+	
+	public void setPage(int page) {
+		this.page = page;
+		this.pageNo = page;
+	}
+
+	public void setRows(int rows) {
+		this.rows = rows;
+		this.pageSize = rows;
+	}
 
 	public int getPageNo() {
 		return pageNo;

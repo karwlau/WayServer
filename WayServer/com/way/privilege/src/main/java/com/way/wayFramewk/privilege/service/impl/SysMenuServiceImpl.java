@@ -42,11 +42,20 @@ public class SysMenuServiceImpl implements SysMenuService {
 
 	@Override
 	public SysMenu save(SysMenu record) {
+		record.setPriCode(record.getCode());
 		Date now = new Date();
 		record.setIsDelete(false);
 		record.setCreateTime(now);
 		record.setUpdateTime(now);
 		sysMenuMapper.insertSelective(record);
+		if(record.getParentId().equals(Constants.SYS_ROOT)){
+			record.setPath(String.valueOf(record.getId()));
+		}else{
+			SysMenu parent = this.getById(record.getParentId());
+			record.setBaseUrl(parent.getBaseUrl());
+			record.setPath(parent.getPath() + Constants.SEPERATE_CODE + record.getId());
+		}
+		this.update(record);
 		return record;
 	}
 

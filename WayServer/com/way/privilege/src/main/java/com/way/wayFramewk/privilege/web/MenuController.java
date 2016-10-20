@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.way.framework.model.Pagination;
 import com.way.wayFramewk.privilege.constant.Constants;
 import com.way.wayFramewk.privilege.entity.SysMenu;
 import com.way.wayFramewk.privilege.service.SysMenuService;
@@ -39,7 +40,7 @@ public class MenuController {
 		List<SysMenu> list = new ArrayList<SysMenu>();
 		if (sysId != null && Constants.SYS_ROOT.equals(sysId)) {
 			//
-		} else if(id == null){
+		} else if (id == null) {
 			list = this.sysMenuService.getListByParentId(sysId);
 		} else {
 			list = this.sysMenuService.getListByParentId(id);
@@ -83,16 +84,19 @@ public class MenuController {
 	public String home(Model model, HttpServletRequest request) {
 		return "menu/home";
 	}
-	
+
 	@RequestMapping("/system")
 	public String menuList(Model model, HttpServletRequest request) {
 		return "menu/system";
 	}
-	
+
+	@SuppressWarnings("rawtypes")
 	@RequestMapping("/findSystem")
 	@ResponseBody
-	public List<SysMenu> findSystem(SysMenu info, HttpServletRequest request) {
+	public List<SysMenu> findSystem(SysMenu info, Pagination page, HttpServletRequest request) {
 		List<SysMenu> list = this.sysMenuService.getSysList();
 		return list;
 	}
+	
+	
 }
