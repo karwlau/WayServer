@@ -123,12 +123,19 @@
 			<artifactId>log</artifactId>
 			<version>0.0.1</version>
 		</dependency>
-		<!-- 日志 -->
+		<!-- 分页模型 -->
 		<dependency>
 			<groupId>com.way.framework</groupId>
 			<artifactId>model</artifactId>
 			<version>0.0.1</version>
 		</dependency>
+		<!-- jsr305 缺陷检查 -->
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>jsr305</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>privilege</finalName>
