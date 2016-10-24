@@ -54,6 +54,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 			SysMenu parent = this.getById(record.getParentId());
 			record.setBaseUrl(parent.getBaseUrl());
 			record.setPath(parent.getPath() + Constants.SEPERATE_CODE + record.getId());
+			record.setDepth((short) (parent.getDepth() + 1));
 		}
 		this.update(record);
 		return record;

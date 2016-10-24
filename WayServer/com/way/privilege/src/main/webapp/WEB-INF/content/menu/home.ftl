@@ -72,7 +72,7 @@
 					node['furl'] = node['baseUrl'] + node['url'];
 					addTab(node);
 				}else{
-					$('#menuTree').tree('expand',node.target)
+					$('#menuTree').tree('expand',node.target);
 				}
 			}
 		});
@@ -81,6 +81,9 @@
 		$("#tabs").tabs({
 			width : '100%',
 			height : '100%'
+			//width : $("#tabs").parent().width(),
+			//height : $("#tabs").parent().height(),
+			//fit : true
 		});
 	});
 	
@@ -89,7 +92,7 @@
 			id : data.id,
 			title : data.name,
 			content : '<iframe src="' + data.furl + '" style="width:100%;height:100%;overflow:hide;"></iframe>',//href : data.furl,
-			height : auto,
+			height : 'auto',
 			closable : true,
 			selected : true
 		});

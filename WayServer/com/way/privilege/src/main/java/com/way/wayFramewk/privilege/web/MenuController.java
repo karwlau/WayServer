@@ -22,25 +22,26 @@ public class MenuController {
 	@Resource
 	private SysMenuService sysMenuService;
 
-	@RequestMapping("/menu")
+	@RequestMapping("/testMenu")
 	public String baseOne(Model model, HttpServletRequest request) {
 		List<SysMenu> sysList = sysMenuService.getSysList();
 		model.addAttribute(Constants.SYS_LIST, sysList);
-		return "menu/menu";
+		return "menu/testMenu";
 	}
 
 	@RequestMapping("/sysList")
 	public @ResponseBody List<SysMenu> sysList(HttpServletRequest request) {
-		List<SysMenu> sysList = sysMenuService.getSysList();
+		List<SysMenu> sysList = this.sysMenuService.getSysList();
 		return sysList;
 	}
 
 	@RequestMapping("/menuExpand")
 	public @ResponseBody List<SysMenu> menuExpand(Long sysId, Long id, HttpServletRequest request) {
 		List<SysMenu> list = new ArrayList<SysMenu>();
-		if (sysId != null && Constants.SYS_ROOT.equals(sysId)) {
-			//
-		} else if (id == null) {
+//		if (sysId != null && Constants.SYS_ROOT.equals(sysId)) {
+//			list = this.sysMenuService.getSysList();
+//		} else 
+		if (id == null) {
 			list = this.sysMenuService.getListByParentId(sysId);
 		} else {
 			list = this.sysMenuService.getListByParentId(id);
@@ -98,5 +99,8 @@ public class MenuController {
 		return list;
 	}
 	
-	
+	@RequestMapping("/menu")
+	public String menu(Model model,HttpServletRequest request){
+		return "menu/menu";
+	}
 }
