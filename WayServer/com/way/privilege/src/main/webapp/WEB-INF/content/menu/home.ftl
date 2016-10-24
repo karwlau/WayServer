@@ -87,7 +87,12 @@
 		});
 	});
 	
+	//打开便签页
 	function addTab(data){
+		if(checkTab(data.name)){
+			$('#tabs').tabs('select',data.name);
+			return false;
+		}
 		$('#tabs').tabs('add', {
 			id : data.id,
 			title : data.name,
@@ -96,6 +101,13 @@
 			closable : true,
 			selected : true
 		});
+	}
+	
+	//检测是否已打开
+	function checkTab(tabName){
+		var tab = $('#tabs').tabs('getTab',tabName);
+		if(tab == null)return false;
+		return true;
 	}
 </script>
 <body class="easyui-layout">

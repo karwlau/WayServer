@@ -60,17 +60,14 @@ public class MenuController {
 		return list;
 	}
 
-	@RequestMapping("/save")
+	@RequestMapping("/saveOrUpdate")
 	@ResponseBody
 	public String save(SysMenu record, HttpServletRequest request) {
-		this.sysMenuService.save(record);
-		return "true";
-	}
-
-	@RequestMapping("/update")
-	@ResponseBody
-	public String update(SysMenu record, HttpServletRequest request) {
-		this.sysMenuService.update(record);
+		if(record.getId() != null ){
+			this.sysMenuService.update(record);
+		}else{
+			this.sysMenuService.save(record);
+		}
 		return "true";
 	}
 

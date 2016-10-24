@@ -66,6 +66,19 @@
 				e.preventDefault();
 				$('#menuTree').tree('select', node.target);
 				record = node;
+				if(record.depth == 1){
+					$('#addBtn').show();
+					$('#editBtn').hide();
+					$('#removeBtn').hide();
+				}else if(record.depth == 5){
+					$('#addBtn').hide();
+					$('#editBtn').show();
+					$('#removeBtn').show();
+				}else{
+					$('#addBtn').show();
+					$('#editBtn').show();
+					$('#removeBtn').show();
+				}
 				$('#opMenu').menu('show',{
 		    		left : event.clientX,
 		    		top : event.clientY
@@ -113,32 +126,40 @@
 	
 	//新增
 	function add(){
-		switch (record.depth){
+		initForm(record.depth + 1);
+		$('#menuWin').dialog({closed : false});
+		$('#parentId').val(record.id);
+	}
+	
+	//编辑
+	function edit(){
+		initForm(record.depth);
+		$('#menuWin').dialog({closed : false});
+		$('#menuForm').form('load',record);
+	}
+	
+	//初始化表单
+	function initForm(depth){
+		switch (depth){
 			case 1:
 			case 2:
-			case 4:
+			case 3:
+			case 5:
 			$('#url').hide();
 			break;
-			case 3:
+			case 4:
 			$('#url').show();
 			break;
 			default:
 			return false;
 		}
-		$('#parentId').val(record.id);
 		$('#menuForm').form('clear');
-		$('#menuWin').dialog({closed : false});
-	}
-	
-	//编辑
-	function edit(){
-	
 	}
 	
 	//保存
 	function save(){
 		$('#menuForm').form('submit', {
-		    url : '/menu/save',
+		    url : '/menu/saveOrUpdate',
 		    onSubmit : function(){
 		        // do some check
 		        // return false to prevent submit;
@@ -147,6 +168,29 @@
 		    	$('#menuWin').dialog('close');
 		        $('#menuTree').tree('reload');
 		    }
+		});
+	}
+	
+	//删除
+	function remove(){
+		$.messager.confirm('确认', '是否确认删除数据?', function (r) {
+			if (r) {
+				$.ajax({
+					url : '/menu/delete',
+					data : {
+						id : record.id
+					},
+					success : function(){
+						$('#menuTree').tree('reload');
+						$.messager.show({
+							title : '消息',
+							msg : '数据已删除',
+							timeout : 5000,
+							showType : 'slide'
+						});
+					}
+				});
+			}
 		});
 	}
 	

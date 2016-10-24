@@ -123,12 +123,14 @@
 	//新增
 	function add(){
 		$('#recordDialog').dialog({title: '新增',closed: false});
+		record = {'parentId':0,'depth':1};
+		$('#recordForm').form('load',record);
 	}
 	
 	//保存
 	function save(){
 		$('#recordForm').form('submit', {
-		    url : '/menu/save',
+		    url : '/menu/saveOrUpdate',
 		    onSubmit : function(){
 		        // do some check
 		        // return false to prevent submit;
@@ -143,21 +145,6 @@
 	function edit(){
 		$('#recordDialog').dialog({title: '编辑',closed: false});
 		$('#recordForm').form('load',record);
-	}
-	
-	//更新
-	function update(){
-		$('#recordForm').form('submit', {
-		    url : '/menu/update',
-		    onSubmit : function(){
-		        // do some check
-		        // return false to prevent submit;
-		    },
-		    success : function(data){
-		    	$('#recordDialog').dialog('close');
-		        $('#dataList').datagrid('load');
-		    }
-		});
 	}
 	
 	//删除
@@ -212,8 +199,8 @@
     	<form id="recordForm" method="post">
     		 <div data-options="region:'center',title:''" style="padding:5px;background:#eee;">
 	    		<input type="hidden" id="id" name="id" />
-	    		<input type="hidden" id="parentId" name="parentId" value="0" />
-	    		<input type="hidden" id="depth" name="depth" value="1" />
+	    		<input type="hidden" id="parentId" name="parentId" />
+	    		<input type="hidden" id="depth" name="depth" />
 	    		<div class="easyui-panel" style="padding:5px;" data-options="border:false">
 	    			<input class="easyui-textbox formItem" data-options="label:'系统名称:'" name="name">
 	    		</div>
