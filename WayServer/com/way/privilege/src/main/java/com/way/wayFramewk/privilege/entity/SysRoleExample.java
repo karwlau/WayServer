@@ -235,63 +235,63 @@ public class SysRoleExample {
             return (Criteria) this;
         }
 
-        public Criteria andIskeyownerIsNull() {
-            addCriterion("isKeyOwner is null");
+        public Criteria andIsKeyOwnerIsNull() {
+            addCriterion("is_key_owner is null");
             return (Criteria) this;
         }
 
-        public Criteria andIskeyownerIsNotNull() {
-            addCriterion("isKeyOwner is not null");
+        public Criteria andIsKeyOwnerIsNotNull() {
+            addCriterion("is_key_owner is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIskeyownerEqualTo(Boolean value) {
-            addCriterion("isKeyOwner =", value, "iskeyowner");
+        public Criteria andIsKeyOwnerEqualTo(Boolean value) {
+            addCriterion("is_key_owner =", value, "isKeyOwner");
             return (Criteria) this;
         }
 
-        public Criteria andIskeyownerNotEqualTo(Boolean value) {
-            addCriterion("isKeyOwner <>", value, "iskeyowner");
+        public Criteria andIsKeyOwnerNotEqualTo(Boolean value) {
+            addCriterion("is_key_owner <>", value, "isKeyOwner");
             return (Criteria) this;
         }
 
-        public Criteria andIskeyownerGreaterThan(Boolean value) {
-            addCriterion("isKeyOwner >", value, "iskeyowner");
+        public Criteria andIsKeyOwnerGreaterThan(Boolean value) {
+            addCriterion("is_key_owner >", value, "isKeyOwner");
             return (Criteria) this;
         }
 
-        public Criteria andIskeyownerGreaterThanOrEqualTo(Boolean value) {
-            addCriterion("isKeyOwner >=", value, "iskeyowner");
+        public Criteria andIsKeyOwnerGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("is_key_owner >=", value, "isKeyOwner");
             return (Criteria) this;
         }
 
-        public Criteria andIskeyownerLessThan(Boolean value) {
-            addCriterion("isKeyOwner <", value, "iskeyowner");
+        public Criteria andIsKeyOwnerLessThan(Boolean value) {
+            addCriterion("is_key_owner <", value, "isKeyOwner");
             return (Criteria) this;
         }
 
-        public Criteria andIskeyownerLessThanOrEqualTo(Boolean value) {
-            addCriterion("isKeyOwner <=", value, "iskeyowner");
+        public Criteria andIsKeyOwnerLessThanOrEqualTo(Boolean value) {
+            addCriterion("is_key_owner <=", value, "isKeyOwner");
             return (Criteria) this;
         }
 
-        public Criteria andIskeyownerIn(List<Boolean> values) {
-            addCriterion("isKeyOwner in", values, "iskeyowner");
+        public Criteria andIsKeyOwnerIn(List<Boolean> values) {
+            addCriterion("is_key_owner in", values, "isKeyOwner");
             return (Criteria) this;
         }
 
-        public Criteria andIskeyownerNotIn(List<Boolean> values) {
-            addCriterion("isKeyOwner not in", values, "iskeyowner");
+        public Criteria andIsKeyOwnerNotIn(List<Boolean> values) {
+            addCriterion("is_key_owner not in", values, "isKeyOwner");
             return (Criteria) this;
         }
 
-        public Criteria andIskeyownerBetween(Boolean value1, Boolean value2) {
-            addCriterion("isKeyOwner between", value1, value2, "iskeyowner");
+        public Criteria andIsKeyOwnerBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_key_owner between", value1, value2, "isKeyOwner");
             return (Criteria) this;
         }
 
-        public Criteria andIskeyownerNotBetween(Boolean value1, Boolean value2) {
-            addCriterion("isKeyOwner not between", value1, value2, "iskeyowner");
+        public Criteria andIsKeyOwnerNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_key_owner not between", value1, value2, "isKeyOwner");
             return (Criteria) this;
         }
 

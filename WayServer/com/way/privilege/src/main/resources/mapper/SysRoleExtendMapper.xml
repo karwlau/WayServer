@@ -5,7 +5,7 @@
 	<resultMap id="BaseResultMap" type="com.way.wayFramewk.privilege.entity.SysRole">
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
-		<result column="isKeyOwner" property="iskeyowner" jdbcType="BIT" />
+   		<result column="is_key_owner" property="isKeyOwner" jdbcType="BIT" />
 		<result column="description" property="description" jdbcType="VARCHAR" />
 		<result column="is_delete" property="isDelete" jdbcType="BIT" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -14,7 +14,7 @@
 		<result column="update_by" property="updateBy" jdbcType="BIGINT" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, name, isKeyOwner, description, is_delete, create_time,
+		id, name, is_key_owner, description, is_delete, create_time,
 		create_by,
 		update_time,
 		update_by
@@ -22,6 +22,7 @@
 	<select id="selectByPage" parameterType="map" resultMap="BaseResultMap">
 		select *
 		from sys_role
+		where is_delete = 0
 	</select>
 	<select id="selectListByUser" parameterType="java.lang.Long"
 		resultMap="BaseResultMap">

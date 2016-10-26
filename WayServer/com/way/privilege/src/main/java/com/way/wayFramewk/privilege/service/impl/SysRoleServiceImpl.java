@@ -14,6 +14,7 @@ import com.way.wayFramewk.privilege.entity.SysUserRoleExample;
 import com.way.wayFramewk.privilege.provider.dao.SysRoleMapper;
 import com.way.wayFramewk.privilege.provider.dao.SysUserRoleMapper;
 import com.way.wayFramewk.privilege.provider.dao.extend.SysRoleExtendMapper;
+import com.way.wayFramewk.privilege.service.SysMenuService;
 import com.way.wayFramewk.privilege.service.SysRoleService;
 
 @Service("sysRoleService")
@@ -24,6 +25,8 @@ public class SysRoleServiceImpl implements SysRoleService {
 	private SysRoleExtendMapper sysRoleExtendMapper;
 	@Resource
 	private SysUserRoleMapper sysUserRoleMapper;
+	@Resource
+	private SysMenuService sysMenuService;
 
 	@Override
 	public Pagination<SysRole> findByPage(Pagination<SysRole> page, SysRole record) {
@@ -63,6 +66,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 		update.setUpdateTime(now);
 		update.setIsDelete(true);
 		sysRoleMapper.updateByPrimaryKeySelective(update);
+		this.sysMenuService.deleteRoleMenuByRoleId(id);
 		return id;
 	}
 
@@ -92,4 +96,17 @@ public class SysRoleServiceImpl implements SysRoleService {
 		}
 
 	}
+
+	@Override
+	public void save(SysRole record, List<Long> has, List<Long> hasnot) {
+		record = this.save(record);
+		this.sysMenuService.duelRoleMenu(record.getId(), has, hasnot);
+	}
+
+	@Override
+	public void update(SysRole record, List<Long> has, List<Long> hasnot) {
+		record = this.update(record);
+		this.sysMenuService.duelRoleMenu(record.getId(), has, hasnot);
+	}
+
 }

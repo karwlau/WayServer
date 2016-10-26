@@ -1,5 +1,6 @@
 package com.way.wayFramewk.privilege.service.impl;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -48,9 +49,9 @@ public class SysMenuServiceImpl implements SysMenuService {
 		record.setCreateTime(now);
 		record.setUpdateTime(now);
 		sysMenuMapper.insertSelective(record);
-		if(record.getParentId().equals(Constants.SYS_ROOT)){
+		if (record.getParentId().equals(Constants.SYS_ROOT)) {
 			record.setPath(String.valueOf(record.getId()));
-		}else{
+		} else {
 			SysMenu parent = this.getById(record.getParentId());
 			record.setBaseUrl(parent.getBaseUrl());
 			record.setPath(parent.getPath() + Constants.SEPERATE_CODE + record.getId());
@@ -151,6 +152,47 @@ public class SysMenuServiceImpl implements SysMenuService {
 			for (SysMenu menu : menuList) {
 				record.setMenuId(menu.getId());
 				this.sysRoleMenuMapper.insert(record);
+			}
+		}
+	}
+
+	@Override
+	public List<SysRoleMenu> findRoleMenuByRoleId(Long roleId) {
+		SysRoleMenuExample example = new SysRoleMenuExample();
+		example.createCriteria().andRoleIdEqualTo(roleId);
+		return this.sysRoleMenuMapper.selectByExample(example);
+	}
+	
+	@Override
+	public void deleteRoleMenuByRoleId(Long roleId) {
+		SysRoleMenuExample example = new SysRoleMenuExample();
+		example.createCriteria().andRoleIdEqualTo(roleId);
+		this.sysRoleMenuMapper.deleteByExample(example);
+	}
+
+	@Override
+	public void duelRoleMenu(Long roleId, List<Long> has, List<Long> hasnot) {
+		List<SysRoleMenu> list = this.findRoleMenuByRoleId(roleId);
+		List<Long> menuIds = new ArrayList<Long>(list.size());
+		for (SysRoleMenu roleMenu : list) {
+			menuIds.add(roleMenu.getMenuId());
+		}
+		SysRoleMenu record = new SysRoleMenu();
+		record.setRoleId(roleId);
+		if (has != null && has.size() > 0) {
+			for (Long hasId : has) {
+				if (!menuIds.contains(hasId)) {
+					record.setMenuId(hasId);
+					this.sysRoleMenuMapper.insert(record);
+				}
+			}
+		}
+		if (hasnot != null && hasnot.size() > 0) {
+			for (Long hasnotId : hasnot) {
+				if (menuIds.contains(hasnotId)) {
+					record.setMenuId(hasnotId);
+					this.sysRoleMenuMapper.delete(record);
+				}
 			}
 		}
 	}

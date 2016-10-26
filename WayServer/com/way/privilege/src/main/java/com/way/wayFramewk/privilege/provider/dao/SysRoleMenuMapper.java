@@ -17,4 +17,6 @@ public interface SysRoleMenuMapper {
 	List<SysRoleMenu> selectByExample(SysRoleMenuExample example);
 
 	int countByExample(SysRoleMenuExample example);
+
+	void deleteByExample(SysRoleMenuExample example);
 }

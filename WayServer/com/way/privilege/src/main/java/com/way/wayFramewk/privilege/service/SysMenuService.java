@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.way.framework.model.Pagination;
 import com.way.wayFramewk.privilege.entity.SysMenu;
+import com.way.wayFramewk.privilege.entity.SysRoleMenu;
 
 public interface SysMenuService {
 
@@ -91,4 +92,27 @@ public interface SysMenuService {
 	 * @param roleId
 	 */
 	void dividePriv(List<SysMenu> menuList, Long roleId);
+
+	/**
+	 * 角色权限
+	 * @param roleId
+	 * @return
+	 */
+	List<SysRoleMenu> findRoleMenuByRoleId(Long roleId);
+
+
+	/**
+	 * 分配权限
+	 * 
+	 * @param roleId
+	 * @param has
+	 * @param hasnot
+	 */
+	void duelRoleMenu(Long roleId, List<Long> has, List<Long> hasnot);
+
+	/**
+	 * 删除角色清空权限
+	 * @param roleId
+	 */
+	void deleteRoleMenuByRoleId(Long roleId);
 }

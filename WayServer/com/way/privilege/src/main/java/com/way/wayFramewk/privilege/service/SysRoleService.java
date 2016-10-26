@@ -36,9 +36,28 @@ public interface SysRoleService {
 
 	/**
 	 * 对用户分配角色
+	 * 
 	 * @param roleList
 	 * @param userId
 	 */
 	void divideRole(List<SysRole> roleList, Long userId);
+
+	/**
+	 * 新增角色,分配权限
+	 * 
+	 * @param record
+	 * @param has
+	 * @param hasnot
+	 */
+	void save(SysRole record, List<Long> has, List<Long> hasnot);
+
+	/**
+	 * 更新角色,分配权限
+	 * 
+	 * @param record
+	 * @param has
+	 * @param hasnot
+	 */
+	void update(SysRole record, List<Long> has, List<Long> hasnot);
 
 }

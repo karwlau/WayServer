@@ -8,7 +8,7 @@ public class SysRole implements Serializable {
 
     private String name;
 
-    private Boolean iskeyowner;
+    private Boolean isKeyOwner;
 
     private String description;
 
@@ -40,12 +40,12 @@ public class SysRole implements Serializable {
         this.name = name == null ? null : name.trim();
     }
 
-    public Boolean getIskeyowner() {
-        return iskeyowner;
+    public Boolean getIsKeyOwner() {
+        return isKeyOwner;
     }
 
-    public void setIskeyowner(Boolean iskeyowner) {
-        this.iskeyowner = iskeyowner;
+    public void setIsKeyOwner(Boolean isKeyOwner) {
+        this.isKeyOwner = isKeyOwner;
     }
 
     public String getDescription() {

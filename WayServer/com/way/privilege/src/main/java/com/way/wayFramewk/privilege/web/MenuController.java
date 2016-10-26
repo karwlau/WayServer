@@ -36,11 +36,12 @@ public class MenuController {
 	}
 
 	@RequestMapping("/menuExpand")
-	public @ResponseBody List<SysMenu> menuExpand(Long sysId, Long id, HttpServletRequest request) {
+	@ResponseBody
+	public List<SysMenu> menuExpand(Long sysId, Long id, HttpServletRequest request) {
 		List<SysMenu> list = new ArrayList<SysMenu>();
-//		if (sysId != null && Constants.SYS_ROOT.equals(sysId)) {
-//			list = this.sysMenuService.getSysList();
-//		} else 
+		// if (sysId != null && Constants.SYS_ROOT.equals(sysId)) {
+		// list = this.sysMenuService.getSysList();
+		// } else
 		if (id == null) {
 			list = this.sysMenuService.getListByParentId(sysId);
 		} else {
@@ -50,7 +51,8 @@ public class MenuController {
 	}
 
 	@RequestMapping("/sysMenuExpand")
-	public @ResponseBody List<SysMenu> sysMenuExpand(Long sysId, HttpServletRequest request) {
+	@ResponseBody
+	public List<SysMenu> sysMenuExpand(Long sysId, HttpServletRequest request) {
 		List<SysMenu> list = new ArrayList<SysMenu>();
 		if (sysId != null && Constants.SYS_ROOT.equals(sysId)) {
 			//
@@ -63,9 +65,9 @@ public class MenuController {
 	@RequestMapping("/saveOrUpdate")
 	@ResponseBody
 	public String save(SysMenu record, HttpServletRequest request) {
-		if(record.getId() != null ){
+		if (record.getId() != null) {
 			this.sysMenuService.update(record);
-		}else{
+		} else {
 			this.sysMenuService.save(record);
 		}
 		return "true";
@@ -95,9 +97,9 @@ public class MenuController {
 		List<SysMenu> list = this.sysMenuService.getSysList();
 		return list;
 	}
-	
+
 	@RequestMapping("/menu")
-	public String menu(Model model,HttpServletRequest request){
+	public String menu(Model model, HttpServletRequest request) {
 		return "menu/menu";
 	}
 }

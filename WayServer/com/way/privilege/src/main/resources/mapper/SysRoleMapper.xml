@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.way.wayFramewk.privilege.entity.SysRole" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="isKeyOwner" property="iskeyowner" jdbcType="BIT" />
+    <result column="is_key_owner" property="isKeyOwner" jdbcType="BIT" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="is_delete" property="isDelete" jdbcType="BIT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -71,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, isKeyOwner, description, is_delete, create_time, create_by, update_time, 
+    id, name, is_key_owner, description, is_delete, create_time, create_by, update_time, 
     update_by
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.way.wayFramewk.privilege.entity.SysRoleExample" >
@@ -108,10 +108,10 @@
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into sys_role (name, isKeyOwner, description, 
+    insert into sys_role (name, is_key_owner, description, 
       is_delete, create_time, create_by, 
       update_time, update_by)
-    values (#{name,jdbcType=VARCHAR}, #{iskeyowner,jdbcType=BIT}, #{description,jdbcType=VARCHAR}, 
+    values (#{name,jdbcType=VARCHAR}, #{isKeyOwner,jdbcType=BIT}, #{description,jdbcType=VARCHAR}, 
       #{isDelete,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT})
   </insert>
@@ -124,8 +124,8 @@
       <if test="name != null" >
         name,
       </if>
-      <if test="iskeyowner != null" >
-        isKeyOwner,
+      <if test="isKeyOwner != null" >
+        is_key_owner,
       </if>
       <if test="description != null" >
         description,
@@ -150,8 +150,8 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="iskeyowner != null" >
-        #{iskeyowner,jdbcType=BIT},
+      <if test="isKeyOwner != null" >
+        #{isKeyOwner,jdbcType=BIT},
       </if>
       <if test="description != null" >
         #{description,jdbcType=VARCHAR},
@@ -188,8 +188,8 @@
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.iskeyowner != null" >
-        isKeyOwner = #{record.iskeyowner,jdbcType=BIT},
+      <if test="record.isKeyOwner != null" >
+        is_key_owner = #{record.isKeyOwner,jdbcType=BIT},
       </if>
       <if test="record.description != null" >
         description = #{record.description,jdbcType=VARCHAR},
@@ -218,7 +218,7 @@
     update sys_role
     set id = #{record.id,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
-      isKeyOwner = #{record.iskeyowner,jdbcType=BIT},
+      is_key_owner = #{record.isKeyOwner,jdbcType=BIT},
       description = #{record.description,jdbcType=VARCHAR},
       is_delete = #{record.isDelete,jdbcType=BIT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -235,8 +235,8 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="iskeyowner != null" >
-        isKeyOwner = #{iskeyowner,jdbcType=BIT},
+      <if test="isKeyOwner != null" >
+        is_key_owner = #{isKeyOwner,jdbcType=BIT},
       </if>
       <if test="description != null" >
         description = #{description,jdbcType=VARCHAR},
@@ -262,7 +262,7 @@
   <update id="updateByPrimaryKey" parameterType="com.way.wayFramewk.privilege.entity.SysRole" >
     update sys_role
     set name = #{name,jdbcType=VARCHAR},
-      isKeyOwner = #{iskeyowner,jdbcType=BIT},
+      is_key_owner = #{isKeyOwner,jdbcType=BIT},
       description = #{description,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=BIT},
       create_time = #{createTime,jdbcType=TIMESTAMP},

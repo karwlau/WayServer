@@ -53,11 +53,17 @@
   </select>
   <delete id="delete" parameterType="com.way.wayFramewk.privilege.entity.SysRoleMenu" >
     delete from sys_role_menu
-    where role_id = #{roleid,jdbcType=BIGINT}
-	and menu_id = #{menuid,jdbcType=BIGINT}
+    where role_id = #{roleId,jdbcType=BIGINT}
+	and menu_id = #{menuId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.way.wayFramewk.privilege.entity.SysRoleMenu" >
-    insert into sys_role_menu (roleId, menuId)
-    values (#{roleid,jdbcType=BIGINT}, #{menuid,jdbcType=BIGINT})
+    insert into sys_role_menu (role_id, menu_id)
+    values (#{roleId,jdbcType=BIGINT}, #{menuId,jdbcType=BIGINT})
   </insert>
+  <delete id="deleteByExample" parameterType="com.way.wayFramewk.privilege.entity.SysRoleMenuExample" >
+    delete from sys_role_menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
 </mapper>
