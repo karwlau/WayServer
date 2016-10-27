@@ -55,10 +55,12 @@ public class SysUserServiceImpl implements SysUserService {
 	public SysUser update(SysUser record) {
 		Date now = new Date();
 		record.setUpdateTime(now);
-		if(StringUtils.isNotBlank(record.getPassword()) && StringUtils.isNotBlank(record.getPassword().trim())){
+		if (StringUtils.isNotBlank(record.getPassword()) && StringUtils.isNotBlank(record.getPassword().trim())) {
 			// 盐值
 			record.setSalt(MD5Util.makeSalt(Constants.SALT_DIGIT));
 			record.setPassword(MD5Util.makePassWord(record.getPassword(), record.getSalt()));
+		} else {
+			record.setPassword(null);
 		}
 		this.sysUserMapper.updateByPrimaryKeySelective(record);
 		return record;
