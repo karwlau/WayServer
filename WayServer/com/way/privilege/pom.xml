@@ -82,6 +82,18 @@
 			<artifactId>cas-client-core</artifactId>
 			<version>3.2.1</version>
 		</dependency>
+		<!-- MD5密码 -->
+		<dependency>
+			<groupId>com.way.utils</groupId>
+			<artifactId>security</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<!-- redis -->
+		<dependency>
+			<groupId>com.way.common</groupId>
+			<artifactId>redison-api</artifactId>
+			<version>0.0.1</version>
+		</dependency>
 		<!-- myBatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>

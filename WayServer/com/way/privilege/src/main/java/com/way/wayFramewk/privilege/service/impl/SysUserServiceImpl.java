@@ -5,9 +5,12 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.way.framework.model.Pagination;
+import com.way.utils.security.MD5.MD5Util;
+import com.way.wayFramewk.privilege.constant.Constants;
 import com.way.wayFramewk.privilege.entity.SysUser;
 import com.way.wayFramewk.privilege.provider.dao.SysUserMapper;
 import com.way.wayFramewk.privilege.provider.dao.extend.SysUserExtendMapper;
@@ -41,6 +44,9 @@ public class SysUserServiceImpl implements SysUserService {
 		record.setIsDelete(false);
 		record.setCreateTime(now);
 		record.setUpdateTime(now);
+		// 盐值
+		record.setSalt(MD5Util.makeSalt(Constants.SALT_DIGIT));
+		record.setPassword(MD5Util.makePassWord(record.getPassword(), record.getSalt()));
 		this.sysUserMapper.insertSelective(record);
 		return record;
 	}
@@ -49,6 +55,11 @@ public class SysUserServiceImpl implements SysUserService {
 	public SysUser update(SysUser record) {
 		Date now = new Date();
 		record.setUpdateTime(now);
+		if(StringUtils.isNotBlank(record.getPassword()) && StringUtils.isNotBlank(record.getPassword().trim())){
+			// 盐值
+			record.setSalt(MD5Util.makeSalt(Constants.SALT_DIGIT));
+			record.setPassword(MD5Util.makePassWord(record.getPassword(), record.getSalt()));
+		}
 		this.sysUserMapper.updateByPrimaryKeySelective(record);
 		return record;
 	}

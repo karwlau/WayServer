@@ -165,6 +165,7 @@
 	//编辑
 	function edit(){
 		$('#recordDialog').dialog({title: '编辑',closed: false});
+		record['password'] = '';
 		$('#recordForm').form('load',record);
 		$.ajax({
 			url : '/user/hasRole',
@@ -251,10 +252,10 @@
 		    		<input class="easyui-switchbutton formItem" data-options="onText:'Yes',offText:'No',value:'true'" name="isAdmin">
 	    		</div>
 	    		<div class="easyui-panel" style="padding:5px;" data-options="border:false">
-		    		<input class="easyui-textbox formItem" data-options="label:'密码:'" name="password">
+		    		<input class="easyui-passwordbox formItem" data-options="label:'密码:',prompt:'不填写即不修改'" name="password">
 	    		</div>
 	    		<div class="easyui-panel" style="padding:5px;" data-options="border:false">
-	    			<select id="userRoles" name="checks" style="width:200px;">
+	    			<select id="userRoles" name="checks" style="width:300px;">
 	    			</select>
 	    		</div>
 	    	</div>
