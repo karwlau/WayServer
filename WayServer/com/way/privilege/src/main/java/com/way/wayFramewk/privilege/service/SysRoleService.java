@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.way.framework.model.Pagination;
 import com.way.wayFramewk.privilege.entity.SysRole;
+import com.way.wayFramewk.privilege.entity.SysUserRole;
 
 public interface SysRoleService {
 	/* base CRUD start */
@@ -59,5 +60,35 @@ public interface SysRoleService {
 	 * @param hasnot
 	 */
 	void update(SysRole record, List<Long> has, List<Long> hasnot);
+
+	/**
+	 * 所有数据
+	 * 
+	 * @param record
+	 * @return
+	 */
+	List<SysRole> findList(SysRole record);
+
+	/**
+	 * 删除用户,清空权限
+	 * @param userId
+	 */
+	void deleteUserRoleByUserId(Long userId);
+	
+	/**
+	 * 分配权限
+	 * 
+	 * @param userId
+	 * @param has
+	 * @param hasnot
+	 */
+	void duelUserRole(Long userId, List<Long> has, List<Long> hasnot);
+
+	/**
+	 * 用户角色
+	 * @param userId
+	 * @return
+	 */
+	List<SysUserRole> findUserRoleByUserId(Long userId);
 
 }

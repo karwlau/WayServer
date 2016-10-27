@@ -24,6 +24,7 @@
 	<select id="selectByPage" parameterType="map" resultMap="BaseResultMap">
 		select *
 		from sys_user
+		where is_delete = 0
 	</select>
 	<select id="selectListByDept" parameterType="java.lang.Long"
 		resultMap="BaseResultMap">

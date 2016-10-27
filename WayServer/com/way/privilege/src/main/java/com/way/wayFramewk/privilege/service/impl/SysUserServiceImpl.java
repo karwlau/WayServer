@@ -11,26 +11,28 @@ import com.way.framework.model.Pagination;
 import com.way.wayFramewk.privilege.entity.SysUser;
 import com.way.wayFramewk.privilege.provider.dao.SysUserMapper;
 import com.way.wayFramewk.privilege.provider.dao.extend.SysUserExtendMapper;
+import com.way.wayFramewk.privilege.service.SysRoleService;
 import com.way.wayFramewk.privilege.service.SysUserService;
 
 @Service("sysUserService")
 public class SysUserServiceImpl implements SysUserService {
 	@Resource
 	private SysUserMapper sysUserMapper;
-
 	@Resource
 	private SysUserExtendMapper sysUserExtendMapper;
+	@Resource
+	private SysRoleService sysRoleService;
 
 	@Override
 	public Pagination<SysUser> findByPage(Pagination<SysUser> page, SysUser record) {
-		List<SysUser> list = sysUserExtendMapper.selectByPage(page, record);
+		List<SysUser> list = this.sysUserExtendMapper.selectByPage(page, record);
 		page.setList(list);
 		return page;
 	}
 
 	@Override
 	public SysUser getById(Long id) {
-		return sysUserMapper.selectByPrimaryKey(id);
+		return this.sysUserMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
@@ -39,7 +41,7 @@ public class SysUserServiceImpl implements SysUserService {
 		record.setIsDelete(false);
 		record.setCreateTime(now);
 		record.setUpdateTime(now);
-		sysUserMapper.insertSelective(record);
+		this.sysUserMapper.insertSelective(record);
 		return record;
 	}
 
@@ -47,7 +49,7 @@ public class SysUserServiceImpl implements SysUserService {
 	public SysUser update(SysUser record) {
 		Date now = new Date();
 		record.setUpdateTime(now);
-		sysUserMapper.updateByPrimaryKeySelective(record);
+		this.sysUserMapper.updateByPrimaryKeySelective(record);
 		return record;
 	}
 
@@ -58,7 +60,8 @@ public class SysUserServiceImpl implements SysUserService {
 		update.setId(id);
 		update.setUpdateTime(now);
 		update.setIsDelete(true);
-		sysUserMapper.updateByPrimaryKeySelective(update);
+		this.sysUserMapper.updateByPrimaryKeySelective(update);
+		this.sysRoleService.deleteUserRoleByUserId(id);
 		return id;
 	}
 
@@ -66,5 +69,19 @@ public class SysUserServiceImpl implements SysUserService {
 	public List<SysUser> getUsersByDeptId(Long deptId) {
 		List<SysUser> list = this.sysUserExtendMapper.selectListByDept(deptId);
 		return list;
+	}
+
+	@Override
+	public SysUser save(SysUser record, List<Long> has, List<Long> hasnot) {
+		record = this.save(record);
+		this.sysRoleService.duelUserRole(record.getId(), has, hasnot);
+		return record;
+	}
+
+	@Override
+	public SysUser update(SysUser record, List<Long> has, List<Long> hasnot) {
+		record = this.update(record);
+		this.sysRoleService.duelUserRole(record.getId(), has, hasnot);
+		return record;
 	}
 }

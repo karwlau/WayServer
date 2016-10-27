@@ -17,4 +17,6 @@ public interface SysUserRoleMapper {
 	List<SysUserRole> selectByExample(SysUserRoleExample example);
 
 	int countByExample(SysUserRoleExample example);
+
+	void deleteByExample(SysUserRoleExample example);
 }

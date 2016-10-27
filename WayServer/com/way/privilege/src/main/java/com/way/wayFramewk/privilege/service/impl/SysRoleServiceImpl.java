@@ -1,5 +1,6 @@
 package com.way.wayFramewk.privilege.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.way.framework.model.Pagination;
 import com.way.wayFramewk.privilege.entity.SysRole;
+import com.way.wayFramewk.privilege.entity.SysRoleExample;
 import com.way.wayFramewk.privilege.entity.SysUserRole;
 import com.way.wayFramewk.privilege.entity.SysUserRoleExample;
 import com.way.wayFramewk.privilege.provider.dao.SysRoleMapper;
@@ -107,6 +109,54 @@ public class SysRoleServiceImpl implements SysRoleService {
 	public void update(SysRole record, List<Long> has, List<Long> hasnot) {
 		record = this.update(record);
 		this.sysMenuService.duelRoleMenu(record.getId(), has, hasnot);
+	}
+
+	@Override
+	public List<SysRole> findList(SysRole record) {
+		SysRoleExample example = new SysRoleExample();
+		example.createCriteria().andIsDeleteEqualTo(false);
+		return this.sysRoleMapper.selectByExample(example);
+	}
+
+	@Override
+	public void deleteUserRoleByUserId(Long userId) {
+		SysUserRoleExample example = new SysUserRoleExample();
+		example.createCriteria().andUserIdEqualTo(userId);
+		this.sysUserRoleMapper.deleteByExample(example);
+	}
+
+	@Override
+	public void duelUserRole(Long userId, List<Long> has, List<Long> hasnot) {
+		List<SysUserRole> list = this.findUserRoleByUserId(userId);
+		List<Long> roleIds = new ArrayList<Long>(list.size());
+		for (SysUserRole userRole : list) {
+			roleIds.add(userRole.getRoleId());
+		}
+		SysUserRole record = new SysUserRole();
+		record.setUserId(userId);
+		if (has != null && has.size() > 0) {
+			for (Long hasId : has) {
+				if (!roleIds.contains(hasId)) {
+					record.setRoleId(hasId);
+					this.sysUserRoleMapper.insert(record);
+				}
+			}
+		}
+		if (hasnot != null && hasnot.size() > 0) {
+			for (Long hasnotId : hasnot) {
+				if (roleIds.contains(hasnotId)) {
+					record.setRoleId(hasnotId);
+					this.sysUserRoleMapper.delete(record);
+				}
+			}
+		}
+	}
+
+	@Override
+	public List<SysUserRole> findUserRoleByUserId(Long userId) {
+		SysUserRoleExample example = new SysUserRoleExample();
+		example.createCriteria().andUserIdEqualTo(userId);
+		return this.sysUserRoleMapper.selectByExample(example);
 	}
 
 }

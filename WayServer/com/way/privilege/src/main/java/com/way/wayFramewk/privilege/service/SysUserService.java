@@ -25,4 +25,22 @@ public interface SysUserService {
 	 * @return
 	 */
 	List<SysUser> getUsersByDeptId(Long deptId);
+
+	/**
+	 * 创建用户,分配角色
+	 * 
+	 * @param record
+	 * @param has
+	 * @param hasnot
+	 */
+	SysUser save(SysUser record, List<Long> has, List<Long> hasnot);
+
+	/**
+	 * 修改用户,分配角色
+	 * 
+	 * @param record
+	 * @param has
+	 * @param hasnot
+	 */
+	SysUser update(SysUser record, List<Long> has, List<Long> hasnot);
 }

@@ -1,13 +1,12 @@
 package com.way.wayFramewk.privilege.web;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,11 +39,18 @@ public class RoleController {
 		return page.getList();
 	}
 
+	@RequestMapping("/roleData")
+	@ResponseBody
+	public List<SysRole> roleData(SysRole record, HttpServletRequest request) {
+		List<SysRole> list = this.sysRoleService.findList(record);
+		return list;
+	}
+
 	@RequestMapping("/saveOrUpdate")
 	@ResponseBody
-	public String save(SysRole record, String checks, String unchecks, HttpServletRequest request) {
-		List<Long> has = makeList(checks);
-		List<Long> hasnot = makeList(unchecks);
+	public String save(SysRole record, Long[] checks, Long[] unchecks, HttpServletRequest request) {
+		List<Long> has = Arrays.asList(checks);
+		List<Long> hasnot = Arrays.asList(unchecks);
 		if (record.getIsKeyOwner() == null) {
 			record.setIsKeyOwner(false);
 		}
@@ -54,28 +60,6 @@ public class RoleController {
 			this.sysRoleService.save(record, has, hasnot);
 		}
 		return "true";
-	}
-
-	/**
-	 * 选择取消权限列表
-	 * 
-	 * @param listStr
-	 * @return
-	 */
-	private static List<Long> makeList(String listStr) {
-		if (StringUtils.isNotBlank(listStr)) {
-			try {
-				String[] arrStr = listStr.split(",");
-				List<Long> list = new ArrayList<Long>(arrStr.length);
-				for (String str : arrStr) {
-					list.add(Long.valueOf(str));
-				}
-				return list;
-			} catch (Exception e) {
-				// TODO throw exception
-			}
-		}
-		return null;
 	}
 
 	@RequestMapping("/delete")

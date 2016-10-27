@@ -57,29 +57,29 @@
 	</select>
 	<delete id="delete" parameterType="com.way.wayFramewk.privilege.entity.SysUserRole">
 		delete from sys_user_role
-		and user_id = #{userid,jdbcType=BIGINT}
-		and role_id = #{roleid,jdbcType=BIGINT}
+		where user_id = #{userId,jdbcType=BIGINT}
+		and role_id = #{roleId,jdbcType=BIGINT}
 	</delete>
 	<insert id="insert" parameterType="com.way.wayFramewk.privilege.entity.SysUserRole">
-		insert into sys_user_role (userId, roleId)
-		values (#{userid,jdbcType=BIGINT}, #{roleid,jdbcType=BIGINT})
+		insert into sys_user_role (user_id, role_id)
+		values (#{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT})
 	</insert>
 	<insert id="insertSelective" parameterType="com.way.wayFramewk.privilege.entity.SysUserRole">
 		insert into sys_user_role
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="userid != null">
-				userId,
+				user_id,
 			</if>
 			<if test="roleid != null">
-				roleId,
+				role_id,
 			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="userid != null">
-				#{userid,jdbcType=BIGINT},
+				#{userId,jdbcType=BIGINT},
 			</if>
 			<if test="roleid != null">
-				#{roleid,jdbcType=BIGINT},
+				#{roleId,jdbcType=BIGINT},
 			</if>
 		</trim>
 	</insert>
@@ -91,4 +91,10 @@
 			<include refid="Example_Where_Clause" />
 		</if>
 	</select>
+	<delete id="deleteByExample" parameterType="com.way.wayFramewk.privilege.entity.SysUserRoleExample">
+		delete from sys_user_role
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
 </mapper>
