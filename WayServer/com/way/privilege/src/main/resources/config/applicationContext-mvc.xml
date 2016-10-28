@@ -207,5 +207,7 @@
 	</bean>
 	
 	<!-- spring utility -->
-	<bean id="springUtils" class="com.way.common.redison_api.SpringUtils"></bean>
+	<bean id="springUtils" class="com.way.wayFramewk.privilege.utils.SpringUtils"></bean>
+	
+	<import resource="classpath*:redis/biz-cache-redisson-master.xml"/>
 </beans>
