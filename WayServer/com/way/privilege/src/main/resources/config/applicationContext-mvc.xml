@@ -205,4 +205,7 @@
 		<property name="basePackage" value="com.way.wayFramewk.privilege.provider.dao" />
 		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
 	</bean>
+	
+	<!-- spring utility -->
+	<bean id="springUtils" class="com.way.common.redison_api.SpringUtils"></bean>
 </beans>

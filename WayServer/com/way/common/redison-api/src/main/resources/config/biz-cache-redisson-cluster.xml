@@ -11,21 +11,20 @@
         http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd"
      default-lazy-init="true">
 		
-	<bean id="masterSlaveServersConfig" class="org.redisson.MasterSlaveServersConfig">
-		<property name="masterAddressUri" value="${redis.masterAddress:127.0.0.1:6379}" />
-		<property name="slaveAddressUris" value="${redis.slaveAddresses:127.0.0.1:6379}" />
+	<bean id="clusterServersConfig" class="org.redisson.ClusterServersConfig">
+		<property name="nodeAddressUris" value="${redis.nodeAddressUris:127.0.0.1:6379}" />
 		<property name="database" value="${redis.database:1}" />
 	</bean>
 	
 	<bean id="redissonCodec" class="org.redisson.codec.SerializationCodec" />
 	
 	<bean id="config" class="org.redisson.Config">
-		<property name="masterSlaveServersConfig" ref="masterSlaveServersConfig" />
+		<property name="clusterServersConfig" ref="clusterServersConfig" />
 		<property name="codec" ref="redissonCodec" />
 	</bean>
 	
 	<bean id="redisson" class="org.redisson.Redisson" destroy-method="shutdown">
 		<constructor-arg ref="config" />
 	</bean>
-
+	
 </beans>
