@@ -11,9 +11,9 @@ import org.redisson.config.MasterSlaveServersConfig;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:config/biz-cache-redisson-master.xml",
- "classpath:config/applicationContext.xml" })
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = { "classpath:config/biz-cache-redisson-master.xml",
+//		"classpath:config/applicationContext.xml" })
 public class TestRedison {
 	// @Test
 	public void test() {
@@ -31,7 +31,7 @@ public class TestRedison {
 		System.out.println(rbo.get());
 	}
 
-	@Test
+	//@Test
 	public void test2() {
 		try {
 			Object bean = SpringUtils.getBean("redisson");
