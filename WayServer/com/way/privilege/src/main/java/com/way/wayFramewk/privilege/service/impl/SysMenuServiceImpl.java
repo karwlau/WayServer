@@ -3,7 +3,9 @@ package com.way.wayFramewk.privilege.service.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -162,7 +164,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 		example.createCriteria().andRoleIdEqualTo(roleId);
 		return this.sysRoleMenuMapper.selectByExample(example);
 	}
-	
+
 	@Override
 	public void deleteRoleMenuByRoleId(Long roleId) {
 		SysRoleMenuExample example = new SysRoleMenuExample();
@@ -195,5 +197,37 @@ public class SysMenuServiceImpl implements SysMenuService {
 				}
 			}
 		}
+	}
+
+	@Override
+	public List<SysMenu> getAll() {
+		SysMenuExample example = new SysMenuExample();
+		example.createCriteria().andIsDeleteEqualTo(false);
+		return this.sysMenuMapper.selectByExample(example);
+	}
+
+	@Override
+	public List<SysRoleMenu> getAllRoleMenu() {
+		SysRoleMenuExample example = new SysRoleMenuExample();
+		return this.sysRoleMenuMapper.selectByExample(example);
+	}
+
+	@Override
+	public Map<Long, List<Long>> getAllRoleMenuMap() {
+		List<SysRoleMenu> list = this.getAllRoleMenu();
+		if (list != null && list.size() > 0) {
+			Map<Long, List<Long>> map = new HashMap<Long, List<Long>>();
+			List<Long> menuList = null;
+			for (SysRoleMenu record : list) {
+				menuList = map.get(record.getRoleId());
+				if (menuList == null) {
+					menuList = new ArrayList<Long>();
+					map.put(record.getRoleId(), menuList);
+				}
+				menuList.add(record.getMenuId());
+			}
+			return map;
+		}
+		return Collections.emptyMap();
 	}
 }

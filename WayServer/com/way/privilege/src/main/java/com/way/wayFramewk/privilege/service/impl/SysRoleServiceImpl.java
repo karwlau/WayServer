@@ -1,8 +1,11 @@
 package com.way.wayFramewk.privilege.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -159,4 +162,28 @@ public class SysRoleServiceImpl implements SysRoleService {
 		return this.sysUserRoleMapper.selectByExample(example);
 	}
 
+	@Override
+	public List<SysUserRole> getAllUserRole() {
+		SysUserRoleExample example = new SysUserRoleExample();
+		return this.sysUserRoleMapper.selectByExample(example);
+	}
+
+	@Override
+	public Map<Long, List<Long>> getAllUserRoleMap() {
+		List<SysUserRole> list = this.getAllUserRole();
+		if (list != null && list.size() > 0) {
+			Map<Long, List<Long>> map = new HashMap<Long, List<Long>>();
+			List<Long> roleList = null;
+			for (SysUserRole record : list) {
+				roleList = map.get(record.getUserId());
+				if (roleList == null) {
+					roleList = new ArrayList<Long>();
+					map.put(record.getUserId(), roleList);
+				}
+				roleList.add(record.getRoleId());
+			}
+			return map;
+		}
+		return Collections.emptyMap();
+	}
 }

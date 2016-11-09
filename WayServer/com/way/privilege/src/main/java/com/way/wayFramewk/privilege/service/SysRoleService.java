@@ -1,6 +1,7 @@
 package com.way.wayFramewk.privilege.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.way.framework.model.Pagination;
 import com.way.wayFramewk.privilege.entity.SysRole;
@@ -90,5 +91,17 @@ public interface SysRoleService {
 	 * @return
 	 */
 	List<SysUserRole> findUserRoleByUserId(Long userId);
+
+	/**
+	 * 所有用户角色
+	 * @return
+	 */
+	List<SysUserRole> getAllUserRole();
+
+	/**
+	 * 所有用户角色
+	 * @return
+	 */
+	Map<Long, List<Long>> getAllUserRoleMap();
 
 }

@@ -37,4 +37,6 @@ public class Constants {
 	public static final String ROLE_KEY = "_boss_role";
 	
 	public static final String USER_KEY = "_boss_user";
+	
+	public static final String BOSS_CONTROL = "_boss_pri";
 }

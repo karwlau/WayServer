@@ -1,6 +1,7 @@
 package com.way.wayFramewk.privilege.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.way.framework.model.Pagination;
 import com.way.wayFramewk.privilege.entity.SysMenu;
@@ -115,4 +116,22 @@ public interface SysMenuService {
 	 * @param roleId
 	 */
 	void deleteRoleMenuByRoleId(Long roleId);
+
+	/**
+	 * 所有系统、菜单
+	 * @return
+	 */
+	List<SysMenu> getAll();
+
+	/**
+	 * 所有角色菜单关联
+	 * @return
+	 */
+	List<SysRoleMenu> getAllRoleMenu();
+
+	/**
+	 * 所有角色菜单关联
+	 * @return
+	 */
+	Map<Long, List<Long>> getAllRoleMenuMap();
 }
