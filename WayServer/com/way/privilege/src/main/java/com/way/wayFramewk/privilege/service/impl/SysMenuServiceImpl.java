@@ -207,6 +207,19 @@ public class SysMenuServiceImpl implements SysMenuService {
 	}
 
 	@Override
+	public Map<Long, SysMenu> getAllMap() {
+		List<SysMenu> list = this.getAll();
+		if (list != null && list.size() > 0) {
+			Map<Long, SysMenu> map = new HashMap<Long, SysMenu>();
+			for (SysMenu menu : list) {
+				map.put(menu.getId(), menu);
+			}
+			return map;
+		}
+		return Collections.emptyMap();
+	}
+
+	@Override
 	public List<SysRoleMenu> getAllRoleMenu() {
 		SysRoleMenuExample example = new SysRoleMenuExample();
 		return this.sysRoleMenuMapper.selectByExample(example);

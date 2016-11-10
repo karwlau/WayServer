@@ -8,6 +8,7 @@
     <result column="path" property="path" jdbcType="VARCHAR" />
     <result column="code" property="code" jdbcType="VARCHAR" />
     <result column="pri_code" property="priCode" jdbcType="VARCHAR" />
+    <result column="sys_code" property="sysCode" jdbcType="VARCHAR" />
     <result column="order_no" property="orderNo" jdbcType="INTEGER" />
     <result column="depth" property="depth" jdbcType="SMALLINT" />
     <result column="base_url" property="baseUrl" jdbcType="VARCHAR" />
@@ -77,8 +78,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, parent_id, path, code, pri_code, order_no, depth, base_url, url, is_delete, 
-    create_time, create_by, update_time, update_by
+    id, name, parent_id, path, code, pri_code, sys_code, order_no, depth, base_url, url, 
+    is_delete, create_time, create_by, update_time, update_by
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.way.wayFramewk.privilege.entity.SysMenuExample" >
     select
@@ -115,15 +116,17 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into sys_menu (name, parent_id, path, 
-      code, pri_code, order_no, 
-      depth, base_url, url, is_delete, 
-      create_time, create_by, update_time, 
-      update_by)
+      code, pri_code, sys_code, 
+      order_no, depth, base_url, 
+      url, is_delete, create_time, 
+      create_by, update_time, update_by
+      )
     values (#{name,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, #{path,jdbcType=VARCHAR}, 
-      #{code,jdbcType=VARCHAR}, #{priCode,jdbcType=VARCHAR}, #{orderNo,jdbcType=INTEGER}, 
-      #{depth,jdbcType=SMALLINT}, #{baseUrl,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{isDelete,jdbcType=BIT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{updateBy,jdbcType=BIGINT})
+      #{code,jdbcType=VARCHAR}, #{priCode,jdbcType=VARCHAR}, #{sysCode,jdbcType=VARCHAR}, 
+      #{orderNo,jdbcType=INTEGER}, #{depth,jdbcType=SMALLINT}, #{baseUrl,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{isDelete,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.way.wayFramewk.privilege.entity.SysMenu" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -145,6 +148,9 @@
       </if>
       <if test="priCode != null" >
         pri_code,
+      </if>
+      <if test="sysCode != null" >
+        sys_code,
       </if>
       <if test="orderNo != null" >
         order_no,
@@ -189,6 +195,9 @@
       </if>
       <if test="priCode != null" >
         #{priCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sysCode != null" >
+        #{sysCode,jdbcType=VARCHAR},
       </if>
       <if test="orderNo != null" >
         #{orderNo,jdbcType=INTEGER},
@@ -246,6 +255,9 @@
       <if test="record.priCode != null" >
         pri_code = #{record.priCode,jdbcType=VARCHAR},
       </if>
+      <if test="record.sysCode != null" >
+        sys_code = #{record.sysCode,jdbcType=VARCHAR},
+      </if>
       <if test="record.orderNo != null" >
         order_no = #{record.orderNo,jdbcType=INTEGER},
       </if>
@@ -286,6 +298,7 @@
       path = #{record.path,jdbcType=VARCHAR},
       code = #{record.code,jdbcType=VARCHAR},
       pri_code = #{record.priCode,jdbcType=VARCHAR},
+      sys_code = #{record.sysCode,jdbcType=VARCHAR},
       order_no = #{record.orderNo,jdbcType=INTEGER},
       depth = #{record.depth,jdbcType=SMALLINT},
       base_url = #{record.baseUrl,jdbcType=VARCHAR},
@@ -316,6 +329,9 @@
       </if>
       <if test="priCode != null" >
         pri_code = #{priCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sysCode != null" >
+        sys_code = #{sysCode,jdbcType=VARCHAR},
       </if>
       <if test="orderNo != null" >
         order_no = #{orderNo,jdbcType=INTEGER},
@@ -354,6 +370,7 @@
       path = #{path,jdbcType=VARCHAR},
       code = #{code,jdbcType=VARCHAR},
       pri_code = #{priCode,jdbcType=VARCHAR},
+      sys_code = #{sysCode,jdbcType=VARCHAR},
       order_no = #{orderNo,jdbcType=INTEGER},
       depth = #{depth,jdbcType=SMALLINT},
       base_url = #{baseUrl,jdbcType=VARCHAR},

@@ -8,6 +8,7 @@
     <result column="path" property="path" jdbcType="VARCHAR" />
     <result column="code" property="code" jdbcType="VARCHAR" />
     <result column="pri_code" property="priCode" jdbcType="VARCHAR" />
+    <result column="sys_code" property="sysCode" jdbcType="VARCHAR" />
     <result column="order_no" property="orderNo" jdbcType="INTEGER" />
     <result column="depth" property="depth" jdbcType="SMALLINT" />
     <result column="base_url" property="baseUrl" jdbcType="VARCHAR" />
@@ -19,8 +20,8 @@
     <result column="update_by" property="updateBy" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, parent_id, path, code, pri_code, order_no, depth, base_url, url, is_delete, 
-    create_time, create_by, update_time, update_by
+    id, name, parent_id, path, code, pri_code, sys_code, order_no, depth, base_url, url, 
+    is_delete, create_time, create_by, update_time, update_by
   </sql>
   <select id="selectByPage" parameterType="map" resultMap="BaseResultMap" >
     select * from sys_menu

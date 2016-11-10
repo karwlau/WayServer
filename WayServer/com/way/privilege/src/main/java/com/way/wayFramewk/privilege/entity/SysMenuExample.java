@@ -505,6 +505,76 @@ public class SysMenuExample {
             return (Criteria) this;
         }
 
+        public Criteria andSysCodeIsNull() {
+            addCriterion("sys_code is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysCodeIsNotNull() {
+            addCriterion("sys_code is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysCodeEqualTo(String value) {
+            addCriterion("sys_code =", value, "sysCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysCodeNotEqualTo(String value) {
+            addCriterion("sys_code <>", value, "sysCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysCodeGreaterThan(String value) {
+            addCriterion("sys_code >", value, "sysCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("sys_code >=", value, "sysCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysCodeLessThan(String value) {
+            addCriterion("sys_code <", value, "sysCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysCodeLessThanOrEqualTo(String value) {
+            addCriterion("sys_code <=", value, "sysCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysCodeLike(String value) {
+            addCriterion("sys_code like", value, "sysCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysCodeNotLike(String value) {
+            addCriterion("sys_code not like", value, "sysCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysCodeIn(List<String> values) {
+            addCriterion("sys_code in", values, "sysCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysCodeNotIn(List<String> values) {
+            addCriterion("sys_code not in", values, "sysCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysCodeBetween(String value1, String value2) {
+            addCriterion("sys_code between", value1, value2, "sysCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysCodeNotBetween(String value1, String value2) {
+            addCriterion("sys_code not between", value1, value2, "sysCode");
+            return (Criteria) this;
+        }
+
         public Criteria andOrderNoIsNull() {
             addCriterion("order_no is null");
             return (Criteria) this;

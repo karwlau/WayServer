@@ -16,6 +16,8 @@ public class SysMenu implements Serializable {
 
     private String priCode;
 
+    private String sysCode;
+
     private Integer orderNo;
 
     private Short depth;
@@ -82,6 +84,14 @@ public class SysMenu implements Serializable {
 
     public void setPriCode(String priCode) {
         this.priCode = priCode == null ? null : priCode.trim();
+    }
+
+    public String getSysCode() {
+        return sysCode;
+    }
+
+    public void setSysCode(String sysCode) {
+        this.sysCode = sysCode == null ? null : sysCode.trim();
     }
 
     public Integer getOrderNo() {

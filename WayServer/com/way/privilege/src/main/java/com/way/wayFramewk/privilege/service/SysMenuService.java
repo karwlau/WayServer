@@ -124,6 +124,12 @@ public interface SysMenuService {
 	List<SysMenu> getAll();
 
 	/**
+	 * 所有系统、菜单
+	 * @return
+	 */
+	Map<Long,SysMenu> getAllMap();
+
+	/**
 	 * 所有角色菜单关联
 	 * @return
 	 */
