@@ -55,6 +55,8 @@ CREATE TABLE sys_menu
 	code varchar(64) COMMENT 'code : 资源编码',
 	-- 权限控制编码
 	pri_code varchar(64) COMMENT 'pri_code : 权限控制编码',
+	-- 系统编码
+	sys_code varchar(64) COMMENT 'sys_code : 系统编码',
 	-- 排序
 	order_no int COMMENT 'order_no : 排序',
 	-- 深度
