@@ -84,15 +84,15 @@
 	<!-- way start -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		p:driverClass="com.mysql.jdbc.Driver"
-		p:jdbcUrl="jdbc:mysql://192.168.0.107:3306/server?useUnicode=true&amp;characterEncoding=UTF-8"
-		p:user="root" p:password="way123" />
+		p:jdbcUrl="jdbc:mysql://localhost:3306/boss?useUnicode=true&amp;characterEncoding=UTF-8"
+		p:user="root" p:password="123456" />
 
 	<!-- 密码加密方式 <bean id="passwordEncoder" class="org.jasig.cas.authentication.handler.DefaultPasswordEncoder" 
 		c:encodingAlgorithm="SHA1" p:characterEncoding="UTF-8" /> -->
 	<bean id="passwordEncoder" class="org.jasig.cas.authentication.handler.MD5PasswordEncoder" />
 
 	<bean id="dbAuthHandler" class="org.jasig.cas.adaptors.jdbc.WayAuthenticationHandler"
-		p:dataSource-ref="dataSource" p:sql="select password,salt from sys_user where no = ?"
+		p:dataSource-ref="dataSource" p:sql="select password,salt from sys_user where name = ?"
 		p:passwordEncoder-ref="passwordEncoder" />
 
 	<!-- way end -->
