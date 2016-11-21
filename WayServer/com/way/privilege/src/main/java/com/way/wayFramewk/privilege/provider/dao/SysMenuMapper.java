@@ -1,10 +1,11 @@
 package com.way.wayFramewk.privilege.provider.dao;
 
-import com.way.wayFramewk.privilege.entity.SysMenu;
-import com.way.wayFramewk.privilege.entity.SysMenuExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import com.github.pagehelper.Page;
+import com.way.wayFramewk.privilege.entity.SysMenu;
+import com.way.wayFramewk.privilege.entity.SysMenuExample;
 
 @Repository
 public interface SysMenuMapper {
@@ -18,7 +19,7 @@ public interface SysMenuMapper {
 
     int insertSelective(SysMenu record);
 
-    List<SysMenu> selectByExample(SysMenuExample example);
+    Page<SysMenu> selectByExample(SysMenuExample example);
 
     SysMenu selectByPrimaryKey(Long id);
 

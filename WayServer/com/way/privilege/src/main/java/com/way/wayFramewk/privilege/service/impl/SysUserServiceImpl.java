@@ -8,10 +8,11 @@ import javax.annotation.Resource;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
-import com.way.framework.model.Pagination;
+import com.github.pagehelper.Page;
 import com.way.utils.security.MD5.MD5Util;
 import com.way.wayFramewk.privilege.constant.Constants;
 import com.way.wayFramewk.privilege.entity.SysUser;
+import com.way.wayFramewk.privilege.entity.SysUserExample;
 import com.way.wayFramewk.privilege.provider.dao.SysUserMapper;
 import com.way.wayFramewk.privilege.provider.dao.extend.SysUserExtendMapper;
 import com.way.wayFramewk.privilege.service.SysRoleService;
@@ -27,9 +28,10 @@ public class SysUserServiceImpl implements SysUserService {
 	private SysRoleService sysRoleService;
 
 	@Override
-	public Pagination<SysUser> findByPage(Pagination<SysUser> page, SysUser record) {
-		List<SysUser> list = this.sysUserExtendMapper.selectByPage(page, record);
-		page.setList(list);
+	public Page<SysUser> findByPage(Page<SysUser> page, SysUser record) {
+		SysUserExample example = new SysUserExample();
+		example.createCriteria().andIsDeleteEqualTo(false);
+		page = this.sysUserMapper.selectByExample(example);
 		return page;
 	}
 

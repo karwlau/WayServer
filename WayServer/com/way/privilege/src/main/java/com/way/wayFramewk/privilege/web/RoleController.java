@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.way.framework.model.Pagination;
+import com.github.pagehelper.Page;
 import com.way.wayFramewk.privilege.entity.SysRole;
 import com.way.wayFramewk.privilege.entity.SysRoleMenu;
 import com.way.wayFramewk.privilege.service.SysMenuService;
@@ -34,9 +34,10 @@ public class RoleController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/roleList")
 	@ResponseBody
-	public List<SysRole> roleList(Pagination page, SysRole record, HttpServletRequest request) {
+	public List<SysRole> roleList(Page page, SysRole record, HttpServletRequest request) {
+		//TODO page
 		page = this.sysRoleService.findByPage(page, record);
-		return page.getList();
+		return page;
 	}
 
 	@RequestMapping("/roleData")

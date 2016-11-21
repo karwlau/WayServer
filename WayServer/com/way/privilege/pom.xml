@@ -135,12 +135,12 @@
 			<artifactId>log</artifactId>
 			<version>0.0.1</version>
 		</dependency>
-		<!-- 分页模型 -->
+		<!-- 分页模型 pagehelper
 		<dependency>
 			<groupId>com.way.framework</groupId>
 			<artifactId>model</artifactId>
 			<version>0.0.1</version>
-		</dependency>
+		</dependency>-->
 		<!-- jsr305 缺陷检查 -->
 		<dependency>
 			<groupId>com.google.code.findbugs</groupId>

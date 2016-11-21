@@ -2,12 +2,12 @@ package com.way.wayFramewk.privilege.service;
 
 import java.util.List;
 
-import com.way.framework.model.Pagination;
+import com.github.pagehelper.Page;
 import com.way.wayFramewk.privilege.entity.SysUser;
 
 public interface SysUserService {
 	/* base CRUD start */
-	Pagination<SysUser> findByPage(Pagination<SysUser> page, SysUser record);
+	Page<SysUser> findByPage(Page<SysUser> page, SysUser record);
 
 	SysUser getById(Long id);
 

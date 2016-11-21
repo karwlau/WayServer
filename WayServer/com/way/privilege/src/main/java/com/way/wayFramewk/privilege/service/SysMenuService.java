@@ -3,14 +3,14 @@ package com.way.wayFramewk.privilege.service;
 import java.util.List;
 import java.util.Map;
 
-import com.way.framework.model.Pagination;
+import com.github.pagehelper.Page;
 import com.way.wayFramewk.privilege.entity.SysMenu;
 import com.way.wayFramewk.privilege.entity.SysRoleMenu;
 
 public interface SysMenuService {
 
 	/* base CRUD start */
-	Pagination<SysMenu> findByPage(Pagination<SysMenu> page, SysMenu record);
+	Page<SysMenu> findByPage(Page<SysMenu> page, SysMenu record);
 
 	SysMenu getById(Long id);
 

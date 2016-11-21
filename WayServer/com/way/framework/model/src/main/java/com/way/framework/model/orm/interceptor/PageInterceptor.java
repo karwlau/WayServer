@@ -41,7 +41,7 @@ public class PageInterceptor implements Interceptor {
 
 	private static Logger logger = Logger.getLogger(PageInterceptor.class);
 	private String dialect = "mysql";
-
+/*
 	@Override
 	public Object intercept(Invocation ivk) throws Throwable {
 		if (!(ivk.getTarget() instanceof RoutingStatementHandler)) {
@@ -97,7 +97,12 @@ public class PageInterceptor implements Interceptor {
 
 		return ivk.proceed();
 	}
-
+*/
+	@Override
+	public Object intercept(Invocation ivk) throws Throwable {
+		return ivk.proceed();
+	}
+	
 	@Override
 	public Object plugin(Object arg0) {
 		return Plugin.wrap(arg0, this);

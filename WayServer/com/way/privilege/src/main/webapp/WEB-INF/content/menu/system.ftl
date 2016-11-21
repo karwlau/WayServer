@@ -31,18 +31,43 @@
 		    }
 		});
 		*/
+		
+		//分页
+		//var p = $('#dataList').datagrid('getPager');
+		$('#pp').pagination({
+			//pageList : [5, 10, 15], //可以设置每页记录条数的列表
+			pageSize : 20, //每页显示的记录条数，默认为10
+			pageNumber : 1,
+			showPageList : false,
+			beforePageText : '第', //页数文本框前显示的汉字
+			afterPageText : '页    共 {pages} 页',
+			displayMsg : '当前显示 {from} - {to} 条记录   共 {total} 条记录',
+			onSelectPage : function(pageNumber, pageSize){
+				var formData = getFormDatas($('#searchForm'));
+				getDataByPage('/menu/findSystem', pageNumber, pageSize, formData, $('#dataList'), $('#pp'));
+			}
+		});
+		
 		//数据
 		$('#dataList').datagrid({
-		    url : '/menu/findSystem',
+		    //url : '/menu/findSystem',
 		    columns : [[
 	            {field:'id', width:80, title:'ID', halign:'center', checkbox:true },
 	            {field:'name', width:100, title:'系统名称', halign:'center'},
-	            {field:'code', width:80, align:'right', title:'系统代码', halign:'center'},
-	            {field:'orderNo', width:80, align:'right', title:'排序', halign:'center'},
-	            {field:'op', width:80, align:'right', title:'操作', halign:'center', formatter:function(value,row,index){
+	            {field:'code', width:100, align:'center', title:'系统代码', halign:'center'},
+	            {field:'orderNo', width:80, align:'center', title:'排序', halign:'center'},
+	            {field:'op', width:80, align:'center', title:'操作', halign:'center', formatter:function(value,row,index){
 	            	return '<a href="#" class="op" data="' + index + '"></a>';
 	            }}
 		    ]],
+		    onBeforeLoad : function(param){
+		    	if(param['pageSize'] == null){
+		    		var paging = $('#pp').pagination('options');
+		    		param['pageSize'] = paging.pageSize;
+		    		param['pageNum'] = paging.pageNumber;
+		    	}
+		    	console.info(paging);
+		    },
 		    onLoadSuccess : function(data){
 		    	$(".op").linkbutton({
 				    iconCls: 'icon-edit',
@@ -54,27 +79,17 @@
 				    	});
 				    }
 				});
+				$('#dataList').datagrid('fixRowHeight');
 		    },
 		    singleSelect : true,
 		    striped : true,
 		    emptyMsg : '没有符合条件数据',
 		    loadMsg : '加载中···',
-		    rownumbers : true,
-		    pageSize : 20,
-		    pagination : true,
-		    pagePosition : 'top'
+		    rownumbers : true
 		});
 		
-		//分页
-		var p = $('#dataList').datagrid('getPager');
-		$(p).pagination({
-			//pageSize : 20, //每页显示的记录条数，默认为10
-			//pageList : [5, 10, 15], //可以设置每页记录条数的列表
-			showPageList : false,
-			beforePageText : '第', //页数文本框前显示的汉字
-			afterPageText : '页    共 {pages} 页',
-			displayMsg : '当前显示 {from} - {to} 条记录   共 {total} 条记录',
-		});
+		//初始加载数据
+		getDataByPage('/menu/findSystem', 1, 20, null, $('#dataList'), $('#pp'));
 		
 		//新增
 		$('#recordDialog').dialog({
@@ -116,8 +131,9 @@
 	
 	//查找
 	function search(){
-		var formData = getFormDatas($('#searchForm'));
-		$('#dataList').datagrid('load',formData);
+		//var formData = getFormDatas($('#searchForm'));
+		//$('#dataList').datagrid('load',formData);
+		$('#pp').pagination('select');
 	}
 	
 	//新增
@@ -187,7 +203,8 @@
 	    	</form>
     	</div>
     </div>
-    
+    <!-- 分页控件 -->
+    <div id="pp" style="background:#efefef;border:1px solid #ccc;"></div>
 	<!-- 数据列表 -->
     <div data-options="region:'center',title:''" style="padding:5px;background:#eee;min-height:600px;">
     	<table id="dataList" style="min-height:600px;">

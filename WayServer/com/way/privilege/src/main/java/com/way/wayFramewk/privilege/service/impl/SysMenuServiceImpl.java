@@ -9,12 +9,15 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
-import com.way.framework.model.Pagination;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.way.wayFramewk.privilege.constant.Constants;
 import com.way.wayFramewk.privilege.entity.SysMenu;
 import com.way.wayFramewk.privilege.entity.SysMenuExample;
+import com.way.wayFramewk.privilege.entity.SysMenuExample.Criteria;
 import com.way.wayFramewk.privilege.entity.SysRoleMenu;
 import com.way.wayFramewk.privilege.entity.SysRoleMenuExample;
 import com.way.wayFramewk.privilege.provider.dao.SysMenuMapper;
@@ -31,10 +34,25 @@ public class SysMenuServiceImpl implements SysMenuService {
 	@Resource
 	private SysRoleMenuMapper sysRoleMenuMapper;
 
+	private SysMenuExample buildExample(SysMenu record) {
+		SysMenuExample example = new SysMenuExample();
+		Criteria c = example.createCriteria().andIsDeleteEqualTo(false);
+		if (record != null) {
+			if (StringUtils.isNotBlank(record.getName())) {
+				c.andNameLike("%" + record.getName() + "%");
+			}
+			if (record.getDepth() != null) {
+				c.andDepthEqualTo(record.getDepth());
+			}
+		}
+		return example;
+	}
+
 	@Override
-	public Pagination<SysMenu> findByPage(Pagination<SysMenu> page, SysMenu record) {
-		List<SysMenu> list = sysMenuExtendMapper.selectByPage(page, record);
-		page.setList(list);
+	public Page<SysMenu> findByPage(Page<SysMenu> page, SysMenu record) {
+		SysMenuExample example = this.buildExample(record);
+		page = PageHelper.startPage(page.getPageNum(), page.getPageSize(), true);
+		page = sysMenuMapper.selectByExample(example);
 		return page;
 	}
 

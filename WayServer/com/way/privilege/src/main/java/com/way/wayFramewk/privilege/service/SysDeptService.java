@@ -1,11 +1,11 @@
 package com.way.wayFramewk.privilege.service;
 
-import com.way.framework.model.Pagination;
+import com.github.pagehelper.Page;
 import com.way.wayFramewk.privilege.entity.SysDept;
 
 public interface SysDeptService {
 	/* base CRUD start */
-	Pagination<SysDept> findByPage(Pagination<SysDept> page, SysDept record);
+	Page<SysDept> findByPage(Page<SysDept> page, SysDept record);
 
 	SysDept getById(Long id);
 

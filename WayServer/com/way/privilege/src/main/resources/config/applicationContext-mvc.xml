@@ -158,7 +158,6 @@
 
 	<!-- <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" 
 		/> -->
-	<bean id="pageInterceptor" class="com.way.framework.model.orm.interceptor.PageInterceptor" />
 
 	<!-- diamond -->
 	<bean id="propertyConfigurer"
@@ -177,7 +176,7 @@
 		<property name="driverClass" value="${jdbc.driver}" />
 		<property name="jdbcUrl" value="${jdbc.url}" />
 		<property name="user" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" /> 
+		<property name="password" value="${jdbc.password}" />
 		<property name="initialPoolSize" value="${pool.initialPoolSize}" />
 		<property name="minPoolSize" value="${pool.minPoolSize}" />
 		<property name="maxPoolSize" value="${pool.maxPoolSize}" />
@@ -191,7 +190,15 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="plugins">
-			<ref bean="pageInterceptor" />
+			<array>
+				<bean class="com.github.pagehelper.PageHelper">
+					<property name="properties">
+						<value>
+							reasonable=true
+						</value>
+					</property>
+				</bean>
+			</array>
 		</property>
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
 		<property name="typeAliasesPackage" value="com.way.wayFramewk.privilege.entiry" />
@@ -206,9 +213,9 @@
 		<property name="basePackage" value="com.way.wayFramewk.privilege.provider.dao" />
 		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
 	</bean>
-	
+
 	<!-- spring utility -->
 	<bean id="springUtils" class="com.way.wayFramewk.privilege.utils.SpringUtils"></bean>
-	
-	<import resource="classpath*:redis/biz-cache-redisson-master.xml"/>
+
+	<import resource="classpath*:redis/biz-cache-redisson-master.xml" />
 </beans>

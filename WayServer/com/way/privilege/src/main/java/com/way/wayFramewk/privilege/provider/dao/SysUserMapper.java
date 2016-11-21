@@ -1,10 +1,11 @@
 package com.way.wayFramewk.privilege.provider.dao;
 
-import com.way.wayFramewk.privilege.entity.SysUser;
-import com.way.wayFramewk.privilege.entity.SysUserExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import com.github.pagehelper.Page;
+import com.way.wayFramewk.privilege.entity.SysUser;
+import com.way.wayFramewk.privilege.entity.SysUserExample;
 
 @Repository
 public interface SysUserMapper {
@@ -18,7 +19,7 @@ public interface SysUserMapper {
 
     int insertSelective(SysUser record);
 
-    List<SysUser> selectByExample(SysUserExample example);
+    Page<SysUser> selectByExample(SysUserExample example);
 
     SysUser selectByPrimaryKey(Long id);
 

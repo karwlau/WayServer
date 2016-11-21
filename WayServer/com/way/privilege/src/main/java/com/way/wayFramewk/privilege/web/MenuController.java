@@ -11,7 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.way.framework.model.Pagination;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import com.way.wayFramewk.privilege.constant.Constants;
 import com.way.wayFramewk.privilege.entity.SysMenu;
 import com.way.wayFramewk.privilege.service.SysMenuService;
@@ -90,14 +91,12 @@ public class MenuController {
 		return "menu/system";
 	}
 
-	@SuppressWarnings("rawtypes")
 	@RequestMapping("/findSystem")
 	@ResponseBody
-	public List<SysMenu> findSystem(SysMenu info, Pagination page, HttpServletRequest request) {
-		List<SysMenu> list = this.sysMenuService.getSysList();
-		page.setPageSize(1);
+	public PageInfo<SysMenu> findSystem(SysMenu info, Page<SysMenu> page, HttpServletRequest request) {
+		info.setDepth(Constants.SYS_LEVEL);
 		page = this.sysMenuService.findByPage(page, info);
-		return list;
+		return page.toPageInfo();
 	}
 
 	@RequestMapping("/menu")

@@ -3,13 +3,13 @@ package com.way.wayFramewk.privilege.service;
 import java.util.List;
 import java.util.Map;
 
-import com.way.framework.model.Pagination;
+import com.github.pagehelper.Page;
 import com.way.wayFramewk.privilege.entity.SysRole;
 import com.way.wayFramewk.privilege.entity.SysUserRole;
 
 public interface SysRoleService {
 	/* base CRUD start */
-	Pagination<SysRole> findByPage(Pagination<SysRole> page, SysRole record);
+	Page<SysRole> findByPage(Page<SysRole> page, SysRole record);
 
 	SysRole getById(Long id);
 

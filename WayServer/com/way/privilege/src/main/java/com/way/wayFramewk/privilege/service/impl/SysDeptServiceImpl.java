@@ -1,13 +1,12 @@
 package com.way.wayFramewk.privilege.service.impl;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.way.framework.model.Pagination;
+import com.github.pagehelper.Page;
 import com.way.wayFramewk.privilege.entity.SysDept;
 import com.way.wayFramewk.privilege.entity.SysDeptUser;
 import com.way.wayFramewk.privilege.entity.SysDeptUserExample;
@@ -26,9 +25,10 @@ public class SysDeptServiceImpl implements SysDeptService {
 	private SysDeptUserMapper sysDeptUserMapper;
 
 	@Override
-	public Pagination<SysDept> findByPage(Pagination<SysDept> page, SysDept record) {
-		List<SysDept> list = sysDeptExtendMapper.selectByPage(page, record);
-		page.setList(list);
+	public Page<SysDept> findByPage(Page<SysDept> page, SysDept record) {
+		// TODO page
+		// List<SysDept> list = sysDeptExtendMapper.selectByPage(page, record);
+		// page.setList(list);
 		return page;
 	}
 

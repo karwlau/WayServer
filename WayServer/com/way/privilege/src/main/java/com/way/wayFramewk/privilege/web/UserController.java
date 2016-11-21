@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.way.framework.model.Pagination;
+import com.github.pagehelper.Page;
 import com.way.wayFramewk.privilege.entity.SysUser;
 import com.way.wayFramewk.privilege.entity.SysUserRole;
 import com.way.wayFramewk.privilege.service.SysRoleService;
@@ -34,9 +34,9 @@ public class UserController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/userList")
 	@ResponseBody
-	public List<SysUser> userList(Pagination page, SysUser record, HttpServletRequest request) {
+	public List<SysUser> userList(Page page, SysUser record, HttpServletRequest request) {
 		page = this.sysUserService.findByPage(page, record);
-		return page.getList();
+		return page;
 	}
 
 	@RequestMapping("/saveOrUpdate")

@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.way.framework.model.Pagination;
+import com.github.pagehelper.Page;
 import com.way.wayFramewk.privilege.entity.SysRole;
 import com.way.wayFramewk.privilege.entity.SysRoleExample;
 import com.way.wayFramewk.privilege.entity.SysUserRole;
@@ -34,9 +34,10 @@ public class SysRoleServiceImpl implements SysRoleService {
 	private SysMenuService sysMenuService;
 
 	@Override
-	public Pagination<SysRole> findByPage(Pagination<SysRole> page, SysRole record) {
-		List<SysRole> list = sysRoleExtendMapper.selectByPage(page, record);
-		page.setList(list);
+	public Page<SysRole> findByPage(Page<SysRole> page, SysRole record) {
+		//TODO page
+//		List<SysRole> list = sysRoleExtendMapper.selectByPage(page, record);
+//		page.setList(list);
 		return page;
 	}
 
