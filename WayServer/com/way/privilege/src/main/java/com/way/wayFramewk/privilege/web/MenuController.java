@@ -95,6 +95,8 @@ public class MenuController {
 	@ResponseBody
 	public List<SysMenu> findSystem(SysMenu info, Pagination page, HttpServletRequest request) {
 		List<SysMenu> list = this.sysMenuService.getSysList();
+		page.setPageSize(1);
+		page = this.sysMenuService.findByPage(page, info);
 		return list;
 	}
 

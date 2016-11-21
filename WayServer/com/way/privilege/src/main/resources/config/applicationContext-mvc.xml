@@ -158,6 +158,7 @@
 
 	<!-- <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" 
 		/> -->
+	<bean id="pageInterceptor" class="com.way.framework.model.orm.interceptor.PageInterceptor" />
 
 	<!-- diamond -->
 	<bean id="propertyConfigurer"
@@ -189,9 +190,9 @@
 	<!-- MyBatis配置 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<!-- <property name="plugins">
-			<ref bean="paginationInterceptor" />
-		</property> -->
+		<property name="plugins">
+			<ref bean="pageInterceptor" />
+		</property>
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
 		<property name="typeAliasesPackage" value="com.way.wayFramewk.privilege.entiry" />
 		<!-- 显式指定Mapper文件位置 -->

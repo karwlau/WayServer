@@ -142,7 +142,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 
 	@Override
 	public List<SysMenu> privilegeCheck(List<SysMenu> menuList, Long userId) {
-		// TODO Auto-generated method stub
+		// FIXME Auto-generated method stub
 		return null;
 	}
 

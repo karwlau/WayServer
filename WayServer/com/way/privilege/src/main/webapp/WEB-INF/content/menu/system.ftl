@@ -182,7 +182,7 @@
 	    	</div>
 	    	<form id="searchForm" method="post">
 		    	<div class="easyui-panel" style="padding:5px;">
-		    		<input class="easyui-textbox" data-options="label:'系统名称'" style="width:300px" name="sysName">
+		    		<input class="easyui-textbox" data-options="label:'系统名称'" style="width:300px" name="name">
 		    	</div>
 	    	</form>
     	</div>
