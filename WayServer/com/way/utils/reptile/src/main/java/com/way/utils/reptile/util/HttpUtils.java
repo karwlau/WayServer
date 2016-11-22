@@ -1,11 +1,15 @@
 package com.way.utils.reptile.util;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.UnknownHostException;
 
 import org.apache.hc.client5.http.impl.sync.CloseableHttpClient;
@@ -41,7 +45,7 @@ public class HttpUtils {
 		try {
 			HttpResponse response = request(urlPath);
 			if (response.getEntity().getContentLength() < 102400) {
-				return;
+				// return;
 			}
 			File file = new File(dir);
 			if (!file.exists()) {
@@ -56,7 +60,27 @@ public class HttpUtils {
 		}
 	}
 
-	@SuppressWarnings("finally")
+	public static void saveUrlAs(String photoUrl, String fileName) {
+		// 此方法只能用户HTTP协议
+		try {
+			URL url = new URL(photoUrl);
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			if(connection.getContentLength() < 102400){
+				return ;
+			}
+			DataInputStream in = new DataInputStream(connection.getInputStream());
+			DataOutputStream out = new DataOutputStream(new FileOutputStream(fileName));
+			byte[] buffer = new byte[4096];
+			int count = 0;
+			while ((count = in.read(buffer)) > 0) {
+				out.write(buffer, 0, count);
+			}
+			out.close();
+			in.close();
+		} catch (Exception e) {
+		}
+	}
+
 	public static HttpResponse request(String urlPath) {
 		HttpGet request = new HttpGet(urlPath);
 		CloseableHttpClient client = HttpClients.createDefault();
@@ -66,6 +90,7 @@ public class HttpUtils {
 			return client.execute(request);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		} finally {
 			request.abort();
 			try {
@@ -73,7 +98,6 @@ public class HttpUtils {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			return null;
 		}
 	}
 
@@ -99,13 +123,13 @@ public class HttpUtils {
 
 	public static void main(String[] args) {
 		try {
-			String urlPath = "";
-
+			String urlPath = "http://img.7160.com/uploads/allimg/131021/1-1310211932270-L.jpg";
+			// HttpResponse response = HttpUtils.request(urlPath);
 			// HttpGet request = new HttpGet(urlPath);
 			// HttpClient client = new AutoRetryHttpClient();
 			// HttpResponse response = client.execute(request);
-
-			down(urlPath, "pic", "10.jpg");
+			saveUrlAs(urlPath, "pic//10.jpg");
+//			down(urlPath, "pic", "10.jpg");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
