@@ -19,19 +19,6 @@
 <script type="text/javascript">
 	var record;
 	$().ready(function(){
-		//表单提交查询
-		/*$('#searchForm').form({
-		    url : '/menu/findSystem',
-		    onSubmit: function(){
-		        // do some check
-		        // return false to prevent submit;
-		    },
-		    success:function(data){
-		        alert(data)
-		    }
-		});
-		*/
-		
 		//分页
 		//var p = $('#dataList').datagrid('getPager');
 		$('#pp').pagination({

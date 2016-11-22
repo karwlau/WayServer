@@ -1,10 +1,11 @@
 package com.way.wayFramewk.privilege.provider.dao;
 
-import com.way.wayFramewk.privilege.entity.SysRole;
-import com.way.wayFramewk.privilege.entity.SysRoleExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import com.github.pagehelper.Page;
+import com.way.wayFramewk.privilege.entity.SysRole;
+import com.way.wayFramewk.privilege.entity.SysRoleExample;
 
 @Repository
 public interface SysRoleMapper {
@@ -18,7 +19,7 @@ public interface SysRoleMapper {
 
     int insertSelective(SysRole record);
 
-    List<SysRole> selectByExample(SysRoleExample example);
+    Page<SysRole> selectByExample(SysRoleExample example);
 
     SysRole selectByPrimaryKey(Long id);
 

@@ -9,10 +9,12 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.way.utils.security.MD5.MD5Util;
 import com.way.wayFramewk.privilege.constant.Constants;
 import com.way.wayFramewk.privilege.entity.SysUser;
 import com.way.wayFramewk.privilege.entity.SysUserExample;
+import com.way.wayFramewk.privilege.entity.SysUserExample.Criteria;
 import com.way.wayFramewk.privilege.provider.dao.SysUserMapper;
 import com.way.wayFramewk.privilege.provider.dao.extend.SysUserExtendMapper;
 import com.way.wayFramewk.privilege.service.SysRoleService;
@@ -27,10 +29,27 @@ public class SysUserServiceImpl implements SysUserService {
 	@Resource
 	private SysRoleService sysRoleService;
 
+	private SysUserExample buildExample(SysUser record) {
+		SysUserExample example = new SysUserExample();
+		Criteria c = example.createCriteria().andIsDeleteEqualTo(false);
+		if (record != null) {
+			if (StringUtils.isNotBlank(record.getName())) {
+				c.andNameLike("%" + record.getName() + "%");
+			}
+			if (record.getNickName() != null) {
+				c.andNickNameLike("%" + record.getNickName() + "%");
+			}
+			if (record.getIsAdmin() != null) {
+				c.andIsAdminEqualTo(record.getIsAdmin());
+			}
+		}
+		return example;
+	}
+
 	@Override
 	public Page<SysUser> findByPage(Page<SysUser> page, SysUser record) {
-		SysUserExample example = new SysUserExample();
-		example.createCriteria().andIsDeleteEqualTo(false);
+		SysUserExample example = this.buildExample(record);
+		page = PageHelper.startPage(page.getPageNum(), page.getPageSize(), true);
 		page = this.sysUserMapper.selectByExample(example);
 		return page;
 	}

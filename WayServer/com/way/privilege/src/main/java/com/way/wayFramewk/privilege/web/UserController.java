@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import com.way.wayFramewk.privilege.entity.SysUser;
 import com.way.wayFramewk.privilege.entity.SysUserRole;
 import com.way.wayFramewk.privilege.service.SysRoleService;
@@ -31,12 +32,11 @@ public class UserController {
 		return "user/user";
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/userList")
 	@ResponseBody
-	public List<SysUser> userList(Page page, SysUser record, HttpServletRequest request) {
+	public PageInfo<SysUser> userList(Page<SysUser> page, SysUser record, HttpServletRequest request) {
 		page = this.sysUserService.findByPage(page, record);
-		return page;
+		return page.toPageInfo();
 	}
 
 	@RequestMapping("/saveOrUpdate")

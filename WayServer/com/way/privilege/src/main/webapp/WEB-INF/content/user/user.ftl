@@ -19,9 +19,24 @@
 <script type="text/javascript">
 	var record;
 	$().ready(function(){
+		//分页
+		$('#pp').pagination({
+			//pageList : [5, 10, 15], //可以设置每页记录条数的列表
+			pageSize : 20, //每页显示的记录条数，默认为10
+			pageNumber : 1,
+			showPageList : false,
+			beforePageText : '第', //页数文本框前显示的汉字
+			afterPageText : '页    共 {pages} 页',
+			displayMsg : '当前显示 {from} - {to} 条记录   共 {total} 条记录',
+			onSelectPage : function(pageNumber, pageSize){
+				var formData = getFormDatas($('#searchForm'));
+				getDataByPage('/user/userList', pageNumber, pageSize, formData, $('#dataList'), $('#pp'));
+			}
+		});
+		
 		//数据
 		$('#dataList').datagrid({
-		    url : '/user/userList',
+		    //url : '/user/userList',
 		    columns : [[
 	            {field:'id', width:80, title:'ID', halign:'center', checkbox:true },
 	            {field:'name', width:100, title:'用户名', halign:'center'},
@@ -52,22 +67,11 @@
 		    striped : true,
 		    emptyMsg : '没有符合条件数据',
 		    loadMsg : '加载中···',
-		    rownumbers : true,
-		    pageSize : 20,
-		    pagination : true,
-		    pagePosition : 'top'
+		    rownumbers : true
 		});
 		
-		//分页
-		var p = $('#dataList').datagrid('getPager');
-		$(p).pagination({
-			//pageSize : 20, //每页显示的记录条数，默认为10
-			//pageList : [5, 10, 15], //可以设置每页记录条数的列表
-			showPageList : false,
-			beforePageText : '第', //页数文本框前显示的汉字
-			afterPageText : '页    共 {pages} 页',
-			displayMsg : '当前显示 {from} - {to} 条记录   共 {total} 条记录',
-		});
+		//初始加载数据
+		getDataByPage('/user/userList', 1, 20, null, $('#dataList'), $('#pp'));
 		
 		//新增
 		$('#recordDialog').dialog({
@@ -120,8 +124,9 @@
 	
 	//查找
 	function search(){
-		var formData = getFormDatas($('#searchForm'));
-		$('#dataList').datagrid('load',formData);
+		//var formData = getFormDatas($('#searchForm'));
+		//$('#dataList').datagrid('load',formData);
+		$('#pp').pagination('select');
 	}
 	
 	//新增
@@ -228,7 +233,8 @@
 	    	</form>
     	</div>
     </div>
-    
+    <!-- 分页控件 -->
+    <div id="pp" style="background:#efefef;border:1px solid #ccc;"></div>
 	<!-- 数据列表 -->
     <div data-options="region:'center',title:''" style="padding:5px;background:#eee;min-height:600px;">
     	<table id="dataList" style="min-height:600px;">

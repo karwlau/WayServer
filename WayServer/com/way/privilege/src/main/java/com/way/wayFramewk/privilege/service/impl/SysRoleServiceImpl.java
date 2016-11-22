@@ -9,11 +9,14 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.way.wayFramewk.privilege.entity.SysRole;
 import com.way.wayFramewk.privilege.entity.SysRoleExample;
+import com.way.wayFramewk.privilege.entity.SysRoleExample.Criteria;
 import com.way.wayFramewk.privilege.entity.SysUserRole;
 import com.way.wayFramewk.privilege.entity.SysUserRoleExample;
 import com.way.wayFramewk.privilege.provider.dao.SysRoleMapper;
@@ -33,11 +36,25 @@ public class SysRoleServiceImpl implements SysRoleService {
 	@Resource
 	private SysMenuService sysMenuService;
 
+	private SysRoleExample buildExample(SysRole record) {
+		SysRoleExample example = new SysRoleExample();
+		Criteria c = example.createCriteria().andIsDeleteEqualTo(false);
+		if (record != null) {
+			if (StringUtils.isNotBlank(record.getName())) {
+				c.andNameLike("%" + record.getName() + "%");
+			}
+			if (record.getIsKeyOwner() != null) {
+				c.andIsKeyOwnerEqualTo(record.getIsKeyOwner());
+			}
+		}
+		return example;
+	}
+
 	@Override
 	public Page<SysRole> findByPage(Page<SysRole> page, SysRole record) {
-		//TODO page
-//		List<SysRole> list = sysRoleExtendMapper.selectByPage(page, record);
-//		page.setList(list);
+		SysRoleExample example = this.buildExample(record);
+		page = PageHelper.startPage(page.getPageNum(),page.getPageSize(),true);
+		page = sysRoleMapper.selectByExample(example);
 		return page;
 	}
 
