@@ -6,6 +6,7 @@
 #-- https://github.com/xushaomin
 #- resource
 #-- https://mirrors.tuna.tsinghua.edu.cn/
+#-- http://mirror.bit.edu.cn/eclipse
 
 
 #database:

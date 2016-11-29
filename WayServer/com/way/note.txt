@@ -36,7 +36,15 @@ source /etc/profile
 
 
 #install tomcat default port 8080
-
+#multi instance
+#common folder : bin ,lib;  instance folder : conf ,logs ,webapps
+#change conf/server.xml port
+##start shell example content: #start
+export CATALINA_BASE=/work/install/apache-tomcat-7.0.69/tcinstance/jstree
+export CATALINA_HOME=/work/install/apache-tomcat-7.0.69
+cd $CATALINA_HOME/bin
+sh startup.sh #replace shutdown.sh for stop shell
+##start shell content: #end
 
 #install jenkins
 vi ${TOMCAT_HOME}/conf/server.xml
