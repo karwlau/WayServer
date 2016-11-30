@@ -1,0 +1,3 @@
+#check kernel version info
+cat /proc/version
+
