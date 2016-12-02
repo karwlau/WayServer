@@ -14,8 +14,8 @@
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
 		<plugin type="com.way.common.plugins.mbg_plugins.base.BasePlugin"></plugin>
 		<!-- <plugin type="com.way.common.plugins.mbg_plugins.page.PaginationPlugin"></plugin> -->
-		<plugin
-			type="com.way.common.plugins.mbg_plugins.page.extend.PaginationExtendPlugin"></plugin>
+		<!-- <plugin
+			type="com.way.common.plugins.mbg_plugins.page.extend.PaginationExtendPlugin"></plugin> -->
 		<plugin type="com.way.common.plugins.mbg_plugins.service.ServicePlugin"></plugin>
 
 		<commentGenerator>

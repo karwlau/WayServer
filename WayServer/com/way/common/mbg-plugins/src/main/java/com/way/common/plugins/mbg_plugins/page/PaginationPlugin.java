@@ -39,9 +39,9 @@ public class PaginationPlugin extends PluginAdapter {
 	@Override
 	public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass,
 			IntrospectedTable introspectedTable) {
-		// Mapper注解
-		interfaze.addAnnotation("@Repository");
-		interfaze.addImportedType(SType.ANO_REPOSITORY.getFQJType());
+		// Mapper注解base
+		// interfaze.addAnnotation("@Repository");
+		// interfaze.addImportedType(SType.ANO_REPOSITORY.getFQJType());
 
 		// 分页方法接口
 		Method method = new Method("selectByPage");

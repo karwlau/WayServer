@@ -9,6 +9,8 @@ import org.mybatis.generator.config.Context;
 
 import com.way.common.plugins.mbg_plugins.utils.constants.SType;
 
+
+
 public class ServiceIntGenerator extends Interface {
 
 	private ServiceIntGenerator(FullyQualifiedJavaType type) {
@@ -17,7 +19,7 @@ public class ServiceIntGenerator extends Interface {
 
 	public ServiceIntGenerator(Context context, IntrospectedTable introspectedTable) {
 		this(SType.SERVICE.getFQJType());
-
+		
 		// import
 		this.addImportedType(SType.PAGE.getFQJType());
 		this.addImportedType(SType.RECORD.getFQJType());
@@ -26,9 +28,18 @@ public class ServiceIntGenerator extends Interface {
 		this.setVisibility(JavaVisibility.PUBLIC);
 		this.findMethodGenerate(introspectedTable);
 		this.getMethodGenerate(introspectedTable);
-		this.saveMethodgeenerate(introspectedTable);
-		this.updateMethodgeenerate(introspectedTable);
-		this.deleteMethodgeenerate(introspectedTable);
+		this.saveMethodGenerate(introspectedTable);
+		this.updateMethodGenerate(introspectedTable);
+		this.deleteMethodGenerate(introspectedTable);
+		this.listMethodGenerate(introspectedTable);
+	}
+
+	private void listMethodGenerate(IntrospectedTable introspectedTable) {
+		Method method = new Method("findByList");
+		method.setVisibility(JavaVisibility.PUBLIC);
+		method.setReturnType(SType.LIST.getFQJType());
+		method.addParameter(SType.RECORD.getParam());
+		this.addMethod(method);
 	}
 
 	private void findMethodGenerate(IntrospectedTable introspectedTable) {
@@ -48,7 +59,7 @@ public class ServiceIntGenerator extends Interface {
 		this.addMethod(method);
 	}
 
-	private void saveMethodgeenerate(IntrospectedTable introspectedTable) {
+	private void saveMethodGenerate(IntrospectedTable introspectedTable) {
 		Method method = new Method("save");
 		method.setVisibility(JavaVisibility.PUBLIC);
 		method.setReturnType(SType.RECORD.getFQJType());
@@ -56,7 +67,7 @@ public class ServiceIntGenerator extends Interface {
 		this.addMethod(method);
 	}
 
-	private void updateMethodgeenerate(IntrospectedTable introspectedTable) {
+	private void updateMethodGenerate(IntrospectedTable introspectedTable) {
 		Method method = new Method("update");
 		method.setVisibility(JavaVisibility.PUBLIC);
 		method.setReturnType(SType.RECORD.getFQJType());
@@ -64,7 +75,7 @@ public class ServiceIntGenerator extends Interface {
 		this.addMethod(method);
 	}
 
-	private void deleteMethodgeenerate(IntrospectedTable introspectedTable) {
+	private void deleteMethodGenerate(IntrospectedTable introspectedTable) {
 		Method method = new Method("delete");
 		method.setVisibility(JavaVisibility.PUBLIC);
 		method.setReturnType(SType.LONG.getFQJType());

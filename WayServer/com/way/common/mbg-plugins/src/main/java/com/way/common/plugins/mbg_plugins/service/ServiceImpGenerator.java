@@ -19,8 +19,9 @@ public class ServiceImpGenerator extends TopLevelClass {
 		super(type);
 	}
 
-	List<String> findMethodCode = Arrays.asList("List<#{recordType}> list = #{mapper}.selectByPage(page,record);",
-			"page.setList(list);", "return page;");
+	List<String> findMethodCode = Arrays.asList(
+			"page = PageHelper.startPage(page.getPageNum(), page.getPageSize(), true);",
+			"page = this.sysUserMapper.selectByExample(example);", "return page;");
 	List<String> findExtendMethodCode = Arrays.asList(
 			"List<#{recordType}> list = #{extendMapper}.selectByPage(page,record);", "page.setList(list);",
 			"return page;");
@@ -33,6 +34,8 @@ public class ServiceImpGenerator extends TopLevelClass {
 	List<String> deleteMethodCode = Arrays.asList("Date now = new Date();",
 			"#{recordType} update = new #{recordType}();", "update.setId(id);", "update.setUpdateTime(now);",
 			"update.setIsDelete(true);", "#{mapper}.updateByPrimaryKeySelective(update);", "return id;");
+	List<String> listMethodCode = Arrays.asList("List<#{recordType}> list = #{mapper}.selectByList(record);",
+			"return list;");
 
 	public ServiceImpGenerator(Context context, IntrospectedTable introspectedTable) {
 		this(new FullyQualifiedJavaType(SType.SERVICE_IMPL.getType()));
@@ -70,6 +73,17 @@ public class ServiceImpGenerator extends TopLevelClass {
 		this.saveMethodgeenerate(introspectedTable);
 		this.updateMethodgeenerate(introspectedTable);
 		this.deleteMethodgeenerate(introspectedTable);
+		this.listMethodGenerate(introspectedTable);
+	}
+
+	private void listMethodGenerate(IntrospectedTable introspectedTable) {
+		Method method = new Method("findByList");
+		method.setVisibility(JavaVisibility.PUBLIC);
+		method.setReturnType(SType.LIST.getFQJType());
+		method.addParameter(SType.RECORD.getParam());
+		this.buildBody(method, listMethodCode);
+		method.addAnnotation("@Override");
+		this.addMethod(method);
 	}
 
 	private void findMethodGenerate(IntrospectedTable introspectedTable) {

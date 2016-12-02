@@ -5,7 +5,7 @@ import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.Parameter;
 
 public enum SType {
-	PAGE("com.way.framework.model.Pagination", "page"),
+	PAGE("com.github.pagehelper.Page", "page"),//com.way.framework.model.Pagination
 
 	LONG("java.lang.Long", "id"),
 
