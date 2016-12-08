@@ -4,6 +4,9 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 
 DROP TABLE IF EXISTS sys_dept_user;
 DROP TABLE IF EXISTS sys_dept;
+DROP TABLE IF EXISTS sys_dict;
+DROP TABLE IF EXISTS sys_memver;
+DROP TABLE IF EXISTS sys_memver_level;
 DROP TABLE IF EXISTS sys_role_menu;
 DROP TABLE IF EXISTS sys_menu;
 DROP TABLE IF EXISTS sys_user_role;
@@ -41,6 +44,64 @@ CREATE TABLE sys_dept_user
 	user_id bigint NOT NULL COMMENT 'user_id',
 	is_head boolean COMMENT 'is_head'
 ) COMMENT = 'sys_dept_user';
+
+
+-- sys_dict
+CREATE TABLE sys_dict
+(
+	-- id
+	id bigint NOT NULL AUTO_INCREMENT COMMENT 'id : id',
+	name varchar(64) COMMENT 'name',
+	code varchar(64) COMMENT 'code ',
+	parent_id bigint COMMENT 'parent_id',
+	parent_code varchar(64) COMMENT 'parent_code',
+	value varchar(128) COMMENT 'value',
+	descr varchar(512) COMMENT 'descr',
+	is_delete boolean DEFAULT '0' COMMENT 'is_delete',
+	create_time datetime DEFAULT NULL COMMENT 'create_time',
+	create_by bigint COMMENT 'create_by',
+	update_time datetime COMMENT 'update_time',
+	update_by bigint COMMENT 'update_by',
+	PRIMARY KEY (id)
+) COMMENT = 'sys_dict';
+
+
+-- sys_memver
+CREATE TABLE sys_memver
+(
+	id bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+	name varchar(64) COMMENT 'name',
+	member_no varchar(64) COMMENT 'member_no',
+	third_key varchar(64) COMMENT 'third_key',
+	level_id bigint COMMENT 'level_id',
+	level_name varchar(64) COMMENT 'level_name',
+	expire_dt datetime COMMENT 'expire_dt',
+	is_delete boolean DEFAULT '0' COMMENT 'is_delete',
+	create_time datetime DEFAULT NULL COMMENT 'create_time',
+	create_by bigint COMMENT 'create_by',
+	update_time datetime COMMENT 'update_time',
+	update_by bigint COMMENT 'update_by',
+	id bigint NOT NULL COMMENT 'id',
+	PRIMARY KEY (id),
+	UNIQUE (id),
+	UNIQUE (id)
+) COMMENT = 'sys_memver';
+
+
+-- sys_memver_level
+CREATE TABLE sys_memver_level
+(
+	id bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+	name varchar(64) COMMENT 'name',
+	priority int COMMENT 'priority',
+	is_delete boolean DEFAULT '0' COMMENT 'is_delete',
+	create_time datetime DEFAULT NULL COMMENT 'create_time',
+	create_by bigint COMMENT 'create_by',
+	update_time datetime COMMENT 'update_time',
+	update_by bigint COMMENT 'update_by',
+	PRIMARY KEY (id),
+	UNIQUE (id)
+) COMMENT = 'sys_memver_level';
 
 
 -- sys_menu : 权限资源表
@@ -133,6 +194,14 @@ CREATE TABLE sys_user_role
 ALTER TABLE sys_dept_user
 	ADD FOREIGN KEY (dept_id)
 	REFERENCES sys_dept (id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE sys_memver
+	ADD FOREIGN KEY (id)
+	REFERENCES sys_memver_level (id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;

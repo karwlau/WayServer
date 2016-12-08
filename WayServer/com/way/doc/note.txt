@@ -55,13 +55,6 @@ vi ${TOMCAT_HOME}/conf/server.xml
 ##add server.xml content #end
 
 
-#common command
-#upgrade server
-yum update
-#check net port
-iptables -L
-#clean 
-iptables -F
 #############################################################################################
 
 

@@ -22,6 +22,7 @@ public class ServiceIntGenerator extends Interface {
 		
 		// import
 		this.addImportedType(SType.PAGE.getFQJType());
+		this.addImportedType(SType.LIST.getFQJType());
 		this.addImportedType(SType.RECORD.getFQJType());
 
 		// method
