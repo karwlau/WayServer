@@ -243,3 +243,25 @@ cd nginx-1.9.2/
 make && make install
 nginx -c /etc/nginx/nginx.conf
 #############################################################################################
+
+
+
+
+#for memcache
+#############################################################################################
+#install
+#need libevent  http://libevent.org/
+#download tar : https://github.com/libevent/libevent/releases/download/release-2.0.22-stable/libevent-2.0.22-stable.tar.gz
+tar -xf libevent-2.0.22-stable.tar.gz
+cd libevent-2.0.22-stable
+./configure
+make
+make install
+
+#start 
+#-d表示启动的是一个守护进程；-m指定分配给memcache的内存数量，单位是MB，这里指定的是10 MB。-u指定运行memcache的用户，这里指定的是root；-l指定监听的服务器的IP地址；-p设置memcache监听的端口，这里指定的是11211；-c指定最大允许的并发连接数，这里设置为32；-P指定memcache的pid文件保存的位置。
+/usr/local/bin/memcached -d -m 10 -u root -l 192.168.0.107 -p 11211 -c 32 -P /tmp/memcached.pid
+
+#error info :error while loading shared libraries: libevent-2.0.so.5: cannot open shared object file: No such file or directory
+ln -s /usr/local/lib/libevent-2.0.so.5 /usr/lib64/libevent-2.0.so.5
+#############################################################################################
