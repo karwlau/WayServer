@@ -26,7 +26,7 @@ public class BossUtil {
 		MasterSlaveServersConfig msConfig = config.useMasterSlaveServers();
 		msConfig.setMasterAddress("127.0.0.1:6379");
 		msConfig.setDatabase(1);
-		msConfig.setPassword("myRedis");
+		//msConfig.setPassword("myRedis");
 		// 连接
 		client = Redisson.create(config);
 	}

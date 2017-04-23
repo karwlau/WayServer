@@ -5,7 +5,7 @@ import org.jsoup.select.Elements;
 
 import com.way.utils.reptile.factory.ExtraFactory;
 import com.way.utils.reptile.model.Task;
-import com.way.utils.reptile.util.JedisUtils;
+import com.way.utils.reptile.util.HttpUtils;
 
 public class PicExtractor extends Extractor {
 
@@ -24,9 +24,10 @@ public class PicExtractor extends Extractor {
 	}
 
 	protected void duel(String urlPath) {
-		// String name = urlPath.substring(urlPath.lastIndexOf('/') + 1);
-		// HttpUtils.down(urlPath, "pic", name);
+		String name = urlPath.replace('/', '_');
+		name = name.substring(name.length() - 20, name.length());
+		HttpUtils.down2(urlPath, "G://pic2", name);
 
-		JedisUtils.pushQ("image", urlPath);
+//		 JedisUtils.pushQ("image", urlPath);
 	}
 }

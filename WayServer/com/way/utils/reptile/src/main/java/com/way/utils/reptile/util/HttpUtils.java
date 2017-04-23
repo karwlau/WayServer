@@ -45,7 +45,7 @@ public class HttpUtils {
 		try {
 			HttpResponse response = request(urlPath);
 			if (response.getEntity().getContentLength() < 102400) {
-				// return;
+				 return;
 			}
 			File file = new File(dir);
 			if (!file.exists()) {
@@ -60,7 +60,7 @@ public class HttpUtils {
 		}
 	}
 
-	public static void saveUrlAs(String photoUrl, String fileName) {
+	public static void down2(String photoUrl,String dir, String fileName) {
 		// 此方法只能用户HTTP协议
 		try {
 			URL url = new URL(photoUrl);
@@ -69,6 +69,7 @@ public class HttpUtils {
 				return ;
 			}
 			DataInputStream in = new DataInputStream(connection.getInputStream());
+			fileName = dir + "\\" + fileName;
 			DataOutputStream out = new DataOutputStream(new FileOutputStream(fileName));
 			byte[] buffer = new byte[4096];
 			int count = 0;
@@ -78,6 +79,7 @@ public class HttpUtils {
 			out.close();
 			in.close();
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -128,8 +130,10 @@ public class HttpUtils {
 			// HttpGet request = new HttpGet(urlPath);
 			// HttpClient client = new AutoRetryHttpClient();
 			// HttpResponse response = client.execute(request);
-			saveUrlAs(urlPath, "pic//10.jpg");
-//			down(urlPath, "pic", "10.jpg");
+			
+			down2(urlPath,"G://pic2", "10.jpg");
+			
+//			down(urlPath, "G://pic2", "10.jpg");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

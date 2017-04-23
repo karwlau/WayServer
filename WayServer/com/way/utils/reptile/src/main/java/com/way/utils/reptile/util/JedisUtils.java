@@ -19,7 +19,7 @@ public class JedisUtils {
 			JedisPoolConfig config = new JedisPoolConfig();
 			config.setMaxIdle(10);
 			config.setMaxTotal(20);
-			jedisPool = new JedisPool(config, "localhost", 6379, 30000, "myRedis");
+			jedisPool = new JedisPool(config, "localhost", 6379, 30000);
 		}
 		Jedis jedis = jedisPool.getResource();
 		jedis.select(1);
@@ -64,7 +64,7 @@ public class JedisUtils {
 		try {
 			String expKey = "image";
 			Jedis jedis = new Jedis("localhost");
-			jedis.auth("myRedis");
+			//jedis.auth("myRedis");
 			jedis.select(1);
 			File file = new File("G://pic.txt");
 			FileOutputStream fos = new FileOutputStream(file);
@@ -86,7 +86,7 @@ public class JedisUtils {
 		try {
 			String expKey = "image";
 			Jedis jedis = new Jedis("localhost");
-			jedis.auth("myRedis");
+			//jedis.auth("myRedis");
 			jedis.select(1);
 			boolean tag = true;
 			while (tag) {
@@ -121,14 +121,14 @@ public class JedisUtils {
 		try {
 			String expKey = "image";
 			Jedis jedis = new Jedis("localhost");
-			jedis.auth("myRedis");
+//			jedis.auth("myRedis");
 			jedis.select(1);
 			String str = jedis.lpop(expKey);
 			String name = null;
 			while (str != null) {
 				name = str.replace('/', 'a');
 				name = name.substring(name.length()-20, name.length());
-//				HttpUtils.down2(str, "dir", name);
+				HttpUtils.down(str, "G://pic2", name);
 				str = jedis.lpop(expKey);
 			}
 			jedis.close();
@@ -139,6 +139,6 @@ public class JedisUtils {
 	
 
 	public static void main(String[] args) {
-		export();
+		exportDown();
 	}
 }

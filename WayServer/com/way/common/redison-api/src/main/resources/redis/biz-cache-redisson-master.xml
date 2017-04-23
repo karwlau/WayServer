@@ -25,7 +25,7 @@
 		</property>
 		<property name="slaveAddresses" value="${redis.slaveAddresses}" />
 		<property name="database" value="${redis.database}" />
-		<property name="password" value="${redis.password}" />
+		<!-- <property name="password" value="${redis.password}" /> -->
 	</bean>
 
 	<bean id="redisson" class="org.redisson.Redisson" destroy-method="shutdown">

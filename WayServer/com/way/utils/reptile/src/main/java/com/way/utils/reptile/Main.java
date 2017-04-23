@@ -12,24 +12,24 @@ import redis.clients.jedis.Jedis;
 public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
-		Config.searchDepth = 5;
-		Config.threads = 8;
-		Config.root = "";
-		
+		Config.searchDepth = 1;
+		Config.threads = 16;
+		Config.root = "http://www.7160.com";
+
 		Extractor picExac = new PicExtractor();
-		picExac.addPositive("(.*)\\.jpg");
-		picExac.addNegative("(.*)\\.jpg");
+		picExac.addPositive("(.*)7160(.*)\\.jpg");
+//		picExac.addNegative("(.*)limg(.*)\\.jpg");
 		ExtraFactory.extractors.add(picExac);
 		Extractor urlExac = new UrlExtractor();
-		urlExac.addPositive("(.*)");
+		urlExac.addPositive("(.*)7160(.*)");
 		ExtraFactory.extractors.add(urlExac);
 		
 		ExtraFactory.start();
 
-		Jedis jedis = JedisUtils.init();
-		while (true) {
-			System.out.println(jedis.llen("image"));
-			Thread.sleep(2000);
-		}
+//		Jedis jedis = JedisUtils.init();
+//		while (true) {
+//			System.out.println(jedis.llen("image"));
+//			Thread.sleep(2000);
+//		}
 	}
 }
